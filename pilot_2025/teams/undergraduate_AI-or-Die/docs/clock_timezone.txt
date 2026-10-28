@@ -1,0 +1,78 @@
+module clock_timezone(
+    input wire clk,             
+    input wire reset,           
+    input wire set,             
+    input wire [5:0] set_hours, 
+    input wire [5:0] set_minutes,
+    input wire [5:0] set_seconds,
+    input wire [2:0] timezone,  
+    output reg [5:0] hours,     
+    output reg [5:0] minutes,   
+    output reg [5:0] seconds    
+);
+    reg [31:0] counter;
+    reg [5:0] base_hours;
+    reg signed [6:0] adjusted_hours; // Increased width to handle negative values
+    
+    parameter CLOCK_FREQ = 100000000;
+    parameter ONE_SEC_COUNT = CLOCK_FREQ - 1;
+    
+    // Initialize with default timezone offsets
+    reg signed [4:0] timezone_offsets [7:0];
+    initial begin
+        timezone_offsets[0] = -12;
+        timezone_offsets[1] = -8;
+        timezone_offsets[2] = -5;
+        timezone_offsets[3] = 0;
+        timezone_offsets[4] = 1;
+        timezone_offsets[5] = 5;
+        timezone_offsets[6] = 8;
+        timezone_offsets[7] = 12;
+    end
+
+    // Sequential logic for time keeping
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            counter <= 0;
+            base_hours <= 6'd12; // Initialize to 12:00:00
+            minutes <= 0;
+            seconds <= 0;
+        end else if (set) begin
+            base_hours <= set_hours;
+            minutes <= set_minutes;
+            seconds <= set_seconds;
+        end else begin
+            if (counter == ONE_SEC_COUNT) begin
+                counter <= 0;
+                if (seconds == 59) begin
+                    seconds <= 0;
+                    if (minutes == 59) begin
+                        minutes <= 0;
+                        if (base_hours == 23) begin
+                            base_hours <= 0;
+                        end else begin
+                            base_hours <= base_hours + 1;
+                        end
+                    end else begin
+                        minutes <= minutes + 1;
+                    end
+                end else begin
+                    seconds <= seconds + 1;
+                end
+            end else begin
+                counter <= counter + 1;
+            end
+        end
+    end
+
+    // Combinational logic for timezone adjustment
+    always @(*) begin
+        adjusted_hours = $signed({1'b0, base_hours}) + $signed(timezone_offsets[timezone]);
+        if (adjusted_hours < 0) begin
+            adjusted_hours = adjusted_hours + 24;
+        end else if (adjusted_hours >= 24) begin
+            adjusted_hours = adjusted_hours - 24;
+        end
+        hours = adjusted_hours[5:0];
+    end
+endmodule

@@ -1,0 +1,30 @@
+
+49. Printing statistics.
+
+=== tqvp_dma ===
+
+   Number of wires:               3159
+   Number of wire bits:           3908
+   Number of public wires:          50
+   Number of public wire bits:     735
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               3812
+     $_ANDNOT_                     833
+     $_AND_                         79
+     $_DFFE_PP_                    194
+     $_DFF_P_                        6
+     $_MUX_                       1150
+     $_NAND_                       131
+     $_NOR_                         99
+     $_NOT_                         75
+     $_ORNOT_                      126
+     $_OR_                         310
+     $_SDFFE_PN0P_                 271
+     $_SDFFE_PN1P_                  64
+     $_SDFFE_PP0P_                   3
+     $_SDFF_PN0_                   100
+     $_XNOR_                        87
+     $_XOR_                        284
+

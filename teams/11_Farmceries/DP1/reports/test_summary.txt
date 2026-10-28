@@ -1,0 +1,79 @@
+rm -f results.xml
+"make" -f test_baud_gen.mk results.xml
+make[1]: Entering directory '/home/user/electrical-and-electronics-engineering/VLSI/ai-hdl/dp-1/peripheral/test'
+/usr/bin/iverilog -o sim_build/sim.vvp -s uart_baud_generator -g2012 -f sim_build/cmds.f  /home/user/electrical-and-electronics-engineering/VLSI/ai-hdl/dp-1/peripheral/test/../src/uart/uart_baud_generator.v
+/home/user/electrical-and-electronics-engineering/VLSI/ai-hdl/.venv/lib/python3.12/site-packages/cocotb_tools/makefiles/simulators/Makefile.icarus:66: Using MODULE is deprecated, please use COCOTB_TEST_MODULES instead.
+rm -f results.xml
+COCOTB_TEST_MODULES=test_baud_gen COCOTB_TESTCASE= COCOTB_TEST_FILTER= COCOTB_TOPLEVEL=uart_baud_generator TOPLEVEL_LANG=verilog \
+         /usr/bin/vvp -M /home/user/electrical-and-electronics-engineering/VLSI/ai-hdl/.venv/lib/python3.12/site-packages/cocotb/libs -m libcocotbvpi_icarus   sim_build/sim.vvp   
+     -.--ns INFO     gpi                                ..mbed/gpi_embed.cpp:93   in _embed_init_python              Using Python 3.12.4 interpreter at /home/user/electrical-and-electronics-engineering/VLSI/ai-hdl/.venv/bin/python
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:79   in gpi_print_registered_impl       VPI registered
+     0.00ns INFO     cocotb                             Running on Icarus Verilog version 12.0 (stable)
+     0.00ns INFO     cocotb                             Seeding Python random module with 1768915456
+     0.00ns INFO     cocotb                             Initialized cocotb v2.0.1 from /home/user/electrical-and-electronics-engineering/VLSI/ai-hdl/.venv/lib/python3.12/site-packages/cocotb
+     0.00ns INFO     cocotb.regression                  pytest not found, install it to enable better AssertionError messages
+     0.00ns INFO     cocotb                             Running tests
+     0.00ns INFO     cocotb.regression                  running test_baud_gen.test_reset (1/5)
+                                                            Test reset behavior
+     0.00ns WARNING  py.warnings                        /home/user/electrical-and-electronics-engineering/VLSI/ai-hdl/dp-1/peripheral/test/test_baud_gen.py:31: DeprecationWarning: The 'units' argument has been renamed to 'unit'.
+                                                          clock = Clock(dut.clk, CLK_PERIOD_NS, units="ns")
+    28.00ns INFO     cocotb.uart_baud_generator         Reset test passed
+    28.00ns INFO     cocotb.regression                  test_baud_gen.test_reset passed
+    28.00ns INFO     cocotb.regression                  running test_baud_gen.test_divisor_lookup (2/5)
+                                                            Test that correct divisor is selected for each baud rate
+    28.00ns WARNING  py.warnings                        /home/user/electrical-and-electronics-engineering/VLSI/ai-hdl/dp-1/peripheral/test/test_baud_gen.py:56: DeprecationWarning: The 'units' argument has been renamed to 'unit'.
+                                                          clock = Clock(dut.clk, CLK_PERIOD_NS, units="ns")
+    56.00ns WARNING  py.warnings                        /home/user/electrical-and-electronics-engineering/VLSI/ai-hdl/dp-1/peripheral/test/test_baud_gen.py:68: DeprecationWarning: The 'units' argument has been renamed to 'unit'.
+                                                          await Timer(1, units="ns")  # Combinational settling time
+    57.00ns INFO     cocotb.uart_baud_generator         Baud sel 0x0: divisor = 0001110001111011 ✓
+    58.00ns INFO     cocotb.uart_baud_generator         Baud sel 0x1: divisor = 0000111000111101 ✓
+    59.00ns INFO     cocotb.uart_baud_generator         Baud sel 0x2: divisor = 0000011100011111 ✓
+    60.00ns INFO     cocotb.uart_baud_generator         Baud sel 0xc: divisor = 0000001001011111 ✓
+    60.00ns INFO     cocotb.uart_baud_generator         Divisor lookup test passed
+    60.00ns INFO     cocotb.regression                  test_baud_gen.test_divisor_lookup passed
+    60.00ns INFO     cocotb.regression                  running test_baud_gen.test_tick_generation_9600 (3/5)
+                                                            Test tick generation for 9600 baud
+    60.00ns WARNING  py.warnings                        /home/user/electrical-and-electronics-engineering/VLSI/ai-hdl/dp-1/peripheral/test/test_baud_gen.py:82: DeprecationWarning: The 'units' argument has been renamed to 'unit'.
+                                                          clock = Clock(dut.clk, CLK_PERIOD_NS, units="ns")
+102162.00ns INFO     cocotb.uart_baud_generator         Tick 1 at cycle 7291 ✓
+204236.00ns INFO     cocotb.uart_baud_generator         Tick 2 at cycle 7291 ✓
+306310.00ns INFO     cocotb.uart_baud_generator         Tick 3 at cycle 7291 ✓
+306310.00ns INFO     cocotb.uart_baud_generator         Tick generation test passed
+306310.00ns INFO     cocotb.regression                  test_baud_gen.test_tick_generation_9600 passed
+306310.00ns INFO     cocotb.regression                  running test_baud_gen.test_enable_disable (4/5)
+                                                            Test enable/disable functionality
+306310.00ns WARNING  py.warnings                        /home/user/electrical-and-electronics-engineering/VLSI/ai-hdl/dp-1/peripheral/test/test_baud_gen.py:119: DeprecationWarning: The 'units' argument has been renamed to 'unit'.
+                                                          clock = Clock(dut.clk, CLK_PERIOD_NS, units="ns")
+306478.00ns INFO     cocotb.uart_baud_generator         Counter stays at 0 when disabled ✓
+306506.00ns WARNING  ..able_disable.test_enable_disable '>' not supported between instances of 'LogicArray' and 'int'
+                                                        Traceback (most recent call last):
+                                                          File "/home/user/electrical-and-electronics-engineering/VLSI/ai-hdl/dp-1/peripheral/test/test_baud_gen.py", line 143, in test_enable_disable
+                                                            assert dut.counter.value > 0, "Counter should increment when enabled"
+                                                                   ^^^^^^^^^^^^^^^^^^^^^
+                                                        TypeError: '>' not supported between instances of 'LogicArray' and 'int'
+306506.00ns WARNING  cocotb.regression                  test_baud_gen.test_enable_disable failed
+306506.00ns INFO     cocotb.regression                  running test_baud_gen.test_all_baud_rates (5/5)
+                                                            Test tick generation for all baud rates
+306506.00ns WARNING  py.warnings                        /home/user/electrical-and-electronics-engineering/VLSI/ai-hdl/dp-1/peripheral/test/test_baud_gen.py:158: DeprecationWarning: The 'units' argument has been renamed to 'unit'.
+                                                          clock = Clock(dut.clk, CLK_PERIOD_NS, units="ns")
+408608.00ns WARNING  ..l_baud_rates.test_all_baud_rates Baud 0x0: tick at cycle 7290, expected 7291
+                                                        Traceback (most recent call last):
+                                                          File "/home/user/electrical-and-electronics-engineering/VLSI/ai-hdl/dp-1/peripheral/test/test_baud_gen.py", line 182, in test_all_baud_rates
+                                                            assert cycle_count == expected_divisor, \
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                        AssertionError: Baud 0x0: tick at cycle 7290, expected 7291
+408608.00ns WARNING  cocotb.regression                  test_baud_gen.test_all_baud_rates failed
+408608.00ns INFO     cocotb.regression                  *************************************************************************************************
+                                                        ** TEST                                     STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        *************************************************************************************************
+                                                        ** test_baud_gen.test_reset                  PASS          28.00           0.00      24259.56  **
+                                                        ** test_baud_gen.test_divisor_lookup         PASS          32.00           0.00      24970.74  **
+                                                        ** test_baud_gen.test_tick_generation_9600   PASS      306250.00           1.62     189359.08  **
+                                                        ** test_baud_gen.test_enable_disable         FAIL         196.00           0.00      73080.59  **
+                                                        ** test_baud_gen.test_all_baud_rates         FAIL      102102.00           0.56     180807.54  **
+                                                        *************************************************************************************************
+                                                        ** TESTS=5 PASS=3 FAIL=2 SKIP=0                        408608.00           2.20     185507.35  **
+                                                        *************************************************************************************************
+make[1]: *** [/home/user/electrical-and-electronics-engineering/VLSI/ai-hdl/.venv/lib/python3.12/site-packages/cocotb_tools/makefiles/simulators/Makefile.icarus:67: results.xml] Error 2
+make[1]: Leaving directory '/home/user/electrical-and-electronics-engineering/VLSI/ai-hdl/dp-1/peripheral/test'
+make: *** [/home/user/electrical-and-electronics-engineering/VLSI/ai-hdl/.venv/lib/python3.12/site-packages/cocotb_tools/makefiles/Makefile.inc:17: sim] Error 2

@@ -1,0 +1,14 @@
+# 1. Read SystemVerilog files first (if they contain shared packages/logic)
+read_verilog -sv synchronizer.sv reclocking.sv rising_edge_detector.sv falling_edge_detector.sv spi_reg.sv
+
+# 2. Read standard Verilog files
+read_verilog alu.v core.v counter.v decode.v latch_reg.v register.v cpu.v mem_ctrl.v peripheral.v qspi_ctrl.v qspi_flash.v tinyqv.v tt_wrapper.v tinyqv_system_top.v 
+
+# 3. Check hierarchy
+synth -top tinyqv_system_top
+
+# 3. Clean up and simplify the logic for a clearer drawing
+proc; opt; 
+
+# 4. Generate the schematic
+show -format svg -prefix my_schematic tinyqv_system_top

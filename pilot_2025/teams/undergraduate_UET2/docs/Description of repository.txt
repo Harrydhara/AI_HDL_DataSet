@@ -1,0 +1,4 @@
+Phase includes:
+- "PromptScript": record of Prompt AI and responses.
+- "Modification.txt": Take note of some modification to fix bug.
+- 10 verilog modules: include 9 old module and a new module named "auth_module" to perform security functions

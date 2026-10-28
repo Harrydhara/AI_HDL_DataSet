@@ -1,0 +1,31 @@
+----------------------MODIFICATIONS--------------------------
+
+1. Top_level
+
+- Edit the input names of the buttons of the modules (no longer start_stop_button but change to the original name, eg: button0) for easy distinction
+
+- Add the Auth_module module by clock_slow = Clock_slow && auth_valid, meaning that there must be a confirmation signal to clock into other modules
+
+- Because seven segment display module instantiation is missing connections for seg and an, we add these outputs (seg, an) to our top level module
+
+2. Top_level_tb
+
+- Change the time scale from millions to ~100 times smaller
+
+- Adding more test cases to simulate the wrong button sequence for the authorization code at first and add more test cases for the alarm clock to simulate the alarm led turning on
+
+3. auth_module
+
+- New code generation, receiving 4 buttons as input, 1 output enable signal
+
+4. Clock_divider
+
+- Increase the counting speed many times (helps simulate faster)
+
+5. Button_debouncer
+
+- Convert to 8-bit input, then there is 1 output bit (011_111_11 then output = 1 at 1 cycle) to help with password pressing The aperture does not repeat a button if held too long.
+
+6. alarm_clock
+
+- Replace the undeclared gated_buttonX_db signals located in the alarm clock instantiation in top level with the correctly declared signals: button0_db, button1_db, button2_db, etc.

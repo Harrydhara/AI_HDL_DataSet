@@ -1,0 +1,11 @@
+{
+    "CLOCK_PERIOD": 30,
+    "DESIGN_NAME": "tinyqv_dma_top",
+    "VERILOG_FILES": "dir::rtl/*.v",
+    "CLOCK_PORT": "clk",
+    "FP_CORE_UTIL": 40,
+    "//FP_SIZING": "absolute",
+    "//DIE_AREA":[0, 0, 500, 500], 
+    "FP_PDN_VPTICH": 300,
+    "FP_PDN_HPITCH": 300
+}

@@ -1,0 +1,373 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\user> wsl
+user@host:/mnt/c/Users/user$ ~/AI-HDL/Acona-Tech-AI-HDL-2026
+-bash: /home/user/AI-HDL/Acona-Tech-AI-HDL-2026: Is a directory
+user@host:/mnt/c/Users/user$ cd ~/AI-HDL/Acona-Tech-AI-HDL-2026
+user@host:~/AI-HDL/Acona-Tech-AI-HDL-2026$ ls
+ Acona-Tech-AI-HDL-2026   key_expansion_sim   sim_mixcolumns             tb_clock_gated.vvp
+ OpenLane                 mixcolumns_sim      software                   tb_opt.vvp
+ aes_control_fsm          nano                synth                      tb_opt_v2.vvp
+ aes_control_fsm.sv       reg_interface_sim   synth_baseline.ys          tb_opt_v3.vvp
+ aes_core.sv              reports             synth_opt_v1.ys            tb_opt_v4.vvp
+ aes_sim                  riscV_mock.sv       synth_opt_v2.ys            tb_riscv_mock.sv
+ aes_standalone.vcd       rtl                 synth_v4.ys                tb_security
+'bash command files'      rtl_optimized       tb                         tb_tqvp_aes128.vcd
+ build                    run_sim.sh          tb_aes_control_fsm.vcd     timing_v1.ys
+ control_fsm_sim          sbox_sim            tb_aes_core.vcd            timing_v2.ys
+ debug_sim                scripts             tb_aes_mixcolumns.vcd      timing_v3.ys
+ docs                     sim                 tb_aes_reg_interface.vcd   timing_v4.ys
+ gate_sim                 sim_aes_core        tb_baseline.vvp            venv
+user@host:~/AI-HDL/Acona-Tech-AI-HDL-2026$ git switch DP3
+Already on 'DP3'
+Your branch is up to date with 'origin/DP3'.
+user@host:~/AI-HDL/Acona-Tech-AI-HDL-2026$ iverilog -g2012 -o tb_security \
+    rtl_optimized/aes_sbox.sv \
+    rtl_optimized/aes_mixcolumns_fast.sv \
+    rtl_optimized/aes_key_expansion_unrolled.sv \
+    rtl_optimized/aes_clock_gate.sv \
+    rtl_optimized/aes_masking_lfsr.sv \
+    rtl_optimized/aes_sbox_masked.sv \
+    rtl_optimized/aes_fault_detector.sv \
+    rtl_optimized/aes_core_secure.sv \
+    rtl_optimized/aes_reg_interface_secure.sv \
+    rtl_optimized/tqvp_aes128_secure.sv \
+    tb/security/tb_aes128_security.sv 2>&1
+
+echo "---COMPILE DONE---"
+
+vvp tb_security
+---COMPILE DONE---
+============================================================
+  DP3 COMPREHENSIVE SECURITY VALIDATION
+  Team Acona | AES-128 | TinyQV 64MHz
+  16 Test Groups | DPA + Fault + Adversarial
+============================================================
+
+--- TEST 1: NIST FIPS-197 Regression (Design Stability) ---
+  [PASS] NIST App.B
+  [PASS] NIST App.C.1
+  [PASS] Zero key+pt
+
+--- TEST 2: Key Lock Enforcement (CWE-1231) ---
+  [PASS] KEY_LOCKED = 1
+  [PASS] Locked key encrypts correctly
+  [PASS] Key read = 0 = 1
+
+--- TEST 3: Key Lock Persistence (Sticky Bit) ---
+  [PASS] Lock sticky after write 0 = 1
+  [PASS] Lock sticky after other writes = 1
+
+--- TEST 4: Key Zeroization (CWE-1259) ---
+  [PASS] ZEROIZED status = 1
+  [PASS] Lock cleared by zeroize = 0
+  [PASS] Post-zeroize encrypt
+
+--- TEST 5: Double Zeroize (Edge Case) ---
+  [PASS] Double zeroize - ZEROIZED = 1
+  [PASS] Double zeroize - no fault = 0
+  [PASS] Encrypt after double zeroize
+
+--- TEST 6: Masking Active ---
+  [PASS] MASKING_ACTIVE = 1
+
+--- TEST 7: Masking Consistency (5 runs) ---
+  [PASS] Masked run
+  [PASS] Masked run
+  [PASS] Masked run
+  [PASS] Masked run
+  [PASS] Masked run
+
+--- TEST 8: Multiple Different Plaintexts ---
+  [PASS] Plaintext A output (non-zero)
+  [PASS] Plaintext B output (non-zero)
+  [PASS] Different plaintexts give different ciphertexts
+
+--- TEST 9: LFSR Seed Lock After KEY_LOCK ---
+  [PASS] Seed unchanged after lock
+
+--- TEST 10: Fault Injection Detection (CWE-1243) ---
+  [PASS] FAULT_DETECTED after injection = 1
+  [PASS] Ciphertext suppressed on fault (suppressed)
+  [PASS] Fault flag is sticky = 1
+  [PASS] Fault cleared by zeroize = 0
+  [PASS] Normal after fault clear
+
+--- TEST 11: Reset Security State (CWE-1271) ---
+  [PASS] LOCKED=0 post-reset = 0
+  [PASS] ZEROIZED=0 post-reset = 0
+  [PASS] FAULT=0 post-reset = 0
+
+--- TEST 12: Full Secure Usage Protocol ---
+  [PASS] Protocol: key locked = 1
+  [PASS] Protocol: encrypt
+  [PASS] Protocol: no fault = 0
+  [PASS] Protocol: zeroized = 1
+  [PASS] Protocol: unlocked = 0
+
+--- TEST 13: DPA Resistance Measurement ---
+  Running 32 encryptions, varying plaintext byte 0...
+  Hamming weight stats over 32 encryptions:
+    Average HW: 63 (ideal=64)
+    Min HW: 54  Max HW: 74  Range: 20
+  [PASS] Average HW in expected range (44-84)
+  [PASS] HW range=20 shows good diffusion
+  HW monotonic transitions: 12/31 (uncorrelated ~= 15-16)
+  [PASS] No significant input-output HW correlation
+
+--- TEST 14: Timing Consistency (Constant-Time) ---
+  Poll counts: 9, 9, 9, 9, 9
+  [PASS] Constant-time: all encryptions = 9 polls
+
+--- TEST 15: Adversarial Input Variations ---
+  [PASS] Invalid address returns 0
+  [PASS] DOUT write ignored (read-only)
+  [PASS] Clean security state after reset
+  [PASS] SEC_STATUS write ignored (read-only)
+  [PASS] Rapid lock-zero-lock sequence
+
+--- TEST 16: Multiple Fault Injection Attempts ---
+  [PASS] Clean encrypt before fault
+  [PASS] Fault on 2nd encrypt = 1
+  [PASS] ault persists across encryptions = 1
+  [PASS] ull recovery after fault+zeroize
+
+============================================================
+  COMPREHENSIVE SECURITY VALIDATION RESULTS
+  Test Groups: 16
+  Total Checks: 50 | Passed: 50 | Failed: 0
+  STATUS: ALL TESTS PASSED
+============================================================
+
+tb/security/tb_aes128_security.sv:802: $finish called at 113405695 (1ps)
+user@host:~/AI-HDL/Acona-Tech-AI-HDL-2026$ # Run simulation and save output
+iverilog -g2012 -o tb_security \
+    rtl_optimized/aes_sbox.sv \
+    rtl_optimized/aes_mixcolumns_fast.sv \
+    rtl_optimized/aes_key_expansion_unrolled.sv \
+    rtl_optimized/aes_clock_gate.sv \
+    rtl_optimized/aes_masking_lfsr.sv \
+    rtl_optimized/aes_sbox_masked.sv \
+    rtl_optimized/aes_fault_detector.sv \
+    rtl_optimized/aes_core_secure.sv \
+    rtl_optimized/aes_reg_interface_secure.sv \
+    rtl_optimized/tqvp_aes128_secure.sv \
+    tb/security/tb_aes128_security.sv
+
+vvp tb_security | tee reports/dp3_security_test_results.txt
+============================================================
+  DP3 COMPREHENSIVE SECURITY VALIDATION
+  Team Acona | AES-128 | TinyQV 64MHz
+  16 Test Groups | DPA + Fault + Adversarial
+============================================================
+
+--- TEST 1: NIST FIPS-197 Regression (Design Stability) ---
+  [PASS] NIST App.B
+  [PASS] NIST App.C.1
+  [PASS] Zero key+pt
+
+--- TEST 2: Key Lock Enforcement (CWE-1231) ---
+  [PASS] KEY_LOCKED = 1
+  [PASS] Locked key encrypts correctly
+  [PASS] Key read = 0 = 1
+
+--- TEST 3: Key Lock Persistence (Sticky Bit) ---
+  [PASS] Lock sticky after write 0 = 1
+  [PASS] Lock sticky after other writes = 1
+
+--- TEST 4: Key Zeroization (CWE-1259) ---
+  [PASS] ZEROIZED status = 1
+  [PASS] Lock cleared by zeroize = 0
+  [PASS] Post-zeroize encrypt
+
+--- TEST 5: Double Zeroize (Edge Case) ---
+  [PASS] Double zeroize - ZEROIZED = 1
+  [PASS] Double zeroize - no fault = 0
+  [PASS] Encrypt after double zeroize
+
+--- TEST 6: Masking Active ---
+  [PASS] MASKING_ACTIVE = 1
+
+--- TEST 7: Masking Consistency (5 runs) ---
+  [PASS] Masked run
+  [PASS] Masked run
+  [PASS] Masked run
+  [PASS] Masked run
+  [PASS] Masked run
+
+--- TEST 8: Multiple Different Plaintexts ---
+  [PASS] Plaintext A output (non-zero)
+  [PASS] Plaintext B output (non-zero)
+  [PASS] Different plaintexts give different ciphertexts
+
+--- TEST 9: LFSR Seed Lock After KEY_LOCK ---
+  [PASS] Seed unchanged after lock
+
+--- TEST 10: Fault Injection Detection (CWE-1243) ---
+  [PASS] FAULT_DETECTED after injection = 1
+  [PASS] Ciphertext suppressed on fault (suppressed)
+  [PASS] Fault flag is sticky = 1
+  [PASS] Fault cleared by zeroize = 0
+  [PASS] Normal after fault clear
+
+--- TEST 11: Reset Security State (CWE-1271) ---
+  [PASS] LOCKED=0 post-reset = 0
+  [PASS] ZEROIZED=0 post-reset = 0
+  [PASS] FAULT=0 post-reset = 0
+
+--- TEST 12: Full Secure Usage Protocol ---
+  [PASS] Protocol: key locked = 1
+  [PASS] Protocol: encrypt
+  [PASS] Protocol: no fault = 0
+  [PASS] Protocol: zeroized = 1
+  [PASS] Protocol: unlocked = 0
+
+--- TEST 13: DPA Resistance Measurement ---
+  Running 32 encryptions, varying plaintext byte 0...
+  Hamming weight stats over 32 encryptions:
+    Average HW: 63 (ideal=64)
+    Min HW: 54  Max HW: 74  Range: 20
+  [PASS] Average HW in expected range (44-84)
+  [PASS] HW range=20 shows good diffusion
+  HW monotonic transitions: 12/31 (uncorrelated ~= 15-16)
+  [PASS] No significant input-output HW correlation
+
+--- TEST 14: Timing Consistency (Constant-Time) ---
+  Poll counts: 9, 9, 9, 9, 9
+  [PASS] Constant-time: all encryptions = 9 polls
+
+--- TEST 15: Adversarial Input Variations ---
+  [PASS] Invalid address returns 0
+  [PASS] DOUT write ignored (read-only)
+  [PASS] Clean security state after reset
+  [PASS] SEC_STATUS write ignored (read-only)
+  [PASS] Rapid lock-zero-lock sequence
+
+--- TEST 16: Multiple Fault Injection Attempts ---
+  [PASS] Clean encrypt before fault
+  [PASS] Fault on 2nd encrypt = 1
+  [PASS] ault persists across encryptions = 1
+  [PASS] ull recovery after fault+zeroize
+
+============================================================
+  COMPREHENSIVE SECURITY VALIDATION RESULTS
+  Test Groups: 16
+  Total Checks: 50 | Passed: 50 | Failed: 0
+  STATUS: ALL TESTS PASSED
+============================================================
+
+tb/security/tb_aes128_security.sv:802: $finish called at 113405695 (1ps)
+user@host:~/AI-HDL/Acona-Tech-AI-HDL-2026$ # Save simulation results
+vvp tb_security | tee reports/dp3_security_test_results.txt
+
+# Push everything
+git add reports/
+git commit -m "DP3: Synthesis reports + simulation results (50/50 tests, 3.5% overhead)"
+git push origin DP3
+
+# Tag submission
+git tag -a DP3-Submission -m "DP3 Security Evaluation - Team Acona"
+git push origin DP3-Submission
+============================================================
+  DP3 COMPREHENSIVE SECURITY VALIDATION
+  Team Acona | AES-128 | TinyQV 64MHz
+  16 Test Groups | DPA + Fault + Adversarial
+============================================================
+
+--- TEST 1: NIST FIPS-197 Regression (Design Stability) ---
+  [PASS] NIST App.B
+  [PASS] NIST App.C.1
+  [PASS] Zero key+pt
+
+--- TEST 2: Key Lock Enforcement (CWE-1231) ---
+  [PASS] KEY_LOCKED = 1
+  [PASS] Locked key encrypts correctly
+  [PASS] Key read = 0 = 1
+
+--- TEST 3: Key Lock Persistence (Sticky Bit) ---
+  [PASS] Lock sticky after write 0 = 1
+  [PASS] Lock sticky after other writes = 1
+
+--- TEST 4: Key Zeroization (CWE-1259) ---
+  [PASS] ZEROIZED status = 1
+  [PASS] Lock cleared by zeroize = 0
+  [PASS] Post-zeroize encrypt
+
+--- TEST 5: Double Zeroize (Edge Case) ---
+  [PASS] Double zeroize - ZEROIZED = 1
+  [PASS] Double zeroize - no fault = 0
+  [PASS] Encrypt after double zeroize
+
+--- TEST 6: Masking Active ---
+  [PASS] MASKING_ACTIVE = 1
+
+--- TEST 7: Masking Consistency (5 runs) ---
+  [PASS] Masked run
+  [PASS] Masked run
+  [PASS] Masked run
+  [PASS] Masked run
+  [PASS] Masked run
+
+--- TEST 8: Multiple Different Plaintexts ---
+  [PASS] Plaintext A output (non-zero)
+  [PASS] Plaintext B output (non-zero)
+  [PASS] Different plaintexts give different ciphertexts
+
+--- TEST 9: LFSR Seed Lock After KEY_LOCK ---
+  [PASS] Seed unchanged after lock
+
+--- TEST 10: Fault Injection Detection (CWE-1243) ---
+  [PASS] FAULT_DETECTED after injection = 1
+  [PASS] Ciphertext suppressed on fault (suppressed)
+  [PASS] Fault flag is sticky = 1
+  [PASS] Fault cleared by zeroize = 0
+  [PASS] Normal after fault clear
+
+--- TEST 11: Reset Security State (CWE-1271) ---
+  [PASS] LOCKED=0 post-reset = 0
+  [PASS] ZEROIZED=0 post-reset = 0
+  [PASS] FAULT=0 post-reset = 0
+
+--- TEST 12: Full Secure Usage Protocol ---
+  [PASS] Protocol: key locked = 1
+  [PASS] Protocol: encrypt
+  [PASS] Protocol: no fault = 0
+  [PASS] Protocol: zeroized = 1
+  [PASS] Protocol: unlocked = 0
+
+--- TEST 13: DPA Resistance Measurement ---
+  Running 32 encryptions, varying plaintext byte 0...
+  Hamming weight stats over 32 encryptions:
+    Average HW: 63 (ideal=64)
+    Min HW: 54  Max HW: 74  Range: 20
+  [PASS] Average HW in expected range (44-84)
+  [PASS] HW range=20 shows good diffusion
+  HW monotonic transitions: 12/31 (uncorrelated ~= 15-16)
+  [PASS] No significant input-output HW correlation
+
+--- TEST 14: Timing Consistency (Constant-Time) ---
+  Poll counts: 9, 9, 9, 9, 9
+  [PASS] Constant-time: all encryptions = 9 polls
+
+--- TEST 15: Adversarial Input Variations ---
+  [PASS] Invalid address returns 0
+  [PASS] DOUT write ignored (read-only)
+  [PASS] Clean security state after reset
+  [PASS] SEC_STATUS write ignored (read-only)
+  [PASS] Rapid lock-zero-lock sequence
+
+--- TEST 16: Multiple Fault Injection Attempts ---
+  [PASS] Clean encrypt before fault
+  [PASS] Fault on 2nd encrypt = 1
+  [PASS] ault persists across encryptions = 1
+  [PASS] ull recovery after fault+zeroize
+
+============================================================
+  COMPREHENSIVE SECURITY VALIDATION RESULTS
+  Test Groups: 16
+  Total Checks: 50 | Passed: 50 | Failed: 0
+  STATUS: ALL TESTS PASSED
+============================================================

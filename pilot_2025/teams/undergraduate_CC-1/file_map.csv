@@ -1,0 +1,31 @@
+released_path,path_in_original_submission,category
+ai_logs/ChatGPT - Phase2q sevseg sync vivado linter fixes.md,PimaCC-chatGPT logs/ChatGPT - Phase2q sevseg sync vivado linter fixes.md,ai_logs
+ai_logs/ChatGPT - Phase2q sevseg sync.md,PimaCC-chatGPT logs/ChatGPT - Phase2q sevseg sync.md,ai_logs
+ai_logs/Claude.md,PimaCC-chatGPT logs/Claude.md,ai_logs
+ai_logs/Gemini.md,PimaCC-chatGPT logs/Gemini.md,ai_logs
+ai_logs/Grok _ X.md,PimaCC-chatGPT logs/Grok _ X.md,ai_logs
+ai_logs/Phase 2 Verilog - Clock Module Design Changes.md,PimaCC-chatGPT logs/Phase 2 Verilog - Clock Module Design Changes.md,ai_logs
+ai_logs/Phase 2 Verilog - Phase 2 Context YAML.md,PimaCC-chatGPT logs/Phase 2 Verilog - Phase 2 Context YAML.md,ai_logs
+ai_logs/Phase 2 Verilog - Phase 2p Verilog Summary(3).md,PimaCC-chatGPT logs/Phase 2 Verilog - Phase 2p Verilog Summary(3).md,ai_logs
+ai_logs/Phase 2 Verilog - Phase2p Debugging Tips(1).md,PimaCC-chatGPT logs/Phase 2 Verilog - Phase2p Debugging Tips(1).md,ai_logs
+ai_logs/Phase 2 Verilog - Phase2p Debugging Tips.md,PimaCC-chatGPT logs/Phase 2 Verilog - Phase2p Debugging Tips.md,ai_logs
+ai_logs/Phase 2 Verilog - Seven Segment Display Stability.md,PimaCC-chatGPT logs/Phase 2 Verilog - Seven Segment Display Stability.md,ai_logs
+ai_logs/Phase2q sevseg sync - Current_state Signal Analysis.md,PimaCC-chatGPT logs/Phase2q sevseg sync - Current_state Signal Analysis.md,ai_logs
+ai_logs/Phase2q sevseg sync - Stopwatch Testbench Sequence (1).md,PimaCC-chatGPT logs/Phase2q sevseg sync - Stopwatch Testbench Sequence (1).md,ai_logs
+ai_logs/Phase2q sevseg sync - Stopwatch Testbench Sequence.md,PimaCC-chatGPT logs/Phase2q sevseg sync - Stopwatch Testbench Sequence.md,ai_logs
+ai_logs/Vivado module interface summary.md,PimaCC-chatGPT logs/Vivado module interface summary.md,ai_logs
+ai_logs/transcripts overview document.md,PimaCC-chatGPT logs/transcripts overview document.md,ai_logs
+config/PCC_Phase3_config.xdc,verilog code/constrs_1/imports/PimaCC_Phase3_team_submittal/PCC_Phase3_config.xdc,config
+docs/clock_divider.txt,verilog code/sources_1/imports/new/PimaCC_Phase3A_team_submittal_test_versions/clock_divider.txt,docs
+docs/clock_timezone.txt,verilog code/sources_1/imports/new/PimaCC_Phase3A_team_submittal_test_versions/clock_timezone.txt,docs
+docs/top_level.txt,verilog code/sources_1/imports/new/PimaCC_Phase3A_team_submittal_test_versions/top_level.txt,docs
+reports/testbench_STATE_set_btns.txt,verilog code/sources_1/imports/new/PimaCC_Phase3A_team_submittal_test_versions/testbench_STATE_set_btns.txt,reports
+rtl/alarm.v,verilog code/sources_1/imports/new/alarm.v,rtl
+rtl/buttonDebouncer.v,verilog code/sources_1/imports/new/buttonDebouncer.v,rtl
+rtl/clock_divider.v,verilog code/sources_1/imports/new/clock_divider.v,rtl
+rtl/clock_timezone.v,verilog code/sources_1/imports/new/clock_timezone.v,rtl
+rtl/convert_24_to_12.v,verilog code/sources_1/imports/new/convert_24_to_12.v,rtl
+rtl/sevseg.v,verilog code/sources_1/imports/new/sevseg.v,rtl
+rtl/stopwatch.v,verilog code/sources_1/imports/new/stopwatch.v,rtl
+rtl/top_level.v,verilog code/sources_1/imports/new/top_level.v,rtl
+testbench/testbench_STATE_set_btns.v,verilog code/sim_1/imports/PimaCC_Phase3_team_submittal/testbench_STATE_set_btns.v,testbench

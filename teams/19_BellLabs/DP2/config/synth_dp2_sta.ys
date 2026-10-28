@@ -1,0 +1,32 @@
+# ============================================================
+# Bell Labs — AI-HDL 2026 — DP2 Baseline STA Script
+# Extracts timing and power BEFORE any optimization
+# Run: yosys scripts/synth_dp2_sta.ys 2>&1 | tee reports/dp2/baseline_sta.txt
+# ============================================================
+
+# Step 1: Read the RTL
+read_verilog src/aes128/aes128_peripheral.v
+
+# Step 2: Synthesize targeting Sky130A
+synth -top tqvp_belllabs_aes128
+
+# Step 3: Technology mapping to sky130_fd_sc_hd
+dfflibmap -liberty /dev/null
+abc -liberty /dev/null
+
+# Step 4: Optimizations
+opt
+opt_clean
+
+# Step 5: Print area statistics
+stat
+
+# Step 6: Static timing analysis — prints critical path and Fmax
+sta
+
+# Step 7: Power estimation
+power -hier
+
+# Step 8: Write baseline netlist
+write_verilog reports/dp2/baseline_netlist.v
+write_json reports/dp2/baseline_synthesis.json

@@ -1,0 +1,75 @@
+user@host:~/AI-HDL/DP2_test$ make -f test_bist.mk
+iverilog -g2005-sv -Wall -o tb_bist.out \
+    tb_bist.v pe_macc.v pe_activation.v vpu.v mvu.v systolic.v bist_ctrl.v peripheral.v
+pe_macc.v:13: warning: timescale for pe_macc inherited from another file.
+tb_bist.v:2: ...: The inherited timescale is here.
+pe_activation.v:13: warning: timescale for pe_activation inherited from another file.
+tb_bist.v:2: ...: The inherited timescale is here.
+vpu.v:39: warning: timescale for vpu inherited from another file.
+tb_bist.v:2: ...: The inherited timescale is here.
+mvu.v:51: warning: timescale for mvu inherited from another file.
+tb_bist.v:2: ...: The inherited timescale is here.
+systolic.v:42: warning: timescale for systolic_2x2 inherited from another file.
+tb_bist.v:2: ...: The inherited timescale is here.
+bist_ctrl.v:56: warning: timescale for bist_ctrl inherited from another file.
+tb_bist.v:2: ...: The inherited timescale is here.
+peripheral.v:41: warning: timescale for tqvp_example inherited from another file.
+tb_bist.v:2: ...: The inherited timescale is here.
+mvu.v:159: warning: @* is sensitive to all 4 words in array 'x'.
+mvu.v:162: warning: @* is sensitive to all 16 words in array 'w'.
+vvp tb_bist.out
+VCD info: dumpfile tb_bist.vcd opened for output.
+
+[T1] FUNCTIONAL mode — systolic direct (identity × identity)
+  PASS  de=0 after reset  got=0x0
+  PASS        syst c00=1  got=0x1
+  PASS        syst c01=0  got=0x0
+  PASS        syst c10=0  got=0x0
+  PASS        syst c11=0  got=0x0
+
+[T2] FUNCTIONAL mode — mvu direct (identity W)
+  TIMEOUT: poll_bit0 addr=0x45 expected=1
+  PASS          mvu y0=1  got=0x1
+  PASS          mvu y1=2  got=0x2
+  PASS          mvu y2=3  got=0x3
+  PASS          mvu y3=4  got=0x4
+
+[T3] Mode register
+  PASS  de=1 after write  got=0x1
+  PASS  e=0 before start  got=0x0
+
+[T4] BIST systolic-only (8 vectors)
+  PASS  ve=1 during test  got=0x1
+  PASS       syst_done=1  got=0x1
+  PASS       syst_pass=1  got=0x1
+  PASS  done=0 (not run)  got=0x0
+
+[T5] BIST mvu-only (4 vectors)
+  PASS        mvu_done=1  got=0x1
+  PASS        mvu_pass=1  got=0x1
+  PASS  done=0 (not run)  got=0x0
+
+[T6] BIST both — systolic then mvu
+  PASS  oth: syst_done=1  got=0x1
+  PASS  oth: syst_pass=1  got=0x1
+  PASS  both: mvu_done=1  got=0x1
+  PASS  both: mvu_pass=1  got=0x1
+  PASS  usy=0 after done  got=0x0
+
+[T7] Bus lockout
+  PASS  _pass unaffected  got=0x1
+
+[T8] Return to FUNCTIONAL mode
+  PASS  after write-back  got=0x0
+  PASS   post-BIST c00=6  got=0x6
+  PASS   post-BIST c11=0  got=0x0
+
+[T9] BIST start ignored in FUNCTIONAL mode
+  PASS   ignored: busy=0  got=0x0
+
+══════════════════════════════════════
+  28 passed,  0 failed
+══════════════════════════════════════
+  ALL TESTS PASSED
+tb_bist.v:321: $finish called at 7466000 (1ps)
+user@host:~/AI-HDL/DP2_test$

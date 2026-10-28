@@ -1,0 +1,299 @@
+Microsoft Windows [Version 10.0.26200.7922]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\user>wsl
+user@host:/mnt/c/Users/user$ cd ~/AI-HDL
+user@host:~/AI-HDL$ ls
+Acona-Tech-AI-HDL-2026
+user@host:~/AI-HDL$ cd Acona-Tech-AI-HDL-2026
+user@host:~/AI-HDL/Acona-Tech-AI-HDL-2026$ ls
+Acona-Tech-AI-HDL-2026  sim_aes_core
+OpenLane                sim_mixcolumns
+aes_control_fsm         software
+aes_control_fsm.sv      synth
+aes_core.sv             synth_baseline.ys
+aes_sim                 synth_opt_v1.ys
+aes_standalone.vcd      synth_opt_v2.ys
+build                   tb
+control_fsm_sim         tb_aes_control_fsm.vcd
+debug_sim               tb_aes_core.vcd
+docs                    tb_aes_mixcolumns.vcd
+gate_sim                tb_aes_reg_interface.vcd
+key_expansion_sim       tb_baseline.vvp
+mixcolumns_sim          tb_clock_gated.vvp
+nano                    tb_opt.vvp
+reg_interface_sim       tb_opt_v2.vvp
+reports                 tb_opt_v3.vvp
+riscV_mock.sv           tb_riscv_mock.sv
+rtl                     tb_tqvp_aes128.vcd
+rtl_optimized           timing_v1.ys
+run_sim.sh              timing_v2.ys
+sbox_sim                timing_v3.ys
+scripts                 venv
+sim
+user@host:~/AI-HDL/Acona-Tech-AI-HDL-2026$ cd ~/AI-HDL/Acona-Tech-AI-HDL-2026
+
+# Run timing analysis for v3
+cat > timing_v3.ys << 'EOF'
+read_verilog -sv rtl_optimized/aes_sbox.sv
+read_verilog -sv rtl_optimized/aes_mixcolumns_fast.sv
+read_verilog -sv rtl_optimized/aes_key_expansion_unrolled.sv
+read_verilog -sv rtl_optimized/aes_core_fast.sv
+read_verilog -sv rtl_optimized/aes_reg_interface.sv
+read_verilog -sv rtl_optimized/aes_clock_gate.sv
+read_verilog -sv rtl_optimized/tqvp_aes128_opt_v3.sv
+
+synth -top tqvp_aes128_top_opt_v3
+flatten
+ltp -noff
+EOF
+
+yosys -s timing_v3.ys 2>&1 | tail -40
+
+10. Executing LTP pass (find longest path).
+
+Longest topological path in tqvp_aes128_top_opt_v3 (length=30):
+    0: \u_aes128.u_aes_core.round_cnt [2]
+    1: $flatten\u_aes128.\u_aes_core.$abc$24077$new_n1475_ (via $flatten\u_aes128.\u_aes_core.$abc$24077$auto$blifparse.cc:386:parse_blif$24373)
+    2: $flatten\u_aes128.\u_aes_core.$abc$24077$new_n1486_ (via $flatten\u_aes128.\u_aes_core.$abc$24077$auto$blifparse.cc:386:parse_blif$24384)
+    3: $flatten\u_aes128.\u_aes_core.$abc$24077$new_n1487_ (via $flatten\u_aes128.\u_aes_core.$abc$24077$auto$blifparse.cc:386:parse_blif$24385)
+    4: $flatten\u_aes128.\u_aes_core.$abc$24077$new_n1488_ (via $flatten\u_aes128.\u_aes_core.$abc$24077$auto$blifparse.cc:386:parse_blif$24386)
+    5: $flatten\u_aes128.\u_aes_core.$abc$24077$new_n1489_ (via $flatten\u_aes128.\u_aes_core.$abc$24077$auto$blifparse.cc:386:parse_blif$24387)
+    6: $flatten\u_aes128.\u_aes_core.$abc$24077$new_n1490_ (via $flatten\u_aes128.\u_aes_core.$abc$24077$auto$blifparse.cc:386:parse_blif$24388)
+    7: \u_aes128.u_aes_core.round_num [3] (via $flatten\u_aes128.\u_aes_core.$abc$24077$auto$blifparse.cc:386:parse_blif$24389)
+    8: $flatten\u_aes128.\u_key_expansion.$abc$25818$new_n4227_ (via $flatten\u_aes128.\u_key_expansion.$abc$25818$auto$blifparse.cc:386:parse_blif$27948)
+    9: $flatten\u_aes128.\u_key_expansion.$abc$25818$new_n4228_ (via $flatten\u_aes128.\u_key_expansion.$abc$25818$auto$blifparse.cc:386:parse_blif$27949)
+   10: $flatten\u_aes128.\u_key_expansion.$abc$25818$new_n7036_ (via $flatten\u_aes128.\u_key_expansion.$abc$25818$auto$blifparse.cc:386:parse_blif$30757)
+   11: $flatten\u_aes128.\u_key_expansion.$abc$25818$new_n7037_ (via $flatten\u_aes128.\u_key_expansion.$abc$25818$auto$blifparse.cc:386:parse_blif$30758)
+   12: $flatten\u_aes128.\u_key_expansion.$abc$25818$new_n7038_ (via $flatten\u_aes128.\u_key_expansion.$abc$25818$auto$blifparse.cc:386:parse_blif$30759)
+   13: $flatten\u_aes128.\u_key_expansion.$abc$25818$new_n7039_ (via $flatten\u_aes128.\u_key_expansion.$abc$25818$auto$blifparse.cc:386:parse_blif$30760)
+   14: $flatten\u_aes128.\u_key_expansion.$abc$25818$new_n7045_ (via $flatten\u_aes128.\u_key_expansion.$abc$25818$auto$blifparse.cc:386:parse_blif$30766)
+   15: \u_aes128.u_key_expansion.round_key [127] (via $flatten\u_aes128.\u_key_expansion.$abc$25818$auto$blifparse.cc:386:parse_blif$30767)
+   16: $flatten\u_aes128.\u_aes_core.$abc$24077$new_n1458_ (via $flatten\u_aes128.\u_aes_core.$abc$24077$auto$blifparse.cc:386:parse_blif$24356)
+   17: \u_aes128.u_aes_core.after_add_key_inv [127] (via $flatten\u_aes128.\u_aes_core.$abc$24077$auto$blifparse.cc:386:parse_blif$24357)
+   18: $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$30770$new_n1719_ (via $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$30770$auto$blifparse.cc:386:parse_blif$32232)
+   19: $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$30770$new_n1779_ (via $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$30770$auto$blifparse.cc:386:parse_blif$32292)
+   20: $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$30770$new_n1780_ (via $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$30770$auto$blifparse.cc:386:parse_blif$32293)
+   21: $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$30770$new_n1781_ (via $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$30770$auto$blifparse.cc:386:parse_blif$32294)
+   22: $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$30770$new_n1786_ (via $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$30770$auto$blifparse.cc:386:parse_blif$32299)
+   23: $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$30770$new_n1791_ (via $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$30770$auto$blifparse.cc:386:parse_blif$32304)
+   24: $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$30770$new_n1797_ (via $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$30770$auto$blifparse.cc:386:parse_blif$32310)
+   25: \u_aes128.u_aes_core.u_mixcolumns_dec.state_out [99] (via $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$30770$auto$blifparse.cc:386:parse_blif$32311)
+   26: $flatten\u_aes128.\u_aes_core.$abc$24077$new_n2586_ (via $flatten\u_aes128.\u_aes_core.$abc$24077$auto$blifparse.cc:386:parse_blif$25484)
+   27: $flatten\u_aes128.\u_aes_core.$abc$24077$new_n2587_ (via $flatten\u_aes128.\u_aes_core.$abc$24077$auto$blifparse.cc:386:parse_blif$25485)
+   28: $flatten\u_aes128.\u_aes_core.$abc$24077$new_n2588_ (via $flatten\u_aes128.\u_aes_core.$abc$24077$auto$blifparse.cc:386:parse_blif$25486)
+   29: $flatten\u_aes128.\u_aes_core.$abc$24077$new_n2591_ (via $flatten\u_aes128.\u_aes_core.$abc$24077$auto$blifparse.cc:386:parse_blif$25489)
+   30: $flatten\u_aes128.\u_aes_core.$procmux$1207.Y [99] (via $flatten\u_aes128.\u_aes_core.$abc$24077$auto$blifparse.cc:386:parse_blif$25490)
+   ff: \u_aes128.u_aes_core.state_reg [99] (via $flatten\u_aes128.\u_aes_core.$auto$ff.cc:266:slice$22600)
+
+End of script. Logfile hash: 6eb07ab2bc, CPU: user 3.40s system 0.09s, MEM: 171.26 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 21% 21x opt_expr (0 sec), 13% 20x opt_clean (0 sec), ...
+user@host:~/AI-HDL/Acona-Tech-AI-HDL-2026$ git pull
+remote: Enumerating objects: 12, done.
+remote: Counting objects: 100% (12/12), done.
+remote: Compressing objects: 100% (12/12), done.
+remote: Total 12 (delta 3), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (12/12), 9.20 KiB | 376.00 KiB/s, done.
+From github.com:[user]/Acona-Tech-AI-HDL-2026
+   ce3549c..389d60a  DP2        -> origin/DP2
+Updating ce3549c..389d60a
+Fast-forward
+ rtl_optimized/aes_core_fast_v2.sv   | 337 ++++++++++++++++++++++
+ rtl_optimized/tqvp_aes128_opt_v4.sv | 198 +++++++++++++
+ tb/tb_tqvp_aes128_opt_v4.sv         | 350 +++++++++++++++++++++++
+ 3 files changed, 885 insertions(+)
+ create mode 100644 rtl_optimized/aes_core_fast_v2.sv
+ create mode 100644 rtl_optimized/tqvp_aes128_opt_v4.sv
+ create mode 100644 tb/tb_tqvp_aes128_opt_v4.sv
+user@host:~/AI-HDL/Acona-Tech-AI-HDL-2026$ iverilog -g2012 -o tb_opt_v4.vvp \
+    rtl_optimized/aes_sbox.sv \
+    rtl_optimized/aes_mixcolumns_fast.sv \
+    rtl_optimized/aes_key_expansion_unrolled.sv \
+    rtl_optimized/aes_core_fast_v2.sv \
+    rtl_optimized/aes_reg_interface.sv \
+    rtl_optimized/aes_clock_gate.sv \
+    rtl_optimized/tqvp_aes128_opt_v4.sv \
+    tb/tb_tqvp_aes128_opt_v4.sv
+
+# 3. Run simulation
+vvp tb_opt_v4.vvp
+
+================================================================
+  DP2 v4: Fully Optimized AES-128 with Pipelined Keys
+  (Clock Gating + Fast MixColumns + Unrolled Keys + Key Pipeline)
+================================================================
+  Expected: ~22 cycles (was 12), ~15 logic levels (was 30)
+================================================================
+
+Test 1: Reset Behavior
+  STATUS: 0x00000000
+  PASSED
+
+Test 2: NIST FIPS-197 Encryption
+  Cycles: 31 (expected ~30 with pipelined keys)
+  PASSED: Ciphertext matches
+    Result: 3925841d02dc09fbdc118597196a0b32
+
+Test 3: NIST FIPS-197 Decryption
+  Cycles: 31
+  PASSED: Plaintext matches
+    Result: 3243f6a8885a308d313198a2e0370734
+
+Test 4: All-Zeros Vector
+  PASSED
+
+Test 5: Encrypt-Decrypt Round Trip
+  Encrypted: 1f936dbf2ccf81f28c04dfe4a7406f81
+  Decrypted: 0fedcba9876543210badf00dcafebeef
+  PASSED
+
+================================================================
+  TEST SUMMARY
+================================================================
+  Total Tests: 5
+  Passed:      5
+  Failed:      0
+================================================================
+
+  *** ALL TESTS PASSED ***
+  v4 Optimizations Verified!
+  - Clock Gating: OK
+  - Fast MixColumns: OK
+  - Unrolled Keys: OK
+  - Pipelined Key Fetch: OK
+================================================================
+tb/tb_tqvp_aes128_opt_v4.sv:340: $finish called at 7398911 (1ps)
+user@host:~/AI-HDL/Acona-Tech-AI-HDL-2026$ cat > timing_v4.ys <<'EOF'
+read_verilog -sv rtl_optimized/aes_sbox.sv
+read_verilog -sv rtl_optimized/aes_mixcolumns_fast.sv
+read_verilog -sv rtl_optimized/aes_key_expansion_unrolled.sv
+read_verilog -sv rtl_optimized/aes_core_fast_v2.sv
+read_verilog -sv rtl_optimized/aes_reg_interface.sv
+read_verilog -sv rtl_optimized/aes_clock_gate.sv
+read_verilog -sv rtl_optimized/tqvp_aes128_opt_v4.sv
+
+synth -top tqvp_aes128_top_opt_v4
+flatten
+ltp -noff
+EOF
+
+yosys -s timing_v4.ys 2>&1 | tail -40
+Deleting now unused module aes_key_expansion_unrolled.
+Deleting now unused module aes_mixcolumns_fast.
+Deleting now unused module aes_reg_interface.
+Deleting now unused module aes_sbox.
+Deleting now unused module tqvp_aes128_opt_v4.
+<suppressed ~40 debug messages>
+
+10. Executing LTP pass (find longest path).
+
+Longest topological path in tqvp_aes128_top_opt_v4 (length=24):
+    0: \u_aes128.u_aes_core.state_reg [82]
+    1: $flatten\u_aes128.\u_aes_core.\gen_sbox_dec[9].u_sbox_dec.$abc$33464$new_n24_ (via $flatten\u_aes128.\u_aes_core.\gen_sbox_dec[9].u_sbox_dec.$abc$33464$auto$blifparse.cc:386:parse_blif$33471)
+    2: $flatten\u_aes128.\u_aes_core.\gen_sbox_dec[9].u_sbox_dec.$abc$33464$new_n36_ (via $flatten\u_aes128.\u_aes_core.\gen_sbox_dec[9].u_sbox_dec.$abc$33464$auto$blifparse.cc:386:parse_blif$33483)
+    3: $flatten\u_aes128.\u_aes_core.\gen_sbox_dec[9].u_sbox_dec.$abc$33464$new_n95_ (via $flatten\u_aes128.\u_aes_core.\gen_sbox_dec[9].u_sbox_dec.$abc$33464$auto$blifparse.cc:386:parse_blif$33542)
+    4: $flatten\u_aes128.\u_aes_core.\gen_sbox_dec[9].u_sbox_dec.$abc$33464$new_n97_ (via $flatten\u_aes128.\u_aes_core.\gen_sbox_dec[9].u_sbox_dec.$abc$33464$auto$blifparse.cc:386:parse_blif$33544)
+    5: $flatten\u_aes128.\u_aes_core.\gen_sbox_dec[9].u_sbox_dec.$abc$33464$new_n101_ (via $flatten\u_aes128.\u_aes_core.\gen_sbox_dec[9].u_sbox_dec.$abc$33464$auto$blifparse.cc:386:parse_blif$33548)
+    6: $flatten\u_aes128.\u_aes_core.\gen_sbox_dec[9].u_sbox_dec.$abc$33464$new_n102_ (via $flatten\u_aes128.\u_aes_core.\gen_sbox_dec[9].u_sbox_dec.$abc$33464$auto$blifparse.cc:386:parse_blif$33549)
+    7: $flatten\u_aes128.\u_aes_core.\gen_sbox_dec[9].u_sbox_dec.$abc$33464$new_n103_ (via $flatten\u_aes128.\u_aes_core.\gen_sbox_dec[9].u_sbox_dec.$abc$33464$auto$blifparse.cc:386:parse_blif$33550)
+    8: $flatten\u_aes128.\u_aes_core.\gen_sbox_dec[9].u_sbox_dec.$abc$33464$new_n104_ (via $flatten\u_aes128.\u_aes_core.\gen_sbox_dec[9].u_sbox_dec.$abc$33464$auto$blifparse.cc:386:parse_blif$33551)
+    9: \u_aes128.u_aes_core.gen_sbox_dec[9].u_sbox_dec.data_out [0] (via $flatten\u_aes128.\u_aes_core.\gen_sbox_dec[9].u_sbox_dec.$abc$33464$auto$blifparse.cc:386:parse_blif$33611)
+   10: $flatten\u_aes128.\u_aes_core.$abc$24309$new_n1300_ (via $flatten\u_aes128.\u_aes_core.$abc$24309$auto$blifparse.cc:386:parse_blif$24429)
+   11: \u_aes128.u_aes_core.after_add_key_inv [48] (via $flatten\u_aes128.\u_aes_core.$abc$24309$auto$blifparse.cc:386:parse_blif$24430)
+   12: $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$31022$new_n789_ (via $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$31022$auto$blifparse.cc:386:parse_blif$31554)
+   13: $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$31022$new_n810_ (via $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$31022$auto$blifparse.cc:386:parse_blif$31575)
+   14: $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$31022$new_n812_ (via $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$31022$auto$blifparse.cc:386:parse_blif$31577)
+   15: $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$31022$new_n813_ (via $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$31022$auto$blifparse.cc:386:parse_blif$31578)
+   16: $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$31022$new_n814_ (via $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$31022$auto$blifparse.cc:386:parse_blif$31579)
+   17: $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$31022$new_n819_ (via $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$31022$auto$blifparse.cc:386:parse_blif$31584)
+   18: $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$31022$new_n825_ (via $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$31022$auto$blifparse.cc:386:parse_blif$31590)
+   19: \u_aes128.u_aes_core.u_mixcolumns_dec.state_out [35] (via $flatten\u_aes128.\u_aes_core.\u_mixcolumns_dec.$abc$31022$auto$blifparse.cc:386:parse_blif$31591)
+   20: $flatten\u_aes128.\u_aes_core.$abc$24309$new_n1886_ (via $flatten\u_aes128.\u_aes_core.$abc$24309$auto$blifparse.cc:386:parse_blif$25015)
+   21: $flatten\u_aes128.\u_aes_core.$abc$24309$new_n1887_ (via $flatten\u_aes128.\u_aes_core.$abc$24309$auto$blifparse.cc:386:parse_blif$25016)
+   22: $flatten\u_aes128.\u_aes_core.$abc$24309$new_n1888_ (via $flatten\u_aes128.\u_aes_core.$abc$24309$auto$blifparse.cc:386:parse_blif$25017)
+   23: $flatten\u_aes128.\u_aes_core.$abc$24309$new_n1891_ (via $flatten\u_aes128.\u_aes_core.$abc$24309$auto$blifparse.cc:386:parse_blif$25020)
+   24: $flatten\u_aes128.\u_aes_core.$procmux$1215.Y [35] (via $flatten\u_aes128.\u_aes_core.$abc$24309$auto$blifparse.cc:386:parse_blif$25021)
+   ff: \u_aes128.u_aes_core.state_reg [35] (via $flatten\u_aes128.\u_aes_core.$auto$ff.cc:266:slice$22603)
+
+End of script. Logfile hash: 4ceb680c75, CPU: user 3.44s system 0.09s, MEM: 172.67 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 21% 21x opt_expr (0 sec), 13% 20x opt_clean (0 sec), ...
+user@host:~/AI-HDL/Acona-Tech-AI-HDL-2026$ cd ~/AI-HDL/Acona-Tech-AI-HDL-2026
+
+# Synthesis for v4
+cat > synth_v4.ys << 'EOF'
+read_verilog -sv rtl_optimized/aes_sbox.sv
+read_verilog -sv rtl_optimized/aes_mixcolumns_fast.sv
+read_verilog -sv rtl_optimized/aes_key_expansion_unrolled.sv
+read_verilog -sv rtl_optimized/aes_core_fast_v2.sv
+read_verilog -sv rtl_optimized/aes_reg_interface.sv
+read_verilog -sv rtl_optimized/aes_clock_gate.sv
+read_verilog -sv rtl_optimized/tqvp_aes128_opt_v4.sv
+
+synth -top tqvp_aes128_top_opt_v4
+stat
+EOF
+
+yosys -s synth_v4.ys 2>&1 | tail -60
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 18
+     $_ANDNOT_                       1
+     $_DFFE_PN0P_                    2
+     $_OR_                          10
+     aes_clock_gate                  2
+     aes_core_fast_v2                1
+     aes_key_expansion_unrolled      1
+     aes_reg_interface               1
+
+=== tqvp_aes128_top_opt_v4 ===
+
+   Number of wires:                 11
+   Number of wire bits:             94
+   Number of public wires:          11
+   Number of public wire bits:      94
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  1
+     tqvp_aes128_opt_v4              1
+
+=== design hierarchy ===
+
+   tqvp_aes128_top_opt_v4            1
+     tqvp_aes128_opt_v4              1
+       aes_clock_gate                2
+       aes_core_fast_v2              1
+         aes_mixcolumns_fast         2
+         aes_sbox                   32
+       aes_key_expansion_unrolled      1
+       aes_reg_interface             1
+
+   Number of wires:              34079
+   Number of wire bits:          42400
+   Number of public wires:         528
+   Number of public wire bits:    8542
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:              37025
+     $_ANDNOT_                    3548
+     $_AND_                        287
+     $_DFFE_PN0P_                 2252
+     $_DFF_PN0_                     21
+     $_DFF_PN1_                      1
+     $_DLATCH_N_                     2
+     $_MUX_                      21291
+     $_NAND_                       238
+     $_NOR_                        142
+     $_NOT_                        426
+     $_ORNOT_                      399
+     $_OR_                        4190
+     $_XNOR_                      1082
+     $_XOR_                       3146
+
+End of script. Logfile hash: 66b6c003b8, CPU: user 2.98s system 0.06s, MEM: 53.55 MB peak
+Yosys 0.33 (git sha1 2584903a060)
+Time spent: 24% 21x opt_expr (0 sec), 15% 20x opt_clean (0 sec), ...
+user@host:~/AI-HDL/Acona-Tech-AI-HDL-2026$

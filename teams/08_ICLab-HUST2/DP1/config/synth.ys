@@ -1,0 +1,39 @@
+# Yosys synthesis script - TinyQV + Winograd (DP2 full system)
+# Usage: yosys synth.ys
+# Output: output/synth_netlist.v, output/synth_netlist.json, output/synth_stats.txt
+
+# --- TinyQV core ---
+read_verilog -sv ../../src/project.v
+read_verilog -sv ../../src/tinyqv.v
+read_verilog -sv ../../src/cpu.v
+read_verilog -sv ../../src/core.v
+read_verilog -sv ../../src/alu.v
+read_verilog -sv ../../src/decode.v
+read_verilog -sv ../../src/register.v
+read_verilog -sv ../../src/latch_reg.v
+read_verilog -sv ../../src/counter.v
+read_verilog -sv ../../src/mem_ctrl.v
+read_verilog -sv ../../src/qspi_ctrl.v
+read_verilog -sv ../../src/qspi_flash.v
+read_verilog -sv ../../src/time.v
+read_verilog -sv ../../src/uart_tx.v
+
+# --- Peripherals (trimmed - winograd) ---
+read_verilog -sv ../../src/peripherals.v
+
+# --- Winograd modules ---
+read_verilog -sv ../../src/tqvp_winograd.v
+read_verilog -sv ../../src/interface.v
+read_verilog -sv ../../src/winograd.v
+read_verilog -sv ../../src/matrix_filter.v
+read_verilog -sv ../../src/matrix_input.v
+read_verilog -sv ../../src/matrix_output.v
+read_verilog -sv ../../src/element_wise.v
+
+hierarchy -check -top tt_um_tt_tinyQV
+
+synth -top tt_um_tt_tinyQV
+
+write_verilog -noattr output/synth_netlist.v
+write_json output/synth_netlist.json
+tee -o output/synth_stats.txt stat

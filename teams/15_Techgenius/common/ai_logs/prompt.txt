@@ -1,0 +1,22 @@
+Build a secure hardware brute force password cracker in Verilog for TinyQV RISC-V platform.
+
+CORE FEATURES:
+- Systematically generate all password combinations (odometer-style: 000→001→999)
+- Support 1-8 character passwords with 5 character sets (numeric, lowercase, uppercase, alphanumeric, ASCII)
+- 3 modes: PIN comparison, hash comparison, login output
+- 64-bit attempt counter + real-time speed measurement
+- Hardware interrupt on password found
+
+CRITICAL SECURITY:
+- Strong authentication (32-bit key + anti-replay nonce) required before operation
+- Constant-time comparison (prevents timing attacks)
+- Tamper detection with automatic data erasure
+- Rate limiting (cooldown between runs)
+- Session attempt limits with forced re-auth
+- Emergency zeroize command
+- Audit logging of security events
+
+REGISTERS:
+- Control, target hash, status, attempt counter, candidate result, auth key, nonce, limits
+
+Test with cocotb: PIN cracking, hash mode, exhaustion, security features, speed measurement.

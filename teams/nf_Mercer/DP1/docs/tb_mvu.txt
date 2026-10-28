@@ -1,0 +1,34 @@
+user@host:~/AI-HDL/DP_test2$ iverilog -o tb_mvu tb_mvu.v mvu.v
+vvp tb_mvu
+tb_mvu.v:75: warning: Numeric constant truncated to 6 bits.
+tb_mvu.v:75: warning: Numeric constant truncated to 6 bits.
+tb_mvu.v:75: warning: Numeric constant truncated to 6 bits.
+tb_mvu.v:75: warning: Numeric constant truncated to 6 bits.
+tb_mvu.v:80: warning: Numeric constant truncated to 6 bits.
+tb_mvu.v:89: warning: Numeric constant truncated to 6 bits.
+tb_mvu.v:90: warning: Numeric constant truncated to 6 bits.
+tb_mvu.v:91: warning: Numeric constant truncated to 6 bits.
+tb_mvu.v:92: warning: Numeric constant truncated to 6 bits.
+mvu.v:86: warning: Numeric constant truncated to 6 bits.
+mvu.v:87: warning: Numeric constant truncated to 6 bits.
+mvu.v:88: warning: Numeric constant truncated to 6 bits.
+mvu.v:89: warning: Numeric constant truncated to 6 bits.
+mvu.v:92: warning: Numeric constant truncated to 6 bits.
+mvu.v:144: warning: Numeric constant truncated to 6 bits.
+mvu.v:145: warning: Numeric constant truncated to 6 bits.
+mvu.v:146: warning: Numeric constant truncated to 6 bits.
+mvu.v:147: warning: Numeric constant truncated to 6 bits.
+mvu.v:150: warning: Numeric constant truncated to 6 bits.
+mvu.v:151: warning: Numeric constant truncated to 6 bits.
+mvu.v:154: warning: Numeric constant truncated to 6 bits.
+mvu.v:155: warning: Numeric constant truncated to 6 bits.
+mvu.v:156: warning: Numeric constant truncated to 6 bits.
+mvu.v:157: warning: Numeric constant truncated to 6 bits.
+=== MVU TESTBENCH START ===
+=== MVU OUTPUTS ===
+READ [0x6] = 10
+READ [0x7] = 20
+READ [0x8] = 30
+READ [0x9] = 40
+=== MVU TESTBENCH DONE ===
+tb_mvu.v:101: $finish called at 506 (1s)

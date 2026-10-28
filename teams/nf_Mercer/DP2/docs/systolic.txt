@@ -1,0 +1,163 @@
+user@host:~/AI-HDL/DP2_test$ iverilog -o tb_systolic tb_systolic.v systolic.v pe_macc.v pe_activation.v \            && vvp tb_systolic
+VCD info: dumpfile tb_systolic.vcd opened for output.
+
+===========================================================
+  TEST 1:               Basic 2x2 multiply
+===========================================================
+  A = [[1,2],[3,4]]   B = [[5,6],[7,8]]
+  C = A x B = [[19,22],[43,50]]  (ReLU no-op, all positive)
+
+  [ PASS ]  c00 = 1*5+2*7 = 19                got 0x00000013 (19)
+  [ PASS ]  c01 = 1*6+2*8 = 22                got 0x00000016 (22)
+  [ PASS ]  c10 = 3*5+4*7 = 43                got 0x0000002b (43)
+  [ PASS ]  c11 = 3*6+4*8 = 50                got 0x00000032 (50)
+-----------------------------------------------------------
+  TEST 1 RESULT: PASS  (4 checks)
+-----------------------------------------------------------
+
+===========================================================
+  TEST 2:               Identity A x B = B
+===========================================================
+  A = I2 = [[1,0],[0,1]]   B = [[5,6],[7,8]]
+  Expected C = B = [[5,6],[7,8]]
+
+  [ PASS ]  c00 = 5                           got 0x00000005 (5)
+  [ PASS ]  c01 = 6                           got 0x00000006 (6)
+  [ PASS ]  c10 = 7                           got 0x00000007 (7)
+  [ PASS ]  c11 = 8                           got 0x00000008 (8)
+-----------------------------------------------------------
+  TEST 2 RESULT: PASS  (4 checks)
+-----------------------------------------------------------
+
+===========================================================
+  TEST 3: ero A matrix -> all outputs zero
+===========================================================
+  A = 0,  B = [[5,6],[7,8]]
+  Expected C = [[0,0],[0,0]]
+
+  [ PASS ]  c00 (zero A)                      got 0x00000000 (0)
+  [ PASS ]  c01 (zero A)                      got 0x00000000 (0)
+  [ PASS ]  c10 (zero A)                      got 0x00000000 (0)
+  [ PASS ]  c11 (zero A)                      got 0x00000000 (0)
+-----------------------------------------------------------
+  TEST 3 RESULT: PASS  (4 checks)
+-----------------------------------------------------------
+
+===========================================================
+  TEST 4: ero B matrix -> all outputs zero
+===========================================================
+  A = [[3,3],[3,3]],  B = 0
+  Expected C = [[0,0],[0,0]]
+
+  [ PASS ]  c00 (zero B)                      got 0x00000000 (0)
+  [ PASS ]  c01 (zero B)                      got 0x00000000 (0)
+  [ PASS ]  c10 (zero B)                      got 0x00000000 (0)
+  [ PASS ]  c11 (zero B)                      got 0x00000000 (0)
+-----------------------------------------------------------
+  TEST 4 RESULT: PASS  (4 checks)
+-----------------------------------------------------------
+
+===========================================================
+  TEST 5: LU clamp: negative products -> 0
+===========================================================
+  A = [[-1,-1],[-1,-1]]  (0xFFFFFFFF = -1 signed)
+  B = [[1,1],[1,1]]
+  Raw products all -2  ->  ReLU clamps to 0
+
+  [ PASS ]  c00 ReLU(-2) = 0                  got 0x00000000 (0)
+  [ PASS ]  c01 ReLU(-2) = 0                  got 0x00000000 (0)
+  [ PASS ]  c10 ReLU(-2) = 0                  got 0x00000000 (0)
+  [ PASS ]  c11 ReLU(-2) = 0                  got 0x00000000 (0)
+-----------------------------------------------------------
+  TEST 5 RESULT: PASS  (4 checks)
+-----------------------------------------------------------
+
+===========================================================
+  TEST 6:     Pipeline timing (done pulse)
+===========================================================
+  I2 x [[1,1],[1,1]].  Check done is 0 before start,
+  1 at cycle+1 (pe_macc registered output ready),
+  0 after next start write clears it.
+
+  [ PASS ]  done before start      (exp 0)    got 0
+  [ PASS ]  done at cycle+1        (exp 1)    got 1
+  [ PASS ]  done at cycle+2 sticky (exp 1)    got 1
+  [ PASS ]  done cleared by start  (exp 0)    got 0
+-----------------------------------------------------------
+  TEST 6 RESULT: PASS  (4 checks)
+-----------------------------------------------------------
+
+===========================================================
+  TEST 7: an reset clears done and outputs
+===========================================================
+  Run a valid multiply, then assert rst_n=0.
+  After release: done=0, all C=0.
+
+  [ PASS ]  done after reset       (exp 0)    got 0
+  [ PASS ]  c00 after reset        (exp 0)    got 0x00000000 (0)
+  [ PASS ]  c01 after reset        (exp 0)    got 0x00000000 (0)
+  [ PASS ]  c10 after reset        (exp 0)    got 0x00000000 (0)
+  [ PASS ]  c11 after reset        (exp 0)    got 0x00000000 (0)
+-----------------------------------------------------------
+  TEST 7 RESULT: PASS  (5 checks)
+-----------------------------------------------------------
+
+===========================================================
+  TEST 8:     Reset asserted mid-operation
+===========================================================
+  Start a multiply, assert rst_n=0 one cycle in.
+  After release: done=0, c00=0.
+
+  [ PASS ]  done after mid-op reset (exp 0)   got 0
+  [ PASS ]  c00 after mid-op reset (exp 0)    got 0x00000000 (0)
+-----------------------------------------------------------
+  TEST 8 RESULT: PASS  (2 checks)
+-----------------------------------------------------------
+
+===========================================================
+  TEST 9: to-back operations (no idle gap)
+===========================================================
+  Op1: A=I2, B=[[1,1],[1,1]]  ->  C=[[1,1],[1,1]]
+  Op2: A=I2, B=[[3,4],[5,6]]  ->  C=[[3,4],[5,6]]  (immediate)
+
+  [ PASS ]  op1 c00 (exp 1)                   got 0x00000001 (1)
+  [ PASS ]  op1 c01 (exp 1)                   got 0x00000001 (1)
+  [ PASS ]  op1 c10 (exp 1)                   got 0x00000001 (1)
+  [ PASS ]  op1 c11 (exp 1)                   got 0x00000001 (1)
+  [ PASS ]  op2 c00 (exp 3)                   got 0x00000003 (3)
+  [ PASS ]  op2 c01 (exp 4)                   got 0x00000004 (4)
+  [ PASS ]  op2 c10 (exp 5)                   got 0x00000005 (5)
+  [ PASS ]  op2 c11 (exp 6)                   got 0x00000006 (6)
+-----------------------------------------------------------
+  TEST 9 RESULT: PASS  (8 checks)
+-----------------------------------------------------------
+
+===========================================================
+  TEST 10:        A and B register readback
+===========================================================
+  Write distinct patterns to each A and B register,
+  then read back and verify.
+
+  [ PASS ]  a0 readback                       got 0x11111111 (286331153)
+  [ PASS ]  a1 readback                       got 0x22222222 (572662306)
+  [ PASS ]  a2 readback                       got 0x33333333 (858993459)
+  [ PASS ]  a3 readback                       got 0x44444444 (1145324612)
+  [ PASS ]  b0 readback                       got 0xaaaaaaaa (2863311530)
+  [ PASS ]  b1 readback                       got 0xbbbbbbbb (3149642683)
+  [ PASS ]  b2 readback                       got 0xcccccccc (3435973836)
+  [ PASS ]  b3 readback                       got 0xdddddddd (3722304989)
+-----------------------------------------------------------
+  TEST 10 RESULT: PASS  (8 checks)
+-----------------------------------------------------------
+
+###########################################################
+#             SYSTOLIC 2x2 TESTBENCH SUMMARY              #
+###########################################################
+#  Total checks :   47                                    #
+#  PASSED       :   47                                    #
+#  FAILED       :    0                                    #
+###########################################################
+#              >>> ALL TESTS PASSED <<<                   #
+###########################################################
+
+tb_systolic.v:520: $finish called at 2226000 (1ps)

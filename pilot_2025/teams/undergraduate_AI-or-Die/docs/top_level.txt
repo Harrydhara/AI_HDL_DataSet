@@ -1,0 +1,253 @@
+`timescale 1ns / 1ps
+
+module top_level(
+    input wire clk,               // 100 MHz clock input from Basys 3 board
+    input wire rst,               // Reset signal
+    input wire button0,           // Button 0 input (State Change)
+    input wire button1,           // Stopwatch control/Alarm set / PIN increment
+    input wire button2,           // Stopwatch reset/Time set / Move to next digit
+    input wire button3,           // Additional control / Confirm PIN
+    input wire [2:0] timezone_sel, // Timezone selector switches
+    input wire am_pm_sel,         // AM/PM selector switch
+    output wire [6:0] seg,        // 7-segment display segments (a-g)
+    output wire [3:0] an,         // 7-segment display anodes (digits)
+    output wire alarm_led         // Alarm LED output
+);
+
+    // State machine states
+    localparam AUTH_STATE = 3'b000;      // Authentication state
+    localparam CLOCK_STATE = 3'b001;     // Display timezone clock
+    localparam STOPWATCH_STATE = 3'b010; // Display stopwatch
+    localparam ALARM_STATE = 3'b011;     // Display and set alarm
+    localparam CONVERT_STATE = 3'b100;   // Display 24-hour converted time
+    localparam LOCKOUT_STATE = 3'b101;   // Lockout after failed attempts
+
+    // State registers
+    reg [2:0] current_state, next_state;
+
+    // Internal signals
+    wire clk_1hz;                 // 1 Hz clock signal
+    wire debounced_button0;
+    wire debounced_button1;
+    wire debounced_button2;
+    wire debounced_button3;
+    wire [15:0] stopwatch_time;
+    wire [5:0] alarm_hour;
+    wire [5:0] alarm_minute;
+    wire [5:0] alarm_second;
+    reg [3:0] display_digit;
+    reg [3:0] an_internal;
+
+    // Refresh counter for display multiplexing
+    reg [19:0] refresh_counter;
+    wire [1:0] refresh_digit;
+
+    // Edge detection for button0
+    reg button0_prev;
+    wire button0_edge;
+
+    // Authentication signals
+    wire unlocked;
+    wire lockout;
+    wire [15:0] entered_pin;
+    wire [1:0] active_digit;
+    wire [2:0] attempts_left;
+
+    // Time signals
+    wire [5:0] hours_24, minutes, seconds;
+    wire [7:0] converted_hours, converted_minutes;
+
+    // Clock Divider
+    clock_divider clk_div (
+        .clk_in(clk),
+        .reset(rst),
+        .clk_out(clk_1hz)
+    );
+
+    // Button Debouncers
+    debouncer debounce_state (
+        .clk(clk),
+        .button_in(button0),
+        .button_out(debounced_button0)
+    );
+
+    debouncer debounce_control (
+        .clk(clk),
+        .button_in(button1),
+        .button_out(debounced_button1)
+    );
+
+    debouncer debounce_reset (
+        .clk(clk),
+        .button_in(button2),
+        .button_out(debounced_button2)
+    );
+
+    debouncer debounce_additional (
+        .clk(clk),
+        .button_in(button3),
+        .button_out(debounced_button3)
+    );
+
+    // PIN Authentication Module
+    pin_auth pin_auth_inst (
+        .clk(clk),
+        .rst(rst),
+        .button1(debounced_button1 && (current_state == AUTH_STATE || current_state == LOCKOUT_STATE)),
+        .button2(debounced_button2 && (current_state == AUTH_STATE || current_state == LOCKOUT_STATE)),
+        .button3(debounced_button3 && (current_state == AUTH_STATE || current_state == LOCKOUT_STATE)),
+        .unlocked(unlocked),
+        .lockout(lockout),
+        .entered_pin(entered_pin),
+        .active_digit(active_digit),
+        .attempts_left(attempts_left)
+    );
+
+    // Stopwatch
+    stopwatch stopwatch_inst (
+        .Clk(clk_1hz),
+        .reset(rst || (debounced_button2 && current_state == STOPWATCH_STATE)),
+        .button1(debounced_button1 && current_state == STOPWATCH_STATE),
+        .button2(debounced_button2 && current_state == STOPWATCH_STATE),
+        .Time(stopwatch_time)
+    );
+
+    // Clock with Timezone
+    clock_timezone timezone_clock (
+        .clk(clk_1hz),
+        .reset(rst),
+        .set(debounced_button2 && current_state == CLOCK_STATE),
+        .set_hours(6'd12),
+        .set_minutes(6'd0),
+        .set_seconds(6'd0),
+        .timezone(timezone_sel),
+        .hours(hours_24),
+        .minutes(minutes),
+        .seconds(seconds)
+    );
+
+    // 24 to 12 hour conversion
+    convert_12_to_24 time_converter (
+        .hour_12(hours_24),
+        .minute_12({2'b00, minutes}),
+        .am_pm(am_pm_sel),
+        .hour_24(converted_hours),
+        .minute_24(converted_minutes)
+    );
+
+    // Alarm module
+    alarm alarm_inst (
+        .clk(clk_1hz),
+        .reset(rst),
+        .hours(hours_24),
+        .minutes(minutes),
+        .seconds(seconds),
+        .set_hour(debounced_button1 && current_state == ALARM_STATE),
+        .set_minute(debounced_button2 && current_state == ALARM_STATE),
+        .set_second(debounced_button3 && current_state == ALARM_STATE),
+        .set_alarm(current_state == ALARM_STATE),
+        .alarm_led(alarm_led),
+        .alarm_hour(alarm_hour),
+        .alarm_minute(alarm_minute),
+        .alarm_second(alarm_second)
+    );
+
+    // Refresh counter logic
+    always @(posedge clk) begin
+        if (rst) begin
+            refresh_counter <= 0;
+        end else begin
+            refresh_counter <= refresh_counter + 1;
+        end
+    end
+
+    assign refresh_digit = refresh_counter[19:18]; //for human viewing
+   //assign refresh_digit = refresh_counter[5:4];  // Faster refresh for simulation (microsecond scale)
+   
+
+    // Button0 Edge Detection Logic
+    always @(posedge clk or posedge rst) begin
+        if (rst) begin
+            button0_prev <= 1'b0;
+        end else begin
+            button0_prev <= debounced_button0;
+        end
+    end
+
+    assign button0_edge = debounced_button0 && !button0_prev;
+
+    // State Machine Logic
+    always @(posedge clk or posedge rst) begin
+        if (rst) begin
+            current_state <= AUTH_STATE;
+        end else begin
+            current_state <= next_state;
+        end
+    end
+
+    // Next state logic
+    always @(*) begin
+        case (current_state)
+            AUTH_STATE: next_state = (unlocked) ? CLOCK_STATE : (lockout ? LOCKOUT_STATE : AUTH_STATE);
+            CLOCK_STATE: next_state = button0_edge ? STOPWATCH_STATE : CLOCK_STATE;
+            STOPWATCH_STATE: next_state = button0_edge ? ALARM_STATE : STOPWATCH_STATE;
+            ALARM_STATE: next_state = button0_edge ? CONVERT_STATE : ALARM_STATE;
+            CONVERT_STATE: next_state = button0_edge ? CLOCK_STATE : CONVERT_STATE;
+            LOCKOUT_STATE: next_state = LOCKOUT_STATE;
+            default: next_state = AUTH_STATE;
+        endcase
+    end
+
+    // Display Multiplexing Logic
+    always @(*) begin
+        // Default all digits off
+        an_internal = 4'b1111;
+
+        case (refresh_digit)
+            2'b00: an_internal = 4'b1110;
+            2'b01: an_internal = 4'b1101;
+            2'b10: an_internal = 4'b1011;
+            2'b11: an_internal = 4'b0111;
+        endcase
+
+        case (current_state)
+            AUTH_STATE, LOCKOUT_STATE: display_digit = entered_pin >> (refresh_digit * 4);
+            CLOCK_STATE: begin
+                case (refresh_digit)
+                    2'b00: display_digit = minutes % 10;   // Minutes Ones place
+                    2'b01: display_digit = minutes / 10;   // Minutes Tens place
+                    2'b10: display_digit = hours_24 % 10;  // Hours Ones place
+                    2'b11: display_digit = hours_24 / 10;  // Hours Tens place
+                endcase
+            end
+            STOPWATCH_STATE: display_digit = stopwatch_time >> (refresh_digit * 4);
+            ALARM_STATE: begin
+                case (refresh_digit)
+                    2'b00: display_digit = alarm_minute % 10;
+                    2'b01: display_digit = alarm_minute / 10;
+                    2'b10: display_digit = alarm_hour % 10;
+                    2'b11: display_digit = alarm_hour / 10;
+                endcase
+            end
+            CONVERT_STATE: begin
+                case (refresh_digit)
+                    2'b00: display_digit = converted_minutes[3:0];
+                    2'b01: display_digit = converted_minutes[7:4];
+                    2'b10: display_digit = converted_hours[3:0];
+                    2'b11: display_digit = converted_hours[7:4];
+                endcase
+            end
+            default: display_digit = 4'h0;
+        endcase
+    end
+
+    // Assign anodes
+    assign an = an_internal;
+
+    // Seven-Segment Display
+    SevenSegmentDisplay seven_seg_display (
+        .hex_digit(display_digit),
+        .seg(seg)
+    );
+
+endmodule

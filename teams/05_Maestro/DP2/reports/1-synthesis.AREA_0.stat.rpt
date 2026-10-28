@@ -1,0 +1,35 @@
+
+64. Printing statistics.
+
+=== tqvp_spi_traffic2 ===
+
+   Number of wires:                 57
+   Number of wire bits:            140
+   Number of public wires:          21
+   Number of public wire bits:     104
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 87
+     sky130_fd_sc_hd__a21boi_2       2
+     sky130_fd_sc_hd__a21o_2         2
+     sky130_fd_sc_hd__a22o_2         3
+     sky130_fd_sc_hd__a2bb2o_2       1
+     sky130_fd_sc_hd__a31o_2         1
+     sky130_fd_sc_hd__and2_2         3
+     sky130_fd_sc_hd__and3_2         1
+     sky130_fd_sc_hd__and3b_2        2
+     sky130_fd_sc_hd__and4bb_2       1
+     sky130_fd_sc_hd__buf_1          9
+     sky130_fd_sc_hd__conb_1        36
+     sky130_fd_sc_hd__dfrtp_2       11
+     sky130_fd_sc_hd__mux2_2         6
+     sky130_fd_sc_hd__nand2_2        3
+     sky130_fd_sc_hd__nor2_2         1
+     sky130_fd_sc_hd__nor4_2         1
+     sky130_fd_sc_hd__o211a_2        1
+     sky130_fd_sc_hd__o21a_2         2
+     sky130_fd_sc_hd__or4_2          1
+
+   Chip area for module '\tqvp_spi_traffic2': 751.971200
+

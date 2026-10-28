@@ -1,0 +1,83 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.33 (git sha1 2584903a060)
+
+
+-- Running command `read_verilog -sv rtl/aes_control_fsm.sv rtl/aes_core.sv rtl/aes_inv_round.sv rtl/aes_key_expansion.sv rtl/aes_mixcolumns.sv rtl/aes_reg_interface.sv rtl/aes_round.sv rtl/aes_sbox.sv rtl/tqvp_aes128.sv rtl/tqvp_aes128_top.sv; synth -top tqvp_aes128_top; stat' --
+
+1. Executing Verilog-2005 frontend: rtl/aes_control_fsm.sv
+Parsing SystemVerilog input from `rtl/aes_control_fsm.sv' to AST representation.
+Generating RTLIL representation for module `\aes_control_fsm'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: rtl/aes_core.sv
+Parsing SystemVerilog input from `rtl/aes_core.sv' to AST representation.
+Generating RTLIL representation for module `\aes_core'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: rtl/aes_inv_round.sv
+Parsing SystemVerilog input from `rtl/aes_inv_round.sv' to AST representation.
+Generating RTLIL representation for module `\aes_inv_round'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: rtl/aes_key_expansion.sv
+Parsing SystemVerilog input from `rtl/aes_key_expansion.sv' to AST representation.
+Generating RTLIL representation for module `\aes_key_expansion'.
+Warning: Replacing memory \round_keys with list of registers. See rtl/aes_key_expansion.sv:218
+Successfully finished Verilog frontend.
+
+5. Executing Verilog-2005 frontend: rtl/aes_mixcolumns.sv
+Parsing SystemVerilog input from `rtl/aes_mixcolumns.sv' to AST representation.
+Generating RTLIL representation for module `\aes_mixcolumns'.
+Successfully finished Verilog frontend.
+
+6. Executing Verilog-2005 frontend: rtl/aes_reg_interface.sv
+Parsing SystemVerilog input from `rtl/aes_reg_interface.sv' to AST representation.
+Generating RTLIL representation for module `\aes_reg_interface'.
+Successfully finished Verilog frontend.
+
+7. Executing Verilog-2005 frontend: rtl/aes_round.sv
+Parsing SystemVerilog input from `rtl/aes_round.sv' to AST representation.
+Generating RTLIL representation for module `\aes_round'.
+Successfully finished Verilog frontend.
+
+8. Executing Verilog-2005 frontend: rtl/aes_sbox.sv
+Parsing SystemVerilog input from `rtl/aes_sbox.sv' to AST representation.
+Generating RTLIL representation for module `\aes_sbox'.
+Successfully finished Verilog frontend.
+
+9. Executing Verilog-2005 frontend: rtl/tqvp_aes128.sv
+Parsing SystemVerilog input from `rtl/tqvp_aes128.sv' to AST representation.
+Generating RTLIL representation for module `\tqvp_aes128'.
+Successfully finished Verilog frontend.
+
+10. Executing Verilog-2005 frontend: rtl/tqvp_aes128_top.sv
+Parsing SystemVerilog input from `rtl/tqvp_aes128_top.sv' to AST representation.
+Generating RTLIL representation for module `\tqvp_aes128_top'.
+Successfully finished Verilog frontend.
+
+11. Executing SYNTH pass.
+
+11.1. Executing HIERARCHY pass (managing design hierarchy).
+
+11.1.1. Analyzing design hierarchy..
+ERROR: Module `aes_inv_round' referenced in module `aes_core' in cell `u_dec_round' does not have a port named 'final_round'.

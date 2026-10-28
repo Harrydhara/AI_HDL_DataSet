@@ -1,0 +1,28 @@
+module convert_12_to_24 (
+    input [5:0] hour_12,     // Changed from 12 bits to 6 bits to match hours_24
+    input [5:0] minute_12,   // Changed from 8 bits to 6 bits to match minutes
+    input am_pm,
+    output reg [7:0] hour_24,
+    output reg [7:0] minute_24
+);
+
+always @(*) begin
+    // Convert minutes (extend to 8 bits)
+    minute_24 = {2'b00, minute_12};
+    
+    // Convert hour based on AM/PM
+    if (am_pm == 1'b0) begin  // AM
+        if (hour_12 == 6'd12) begin
+            hour_24 = 8'd0;  // 12 AM -> 00
+        end else begin
+            hour_24 = {2'b00, hour_12};  // Extend to 8 bits
+        end
+    end else begin  // PM
+        if (hour_12 == 6'd12) begin
+            hour_24 = 8'd12;  // 12 PM -> 12
+        end else begin
+            hour_24 = {2'b00, hour_12} + 8'd12;
+        end
+    end
+end
+endmodule

@@ -1,0 +1,23 @@
+
+50. Printing statistics.
+
+=== tqvp_spi_traffic2 ===
+
+   Number of wires:                 71
+   Number of wire bits:            157
+   Number of public wires:          19
+   Number of public wire bits:     105
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 68
+     $_ANDNOT_                      21
+     $_AND_                          4
+     $_DFFE_PN0N_                    2
+     $_DFFE_PN0P_                    4
+     $_DFF_PN0_                      5
+     $_NAND_                         7
+     $_NOR_                          3
+     $_ORNOT_                        9
+     $_OR_                          13
+

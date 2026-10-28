@@ -1,0 +1,4 @@
+  found ctrl input: \m_error
+  ctrl inputs: { $logic_and$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:259$78_Y $logic_and$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:235$67_Y $logic_and$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:211$51_Y $eq$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:200$49_Y $logic_and$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:193$47_Y $ne$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:193$46_Y $logic_and$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:163$44_Y \addr_fault \fifo_empty \busy \m_error \rst_n }
+    1: \m_error
+ABC: Error: The network is combinational.

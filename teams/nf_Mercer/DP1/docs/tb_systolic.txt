@@ -1,0 +1,12 @@
+user@host:~/AI-HDL/DP_test2$ iverilog -g2012 -o tb_systolic.out \
+    tb_systolic.v \
+    systolic.v \
+    pe_macc.v \
+    pe_activation.v
+
+./tb_systolic.out
+C00 = 5
+C01 = 6
+C10 = 15
+C11 = 18
+tb_systolic.v:60: $finish called at 145000 (1ps)

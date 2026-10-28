@@ -1,0 +1,29 @@
+# Master Makefile for new_dp1/test
+# Runs all CPU unit tests, peripheral tests, and system test
+#
+# Usage:
+#   make                  - run all tests
+#   make test_alu         - run only the ALU test
+#   make test_latch_reg   - run only the latch_reg test
+#   make test_system      - run only the full-system test
+#   make clean            - remove all build artifacts
+
+TESTS = alu core counter cpu decode mem_ctrl qspi_ctrl qspi_flash register \
+        latch_reg time uart_tx peripherals tinyqv \
+        dma system
+
+.PHONY: all clean $(addprefix test_,$(TESTS))
+
+all: $(addprefix test_,$(TESTS))
+
+# Generate an explicit rule for each test
+define RUN_TEST
+test_$(1):
+	$(MAKE) -f test_$(1).mk SIM_BUILD=sim_build/$(1) clean
+	$(MAKE) -f test_$(1).mk SIM_BUILD=sim_build/$(1)
+endef
+
+$(foreach t,$(TESTS),$(eval $(call RUN_TEST,$(t))))
+
+clean:
+	rm -rf sim_build results.xml

@@ -1,0 +1,15 @@
+released_path,path_in_original_submission,category
+ai_logs/Chatgpt-Prompt.md,AI Response/Phase3.2/Chatgpt-Prompt.md,ai_logs
+ai_logs/Phase 1__link to conservation chatGPT prompts.txt,AI Response/Phase 1/link to conservation chatGPT prompts.txt,ai_logs
+ai_logs/Phase 3.1__link to conservation chatGPT prompts.txt,AI Response/Phase 3.1/link to conservation chatGPT prompts.txt,ai_logs
+ai_logs/link to conservation chatGPT prompts copy.txt,AI Response/Phase 2/link to conservation chatGPT prompts copy.txt,ai_logs
+rtl/alarm.v,verilog code/source_code/alarm.v,rtl
+rtl/button_debouncer.v,verilog code/source_code/button_debouncer.v,rtl
+rtl/clock_divider.v,verilog code/source_code/clock_divider.v,rtl
+rtl/convert_12_to_24.v,verilog code/source_code/convert_12_to_24.v,rtl
+rtl/digital_clock.v,verilog code/source_code/digital_clock.v,rtl
+rtl/seven_segment.v,verilog code/source_code/seven_segment.v,rtl
+rtl/stop_watch.v,verilog code/source_code/stop_watch.v,rtl
+rtl/time_zone.v,verilog code/source_code/time_zone.v,rtl
+rtl/top_level.v,verilog code/source_code/top_level.v,rtl
+testbench/test_bench.v,verilog code/simulation_source/test_bench.v,testbench

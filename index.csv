@@ -1,0 +1,22 @@
+folder,team,final_rank,institution,country,phases_with_files,phases_with_prompt_logs,all_four_phases_logged,curated_prompts_DP1,curated_prompts_DP2,curated_prompts_DP3,curated_prompts_DP4,rtl_files,rtl_loc,testbench_files,reports,gds_files,taped_out
+01_NeCRL,NeCRL,1,San Francisco State University,USA,DP1;DP2;DP3;DP4,DP1;DP2;DP3,no,19,34,60,0,8,917,20,127,2,AES-128 accelerator (graduate division winner)
+02_ITIMS-Boys,ITIMS Boys,2,Hanoi University of Science and Technology,Vietnam,DP1;DP2;DP3;DP4,DP1;DP2;DP3;DP4,yes,6,5,19,8,6,605,8,60,4,SPI controller + CRC-16 (undergraduate division winner)
+03_ElectroNova,ElectroNova,3,College of Engineering Trivandrum,India,DP1;DP2;DP3;DP4,DP1;DP2;DP3;DP4,yes,5,40,19,30,122,14383,75,138,6,
+04_Devrem,Devrem,4,Yildiz Technical University,Türkiye,DP2;DP3;DP4,DP1;DP3;DP4,no,7,0,41,6,3,613,2,3,1,
+05_Maestro,Maestro,5,The University of Arizona,USA,DP1;DP2;DP3;DP4,DP1;DP2;DP3;DP4,yes,3,6,17,18,13,1779,7,85,1,
+06_Team-team,Team team,6,KU Leuven,Belgium,DP1,,no,0,0,0,0,5,483,25,2,0,
+07_Acona-Tech,Acona Tech,7,Ankara Yıldırım Beyazıt University,Türkiye,DP1;DP2;DP3;DP4,DP4,no,0,0,0,7,25,4015,14,3,1,
+08_ICLab-HUST2,ICLab_HUST2,8,Hanoi University of Science and Technology,Vietnam,DP1;DP2;DP3;DP4,DP1;DP2;DP3;DP4,yes,14,4,8,9,22,3901,22,14,0,
+09_HUST1,HUST1,9,Hanoi University of Science and Technology,Vietnam,DP3;DP4,DP3,no,0,0,8,0,120,13258,71,5,0,
+11_Farmceries,Farmceries,11,University of Lagos,Nigeria,DP1;DP2;DP3;DP4,DP1;DP2;DP3;DP4,yes,21,3,9,6,27,3361,35,14,1,
+12_Obsidian-Order,Obsidian Order,12,Jomo Kenyatta University of Agriculture and Technology,Kenya,DP1;DP2,DP1,no,4,0,0,0,1,328,3,3,0,
+13_Team-Circuitrix,Team Circuitrix,13,Obafemi Awolowo University,Nigeria,,,no,0,0,0,0,3,412,1,0,0,
+14_UCC-Eng-Physics,UCC Eng. Physics,14,University of Cape Coast,Ghana,DP1;DP2,DP1,no,13,0,0,0,8,280,1,12,0,
+15_Techgenius,Techgenius,15,Regent University College of Science and Technology,Ghana,,,no,0,0,0,0,2,424,3,0,0,
+16_Astral-Coders,Astral Coders,16,University of Lagos,Nigeria,,,no,0,0,0,0,1,0,0,0,0,
+18_HUSD,HUSD,18,Hanoi University of Science and Technology,Vietnam,DP1;DP2;DP3,DP1;DP2,no,4,1,0,0,7,918,4,2,0,
+19_BellLabs,BellLabs,19,University of Lagos,Nigeria,DP1;DP2;DP3;DP4,DP1;DP2;DP3;DP4,yes,6,14,39,4,2,558,2,18,1,
+20_ICLab-HUST,ICLab_HUST,20,Hanoi University of Science and Technology,Vietnam,DP1;DP2;DP3;DP4,DP1;DP2;DP3,no,19,2,13,0,9,1684,72,7,1,
+21_BIG-4,BIG-4,21,Hanoi University of Science and Technology,Vietnam,DP1;DP2;DP3,DP1,no,13,0,0,0,4,710,1,0,0,
+22_Team-Ingenius,Team Ingenius,22,University of Lagos,Nigeria,DP1;DP2;DP3,DP1,no,4,0,0,0,4,378,5,7,0,
+nf_Mercer,Mercer,,Mercer County Community College,USA,DP1;DP2;DP3;DP4,DP1,no,3,0,0,0,20,2185,11,31,1,

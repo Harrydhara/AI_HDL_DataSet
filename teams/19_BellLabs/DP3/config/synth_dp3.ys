@@ -1,0 +1,35 @@
+# ============================================================
+# Bell Labs — University of Lagos, Nigeria
+# AI Hardware Design League 2026 — Team #63
+# Design Phase 3: Security Synthesis Script
+# ============================================================
+
+# Step 1: Read secure RTL (with Boolean Masking and Key Lockout)
+read_verilog src/aes128/aes128_peripheral.v
+
+# Step 2: Synthesize targeting sky130_fd_sc_hd
+synth -top tqvp_belllabs_aes128
+
+# Step 3: Standard optimization
+opt
+
+# Step 4: Remove unused cells and wires
+opt_clean
+
+# Step 5: Merge identical logic cones
+opt_merge
+
+# Step 6: Remove unreachable MUX branches
+opt_muxtree
+
+# Step 7: Final cleanup
+opt_clean
+
+# Step 8: Print statistics
+stat
+
+# Step 9: Write secure gate-level netlist
+write_verilog reports/dp3/netlist_secure.v
+
+# Step 10: Write JSON report for automated analysis
+write_json reports/dp3/synthesis_secure.json

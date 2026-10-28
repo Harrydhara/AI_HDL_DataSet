@@ -1,0 +1,12 @@
+released_path,path_in_original_submission,category
+docs/README.txt.txt,README.txt.txt,docs
+rtl/alarm_clock.v,verilog code/alarm_clock.v,rtl
+rtl/button_debouncer.v,verilog code/button_debouncer.v,rtl
+rtl/clock_divider.v,verilog code/clock_divider.v,rtl
+rtl/digital_clock.v,verilog code/digital_clock.v,rtl
+rtl/format_12h_24h.v,verilog code/format_12h_24h.v,rtl
+rtl/security_module.v,verilog code/security_module.v,rtl
+rtl/seven_segment_display.v,verilog code/seven_segment_display.v,rtl
+rtl/stopwatch.v,verilog code/stopwatch.v,rtl
+rtl/stopwatch_top.v,verilog code/stopwatch_top.v,rtl
+rtl/timezone_adjust.v,verilog code/timezone_adjust.v,rtl

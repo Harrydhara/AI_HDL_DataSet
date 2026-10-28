@@ -1,0 +1,105 @@
+# TinyTapeout Project Configuration
+# AI-HDL 2026 DP1: 8-bit GPIO Peripheral with 2x2 Matrix Multiplier Accelerator
+
+# Mandatory fields
+project:
+  title: "GPIO Controller + 2x2 Matrix Multiplier Accelerator"
+  author: "[user]"
+  description: "Memory-mapped GPIO peripheral with 2x2 matrix multiplier hardware accelerator and input change interrupt for tinyQV RISC-V core"
+  language: "Verilog"
+  clock_hz: 50000000  # 50 MHz default clock
+
+# Top module configuration
+top_module: "tqvp_gpio"
+
+# Source files (relative to project root)
+source_files:
+  - "src/tqvp_gpio.v"
+
+# Pin configuration (TinyTapeout standard)
+pinout:
+  ui_in:   # Dedicated inputs (8 bits)
+    description: "GPIO input pins"
+    pins:
+      - "GPIO_IN[0]"
+      - "GPIO_IN[1]"
+      - "GPIO_IN[2]"
+      - "GPIO_IN[3]"
+      - "GPIO_IN[4]"
+      - "GPIO_IN[5]"
+      - "GPIO_IN[6]"
+      - "GPIO_IN[7]"
+  
+  uo_out:  # Dedicated outputs (8 bits)
+    description: "GPIO output pins"
+    pins:
+      - "GPIO_OUT[0]"
+      - "GPIO_OUT[1]"
+      - "GPIO_OUT[2]"
+      - "GPIO_OUT[3]"
+      - "GPIO_OUT[4]"
+      - "GPIO_OUT[5]"
+      - "GPIO_OUT[6]"
+      - "GPIO_OUT[7]"
+  
+  uio_in:  # Bidirectional pins (not used in this design)
+    description: "Unused (reserved)"
+  
+  uio_out: # Bidirectional pins (not used in this design)
+    description: "Unused (reserved)"
+  
+  uio_oe:  # Bidirectional output enable (not used)
+    description: "Unused (reserved)"
+
+# Documentation
+documentation:
+  datasheet: "docs/design_spec.md"
+  how_it_works: |
+    This peripheral implements a simple 8-bit GPIO controller with three memory-mapped 
+    registers accessible via the tinyQV bus interface:
+    
+    - Address 0x00 (OUTPUT_REG): Controls output values on uo_out[7:0]
+    - Address 0x01 (DIRECTION_REG): Sets pin direction (1=output, 0=input)
+    - Address 0x02 (INPUT_REG): Reads input values from ui_in[7:0] (masked by direction)
+    
+    The module uses synchronous design with active-low reset and provides immediate 
+    response to bus transactions via the data_ready handshake signal.
+
+  how_to_test: |
+    1. Reset the module (assert rst_n low, then high)
+    2. Write 0xFF to address 0x01 to set all pins as outputs
+    3. Write 0xAA to address 0x00 to set output pattern
+    4. Verify uo_out[7:0] shows 0xAA
+    5. Change direction to 0x00 (all inputs)
+    6. Apply test pattern to ui_in[7:0]
+    7. Read address 0x02 and verify input values match
+    
+    See test/test.py for automated cocotb test suite.
+
+  external_hw: |
+    - 8 LEDs connected to uo_out[7:0] to visualize outputs
+    - 8 switches/buttons connected to ui_in[7:0] for input testing
+    - Optional: Logic analyzer on bus signals for debugging
+
+# Git and repository info
+git_repo: "https://github.com/[user]/Obsidian-Order---AI-HDL-2026-Design-Phase-1.git"
+commit_id: "main"  # Will be updated after first commit
+
+# Competition metadata
+tags:
+  - "AI-HDL-2026"
+  - "DP1"
+  - "GPIO"
+  - "tinyQV"
+  - "RISC-V-peripheral"
+
+# Build configuration (for synthesis later)
+build:
+  top: "tqvp_gpio"
+  constraints: ""  # No timing constraints for initial version
+  
+# Test configuration
+test:
+  cocotb_test_dir: "test"
+  cocotb_test_module: "test"
+  verilog_tb: "test/tb_gpio.v"

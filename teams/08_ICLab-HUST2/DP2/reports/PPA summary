@@ -1,0 +1,31 @@
+## Timing — All Clean ✓
+
+| Metric                  | Baseline | PW1-v2 |
+|------------------------|----------|--------|
+| WNS nom_ss (ns)        | -2.48    | +0.900 |
+| WNS max_ss (ns)        | —        | +0.784 |
+| TNS nom_ss (ns)        | -622.7   | 0.00   |
+| Setup vio total        | 2,757    | 0      |
+| Setup vio nom_ss       | 959      | 0      |
+| Setup vio max_ss       | —        | 0      |
+| Hold violations        | 0        | 0      |
+| Slew violations        | 260      | 4      |
+| Fanout violations      | 1,334    | 1,104  |
+
+## Power
+
+| Metric            | Baseline | PW1-v2 |
+|------------------|----------|--------|
+| Internal (mW)    | 23.08    | 15.22  |
+| Switching (mW)   | 7.87     | 22.94  |
+| Power TOTAL (mW) | 30.95    | 38.16  |
+| Clock gate cells | 0        | 360    |
+
+## Area & Quality
+
+| Metric             | Baseline | PW1-v2 |
+|--------------------|----------|--------|
+| Instance count     | 63,311   | 70,427 |
+| Timing repair bufs | 1,682    | 1,919  |
+| Antenna violations | 21       | 20     |
+| DRC / LVS / Magic  | 0/0/0    | 0/0/0  |

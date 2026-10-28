@@ -1,0 +1,10 @@
+Partial/Required: 16.66, Required:    400.0, Partial:  6665.67, Net: net3, Pin: _4936_/D, Layer: met1
+Partial/Required: 13.25, Required:    400.0, Partial:  5298.67, Net: net10, Pin: _4871_/D, Layer: met1
+Partial/Required: 13.21, Required:    400.0, Partial:  5283.03, Net: net11, Pin: _4873_/D, Layer: met1
+Partial/Required: 11.43, Required:    400.0, Partial:  4571.92, Net: net20, Pin: output20/A, Layer: met1
+Partial/Required: 10.51, Required:    400.0, Partial:  4204.25, Net: net6, Pin: _4939_/D, Layer: met1
+Partial/Required:  8.99, Required:    400.0, Partial:  3595.57, Net: net122, Pin: output21/A, Layer: met1
+Partial/Required:  4.50, Required:    400.0, Partial:  1799.78, Net: net9, Pin: _4942_/D, Layer: met1
+Partial/Required:  1.24, Required:    400.0, Partial:   495.67, Net: _1030_, Pin: _4035_/A0, Layer: met1
+Partial/Required:  1.17, Required:    400.0, Partial:   466.49, Net: _1065_, Pin: _2790_/A, Layer: met1
+Partial/Required:  1.12, Required:    400.0, Partial:   446.56, Net: i_spi_reg.falling_edge_detector_sof.data, Pin: hold14/A, Layer: met1

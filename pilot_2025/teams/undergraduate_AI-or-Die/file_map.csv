@@ -1,0 +1,14 @@
+released_path,path_in_original_submission,category
+ai_logs/Phase3_Pt2_Sample_prompts.md,AI Prompts/Phase3_Pt2_Sample_prompts.md,ai_logs
+config/Basys_3_Master.xdc,verilog code/Constraint_file/Basys_3_Master.xdc,config
+docs/README.md,README.md,docs
+docs/SevenSegmentDisplay.txt,verilog code/Design_files/SevenSegmentDisplay.txt,docs
+docs/alarm.txt,verilog code/Design_files/alarm.txt,docs
+docs/clock_divider.txt,verilog code/Design_files/clock_divider.txt,docs
+docs/clock_timezone.txt,verilog code/Design_files/clock_timezone.txt,docs
+docs/convert_12_to_24.txt,verilog code/Design_files/convert_12_to_24.txt,docs
+docs/debouncer.txt,verilog code/Design_files/debouncer.txt,docs
+docs/pin_auth.txt,verilog code/Design_files/pin_auth.txt,docs
+docs/stopwatch.txt,verilog code/Design_files/stopwatch.txt,docs
+docs/top_level.txt,verilog code/Design_files/top_level.txt,docs
+docs/top_level_tb_2.txt,verilog code/Simulation_files/top_level_tb_2.txt,docs

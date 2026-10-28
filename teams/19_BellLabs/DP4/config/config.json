@@ -1,0 +1,22 @@
+{
+    "DESIGN_NAME": "tqvp_belllabs_aes128",
+    "VERILOG_FILES": "dir::src/aes128/*.v",
+    "CLOCK_PORT": "clk",
+    "CLOCK_PERIOD": 15.62,
+    "FP_CORE_UTIL": 40,
+    "PL_TARGET_DENSITY": 0.35,
+    "DIE_AREA": "0 0 750 750",
+    "FP_SIZING": "absolute",
+    "GRT_REPAIR_ANTENNAS": 1,
+    "RUN_HEURISTIC_DIODE_INSERTION": 1,
+    "DIODE_ON_PORTS": "in",
+    "SYNTH_STRATEGY": "DELAY 0",
+    "FP_IO_MODE": 1,
+    "VDD_NETS": ["vccd1"],
+    "GND_NETS": ["vssa1"],
+    "FP_PDN_VPITCH": 100,
+    "FP_PDN_HPITCH": 100,
+    "GRT_ADJUSTMENT": 0.3,
+    "DRT_OPT_ITERS": 32,
+    "MAGIC_DRC_USE_GDS": true
+}

@@ -1,0 +1,64 @@
+module alarm(
+    input clk,
+    input wire reset,
+    input wire [5:0] hours,       // Current clock hours (24-hour format)
+    input wire [5:0] minutes,     // Current clock minutes
+    input wire [5:0] seconds,     // Current clock seconds
+    input wire set_hour,          // Button to increment alarm hour
+    input wire set_minute,        // Button to increment alarm minute
+    input wire set_second,        // Button to increment alarm second
+    input wire set_alarm,         // Signal to enable alarm setting
+    output reg alarm_led,         // Alarm LED (indicates alarm triggered)
+    output reg [5:0] alarm_hour,  // Output for alarm hour
+    output reg [5:0] alarm_minute,// Output for alarm minute
+    output reg [5:0] alarm_second // Output for alarm second
+);
+
+    // Registers to hold the alarm time
+    reg alarm_active = 0;         // Alarm active flag
+    reg [23:0] blink_counter = 0; // Counter for blinking LED
+
+    // Alarm setting and activation logic
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            alarm_hour <= 6'd0;   // Initialize alarm time to 00:00:00
+            alarm_minute <= 6'd0;
+            alarm_second <= 6'd0;
+            alarm_active <= 0;
+            alarm_led <= 0;
+            blink_counter <= 0;
+        end else begin
+            // Set the alarm time
+            if (set_alarm) begin
+                if (set_hour) begin
+                    alarm_hour <= (alarm_hour == 6'd23) ? 6'd0 : alarm_hour + 1; // Wrap around at 23
+                end
+                if (set_minute) begin
+                    alarm_minute <= (alarm_minute == 6'd59) ? 6'd0 : alarm_minute + 1; // Wrap around at 59
+                end
+                if (set_second) begin
+                    alarm_second <= (alarm_second == 6'd59) ? 6'd0 : alarm_second + 1; // Wrap around at 59
+                end
+                alarm_active <= 1; // Activate alarm after setting
+            end
+
+            // Alarm trigger logic
+            if (alarm_active &&
+                (hours == alarm_hour) &&
+                (minutes == alarm_minute) &&
+                (seconds == alarm_second)) begin
+
+                // Blink the alarm LED
+                blink_counter <= blink_counter + 1;
+                if (blink_counter[23]) begin
+                    alarm_led <= ~alarm_led; // Toggle LED at a slow rate
+                end
+            end else begin
+                // Turn off LED if alarm conditions are not met
+                alarm_led <= 0;
+                blink_counter <= 0;
+            end
+        end
+    end
+
+endmodule

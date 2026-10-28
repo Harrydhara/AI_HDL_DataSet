@@ -1,0 +1,9 @@
+released_path,path_in_original_submission,category
+common/ai_logs/prompt.txt,Techgenius-AI-HDL26-main/tinyqv-full-peripheral-template/src/prompt.txt,ai_logs
+common/config/Makefile,Techgenius-AI-HDL26-main/tinyqv-full-peripheral-template/src/test/Makefile,config
+common/config/run_tests.sh,Techgenius-AI-HDL26-main/tinyqv-full-peripheral-template/src/test/run_tests.sh,config
+common/docs/README.md,Techgenius-AI-HDL26-main/README.md,docs
+common/reports/results.xml,Techgenius-AI-HDL26-main/tinyqv-full-peripheral-template/src/test/results.xml,reports
+common/rtl/peripheral.v,Techgenius-AI-HDL26-main/tinyqv-full-peripheral-template/src/peripheral.v,rtl
+common/rtl/tt_wrapper.v,Techgenius-AI-HDL26-main/tinyqv-full-peripheral-template/src/tt_wrapper.v,rtl
+common/testbench/test.py,Techgenius-AI-HDL26-main/tinyqv-full-peripheral-template/src/test/test.py,testbench

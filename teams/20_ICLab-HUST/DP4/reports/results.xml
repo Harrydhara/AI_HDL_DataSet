@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1774624422" />
+    <testcase name="test_registers" classname="test_register" file="/mnt/d/HUST/AI-HDL/DP3/test/test_register.py" lineno="7" time="0.336669921875" sim_time_ns="10728.001" ratio_time="31865.041403915882" />
+  </testsuite>
+</testsuites>

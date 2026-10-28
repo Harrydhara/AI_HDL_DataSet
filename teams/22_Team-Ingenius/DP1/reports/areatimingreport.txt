@@ -1,0 +1,12 @@
+------------------------------------------------
+AREA METRICS (from 1-synthesis.stat.rpt)
+Chip Area: 13457.907200 um^2
+Cell Count: 1115
+
+TIMING METRICS (from signoff.sta.rpt)
+Worst Negative Slack (WNS): 0.00 ns
+Total Negative Slack (TNS): 0.00 ns
+Target Clock: 20.0 ns (50 MHz)
+Status: PASS
+
+- CRC engine meets timing at target frequency.

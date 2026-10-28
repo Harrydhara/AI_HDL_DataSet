@@ -1,0 +1,5 @@
+user@host:~/AI-HDL/DP_test2$ iverilog -g2012 -o sim_macc peripheral.v tb_tqvp_macc.v
+    vvp sim_macc
+    MACC_ACC = 24 (expected 24)
+    MACC_DONE = 1
+    tb_tqvp_macc.v:92: $finish called at 255000 (1ps)

@@ -1,0 +1,109 @@
+{
+  "DESIGN_NAME": "tt_um_tt_tinyQV",
+  "VERILOG_FILES": [
+    "dir::project.v",
+    "dir::tinyqv.v",
+    "dir::cpu.v",
+    "dir::core.v",
+    "dir::decode.v",
+    "dir::alu.v",
+    "dir::register.v",
+    "dir::counter.v",
+    "dir::mem_ctrl.v",
+    "dir::qspi_ctrl.v",
+    "dir::qspi_flash.v",
+    "dir::peripherals.v",
+    "dir::tqvp_winograd.v",
+    "dir::winograd.v",
+    "dir::element_wise.v",
+    "dir::matrix_filter.v",
+    "dir::matrix_input.v",
+    "dir::matrix_output.v",
+    "dir::latch_reg.v",
+    "dir::interface.v",
+    "dir::time.v",
+    "dir::uart_tx.v"
+  ],
+
+  "//": "=== DP2 OPTIMIZATION: Die size tăng từ 1336x432 lên 1700x480 ===",
+  "//": "Lý do: utilization từ 90% xuống ~63% → routing converge ~10 iter thay vì 48",
+  "//": "Runtime ước tính: 3-4 giờ thay vì 15+ giờ",
+  "DIE_AREA": "0 0 1700 480",
+
+  "//": "=== TIMING: Giữ 20ns (50MHz) - đây là constraint chuẩn của TinyTapeout ===",
+  "CLOCK_PERIOD": 20,
+
+  "//": "=== PLACEMENT: Giảm density target để placer có không gian buffer timing ===",
+  "//": "Từ 85 xuống 65 - tương ứng với utilization ~63% của die mới",
+  "PL_TARGET_DENSITY_PCT": 65,
+
+  "//": "=== HOLD/SETUP MARGINS: Tăng nhẹ setup margin để fixer tích cực hơn ===",
+  "PL_RESIZER_HOLD_SLACK_MARGIN": 0.15,
+  "GRT_RESIZER_HOLD_SLACK_MARGIN": 0.1,
+  "PL_RESIZER_SETUP_SLACK_MARGIN": 0.20,
+  "GRT_RESIZER_SETUP_SLACK_MARGIN": 0.15,
+
+  "//": "=== FANOUT: Giảm max fanout từ SDC (18) - thêm control ở đây ===",
+  "//": "1334 fanout violations hiện tại là nguyên nhân chính timing fail ở ss corner",
+  "PL_RESIZER_MAX_WIRE_LENGTH": 600,
+  "GRT_RESIZER_MAX_WIRE_LENGTH": 500,
+
+  "//": "=== SYNTH: Giữ AREA 1 nhưng bật clock gating để synthesis tự infer ICG ===",
+  "SYNTH_STRATEGY": "AREA 1",
+  "SYNTH_MAX_FANOUT": 16,
+
+  "//": "=== CLOCK GATING: Bật Lighter để tự động infer clock gates từ RTL ===",
+  "//": "Đây là cách đơn giản nhất để giảm switching power mà không cần sửa RTL nhiều",
+  "USE_LIGHTER": 1,
+
+  "//": "SDC Customizations",
+  "FALLBACK_SDC_FILE": "dir::base.sdc",
+  "PNR_SDC_FILE": "dir::base.sdc",
+  "SIGNOFF_SDC_FILE": "dir::base.sdc",
+
+  "//": "=== ROUTING: Tăng ngưỡng repair để nhanh hơn (die lớn hơn ít cần repair) ===",
+  "DESIGN_REPAIR_MAX_SLEW_PCT": 50,
+  "DESIGN_REPAIR_MAX_CAP_PCT": 50,
+  "RUN_HEURISTIC_DIODE_INSERTION": 1,
+  "RUN_ANTENNA_REPAIR": 1,
+  "DESIGN_REPAIR_MAX_WIRE_LENGTH": 900,
+  "PL_WIRE_LENGTH_COEF": 0.05,
+  "HEURISTIC_ANTENNA_THRESHOLD": 200,
+  "GRT_ANTENNA_ITERS": 10,
+  "GRT_ANTENNA_MARGIN": 15,
+
+  "//": "=== POST-ROUTE REPAIR: Giữ để fix timing sau routing ===",
+  "MAX_TRANSITION_CONSTRAINT": 1.5,
+  "RUN_POST_GRT_DESIGN_REPAIR": true,
+
+  "//": "=== LINTER ===",
+  "RUN_LINTER": 1,
+  "LINTER_INCLUDE_PDK_MODELS": 1,
+
+  "CLOCK_PORT": "clk",
+
+  "//": "=== KHÔNG ĐỔI PHẦN DƯỚI ===",
+  "RUN_KLAYOUT_XOR": 0,
+  "RUN_KLAYOUT_DRC": 0,
+  "DESIGN_REPAIR_BUFFER_OUTPUT_PORTS": 0,
+
+  "TOP_MARGIN_MULT": 1,
+  "BOTTOM_MARGIN_MULT": 1,
+  "LEFT_MARGIN_MULT": 6,
+  "RIGHT_MARGIN_MULT": 6,
+
+  "FP_SIZING": "absolute",
+  "GRT_ALLOW_CONGESTION": 1,
+
+  "FP_IO_HLENGTH": 2,
+  "FP_IO_VLENGTH": 2,
+
+  "FP_PDN_VPITCH": 38.87,
+
+  "RUN_CTS": 1,
+  "FP_PDN_MULTILAYER": 0,
+  "RT_MAX_LAYER": "met4",
+
+  "MAGIC_DEF_LABELS": 0,
+  "MAGIC_WRITE_LEF_PINONLY": 1
+}

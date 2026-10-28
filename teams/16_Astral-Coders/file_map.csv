@@ -1,0 +1,3 @@
+released_path,path_in_original_submission,category
+common/docs/README.md,README.md,docs
+common/rtl/my_module.v,rtl/my_module.v,rtl

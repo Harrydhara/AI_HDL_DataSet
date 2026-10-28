@@ -1,0 +1,60 @@
+module stopwatch(
+    input Clk,           // System clock (100 MHz)
+    input reset,         // Asynchronous reset
+    input button1,       // Start/Stop button (debounced)
+    input button2,       // Reset button (debounced)
+    output reg [15:0] Time // Combined time output
+);
+    //The following 4 lines were manually changed to be initialized to 0.
+    reg [5:0] minutes = 0;   // Minutes counter (max: 59)
+    reg [5:0] seconds = 0;   // Seconds counter (max: 59)
+    reg [4:0] hours = 0;     // Hours counter (max: 23)
+    reg running = 0;         // Stopwatch running flag
+
+    // Time update logic
+    always @(posedge Clk) begin
+        if (reset) begin
+            hours <= 0;
+            minutes <= 0;
+            seconds <= 0;
+            running <= 0;
+        end
+        else if (button2) begin
+            hours <= 0;
+            minutes <= 0;
+            seconds <= 0;
+            running <= 0;
+        end
+        else if (button1) begin
+            running <= ~running; // Toggle running state
+        end
+
+        if (running) begin
+            if (seconds == 59) begin
+                seconds <= 0;
+                if (minutes == 59) begin
+                    minutes <= 0;
+                    if (hours == 23) begin
+                        hours <= 0;
+                    end
+                    else begin
+                        hours <= hours + 1;
+                    end
+                end
+                else begin
+                    minutes <= minutes + 1;
+                end
+            end
+            else begin
+                seconds <= seconds + 1;
+            end
+        end
+    end
+
+    // Combine time into a single output
+    always @(*) begin
+        Time = {hours[4:0], minutes[5:0], seconds[5:0]};
+    end
+
+endmodule
+

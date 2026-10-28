@@ -1,0 +1,7 @@
+# Peripheral configuration for TinyQV
+
+source_files:
+  - rtl/user_peripherals/tqvp_ingenius/tt_um_ingenius_crc.v
+  - rtl/user_peripherals/tqvp_ingenius/crc_datapath.v
+
+top_module: tt_um_ingenius_crc

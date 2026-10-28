@@ -1,0 +1,140 @@
+module tb_alarm_clock_with_digital_clock;
+
+    // Inputs for digital clock
+    reg clk;
+    reg reset;
+    reg set_time_enable;
+    reg [5:0] set_hours;
+    reg [5:0] set_minutes;
+    reg [5:0] set_seconds;
+
+    // Inputs for alarm
+    reg select_btn;
+    reg increment_btn;
+    reg toggle_alarm_btn;
+
+    // Outputs for digital clock
+    wire [5:0] hours;
+    wire [5:0] minutes;
+    wire [5:0] seconds;
+
+    // Outputs for alarm
+    wire alarm_led;
+
+    // Instantiate the Digital Clock module
+    digital_clock digital_clock_dut (
+        .clk_div(clk),
+        .reset(reset),
+        .set_time_enable(set_time_enable),
+        .set_hours(set_hours),
+        .set_minutes(set_minutes),
+        .set_seconds(set_seconds),
+        .timezone_select(5'd0),  // Default timezone
+        .hours(hours),
+        .minutes(minutes),
+        .seconds(seconds),
+        .adjusted_hours(),    // Not used in this testbench
+        .is_pm()              // Not used in this testbench
+    );
+
+    // Instantiate the Alarm module
+    alarm alarm_dut (
+        .clk(clk),
+        .reset(reset),
+        .select_btn(select_btn),
+        .increment_btn(increment_btn),
+        .toggle_alarm_btn(toggle_alarm_btn),
+        .current_hours(hours),
+        .current_minutes(minutes),
+        .current_seconds(seconds),
+        .alarm_led(alarm_led)
+    );
+
+    // Clock generation
+    always #500 clk = ~clk; // 1 kHz clock: toggle every 500 µs
+
+    // Testbench variables and initialization
+    initial begin
+        // Initialize inputs
+        clk = 0;
+        reset = 0;
+        set_time_enable = 0;
+        set_hours = 0;
+        set_minutes = 0;
+        set_seconds = 0;
+        select_btn = 0;
+        increment_btn = 0;
+        toggle_alarm_btn = 0;
+
+        // Apply Reset
+        reset = 1;
+        #1000; // Hold reset for 1 ms
+        reset = 0;
+
+        // Set initial time on the digital clock
+        set_time_enable = 1; // Enable time setting
+        set_hours = 6'd3;   // Set initial time: 12:00:00
+        set_minutes = 6'd20;
+        set_seconds = 6'd5;
+        #1000; // Hold for 1 ms
+        set_time_enable = 0; // Disable time setting
+
+        // Test case: Set Alarm Time (Hour, Minute, Second) and Toggle Alarm
+        // Step 1: Increment hours (select_btn = 0)
+        repeat(3) begin // Simulate pressing increment button 3 times
+            increment_btn = 1; // Press the button
+            #1000; // Wait for debounce time
+            increment_btn = 0; // Release the button
+            #1000; // Wait before the next press
+        end
+
+        // Step 2: Increment minutes
+        #1000; // Wait for 1 ms
+        select_btn = 1; // Select minute for alarm
+        #1000; // Wait for 1 ms
+        select_btn = 0; // Stop selecting minute
+        repeat(23) begin // Simulate pressing increment button 15 times
+            increment_btn = 1; // Press the button
+            #1000; // Wait for debounce time
+            increment_btn = 0; // Release the button
+            #1000; // Wait before the next press
+        end
+
+        // Step 3: Increment seconds
+        #1000; // Wait for 1 ms
+        select_btn = 1; // Select second for alarm
+        #1000; // Wait for 1 ms
+        select_btn = 0; // Stop selecting second
+        repeat(45) begin // Simulate pressing increment button 45 times
+            increment_btn = 1; // Press the button
+            #1000; // Wait for debounce time
+            increment_btn = 0; // Release the button
+            #1000; // Wait before the next press
+        end
+
+        // Step 4: Finalize Alarm Setting and Toggle Alarm ON
+        toggle_alarm_btn = 1; // Turn the alarm ON
+        #1000; // Wait for 1 ms
+        toggle_alarm_btn = 0; // Release toggle button
+
+        // Step 5: Simulate time passing and check alarm state
+        repeat(1000) #1000; // Wait for 60 ms (simulate real-time clock updates)
+
+        // Step 6: Toggle Alarm OFF
+        toggle_alarm_btn = 1; // Turn the alarm OFF
+        #1000; // Wait for 1 ms
+        toggle_alarm_btn = 0; // Release toggle button
+
+        repeat(5) #1000; // Simulate additional time passing
+
+        // End simulation
+        $finish;
+    end
+
+    // Monitor outputs for debugging
+    initial begin
+        $monitor("Time: %0t | Reset: %b | Alarm LED: %b | Clock: %02d:%02d:%02d",
+                 $time, reset, alarm_led, hours, minutes, seconds);
+    end
+
+endmodule

@@ -1,0 +1,15 @@
+released_path,path_in_original_submission,category
+ai_logs/PromptScript - Member A.md,AI Prompts/PromptScript - Member A.md,ai_logs
+config/basys3.xdc,verilog code/basys3.xdc,config
+docs/Description of repository.txt,Description of repository.txt,docs
+docs/Modifications to fix bug.txt,verilog code/Modifications to fix bug.txt,docs
+rtl/12_24h_convert.v,verilog code/12_24h_convert.v,rtl
+rtl/alarm_clock.v,verilog code/alarm_clock.v,rtl
+rtl/auth_module.v,verilog code/auth_module.v,rtl
+rtl/buttonDebouncer.v,verilog code/buttonDebouncer.v,rtl
+rtl/clock_divider.v,verilog code/clock_divider.v,rtl
+rtl/seven_segment_display.v,verilog code/seven_segment_display.v,rtl
+rtl/stopwatch.v,verilog code/stopwatch.v,rtl
+rtl/timezone.v,verilog code/timezone.v,rtl
+rtl/top_level.v,verilog code/top_level.v,rtl
+testbench/top_level_tb.v,verilog code/top_level_tb.v,testbench

@@ -1,0 +1,362 @@
+`timescale 1ns / 1ps
+
+module top_level(
+    input wire clk,                  // 100 MHz clock input from Basys3 board
+    input wire rst,                  // Reset signal
+    //input wire [1:0] function_select, // Selector signal to choose active function
+    input wire BTN_C,                // Center button
+    input wire BTN_U,                // Up button
+    input wire BTN_L,                // Left button
+    input wire BTN_R,                // Right button
+    input wire BTN_D,                // Down button
+    input wire SW_0,                 // Functional switch 0
+    input wire SW_2,                 // Functional switch 2
+    input wire SW_4,                 // Functional switch 4
+    input wire SW_8,                 // Functional switch 8
+    input wire debug_clock,          // Debug mode control signal
+    output wire [6:0] IO_SSEG,       // Active-low 7-segment display segments
+    output wire [3:0] IO_SSEG_SEL,   // Active-low digit selector
+    //output wire alarm_LED,           // LED to indicate alarm trigger (redundant-vestigial)
+    //output wire alarm_latch_LED,     // LED for latched alarm state (redundant-vestigial)
+    //output reg state_mode_enable_alarm,
+    //output wire debug_long_press_active, //debug for long press function alarm and clock_timezone
+    //output wire am_pm_mode,           // AM/PM signal for external use in LED
+    output wire LD0,  // ✅ ALARM Mode Active LED
+    output wire LD1,  // ✅ Alarm Trigger Flash LED
+    output wire LD2,  // ✅ AM/PM Indicator LED
+    output wire LD3   // ✅ Seconds Indicator LED
+);
+
+    // 12-hour format outputs
+    wire [5:0] hours_12;
+    wire [5:0] minutes_12;
+
+    // Internal Signals
+    wire clk_1kHz;                  // 1 kHz clock for debouncing
+    wire clk_1Hz;                   // **NEW** 1 Hz clock for real-time updates
+    wire debounced_BTN_C;           // Debounced Center button
+    wire debounced_BTN_U;           // Debounced Up button
+    wire debounced_BTN_L;           // Debounced Left button
+    wire debounced_BTN_R;           // Debounced Right button
+    wire debounced_BTN_D;           // Debounced Down button
+    wire debounced_SW_0;            // Debounced functional switch 0
+    wire debounced_SW_2;            // Debounced functional switch 2
+    wire debounced_SW_4;            // Debounced functional switch 4
+    wire debounced_SW_8;            // Debounced functional switch 8
+    // Routed button signals based on current_state
+    wire debounced_BTN_L_clock;
+    wire debounced_BTN_R_clock;
+    wire debounced_BTN_L_alarm;
+    wire debounced_BTN_R_alarm;
+
+    // Submode Flags
+    reg clock_set_mode = 1'b0;             // Initialize to 0
+    reg timezone_set_mode;          //declare but don'instantiate may induce multi-driven Net errors 
+    reg alarm_set_mode = 1'b0;             // Initialize to 0
+    reg state_mode_enable_alarm;    // Initialize to 1 temporary experiment
+    // Fresh flag to halt the sev seg flicker during manual updats
+    reg manual_update;  // Flag to indicate manual update
+    
+    // State Machine
+    reg [1:0] current_state; // 2 bits for main states (CLOCK, ALARM, STOPWATCH, RESERVED)
+    parameter CLOCK = 2'b00, ALARM = 2'b01, STOPWATCH = 2'b10, RESERVED = 2'b11;
+
+    // Multiplexer Outputs
+    wire [5:0] mux_hour;            // Multiplexer output for hour (or minutes in stopwatch mode)
+    wire [5:0] mux_minute;          // Multiplexer output for minute (or seconds in stopwatch mode)
+
+    //inputs from lock and alarm and implementation errors 
+    wire long_press_active_clock; //input from clock for processing and out to sevseg
+    wire long_press_active_alarm; //input from alarm for processing and out to sevseg    
+
+    //this looks like a definition and assignment and possibly a clear
+    wire long_press_active = (current_state == CLOCK) ? long_press_active_clock : 
+                             (current_state == ALARM) ? long_press_active_alarm : 1'b0;
+
+    // Buffered Signals
+    wire [5:0] buffered_hour;       // Buffered intermediate signal for hour
+    wire [5:0] buffered_minute;     // Buffered intermediate signal for minute
+
+    wire [5:0] alarm_hour;          // Alarm hour output from alarm module
+    wire [5:0] alarm_minute;        // Alarm minute output from alarm module
+    // Alarm Signals
+    wire alarm_trigger;             // Initialize to 0
+    wire alarm_latch;               // Initialize to 0
+
+    
+    wire signed [4:0] timezone_offset; // Timezone offset (-12 to +12)(signed 5-bit)
+
+    wire [5:0] converted_hours;     // Output from convert_24_to_12 module
+    wire [5:0] converted_minutes;   // Output from convert_24_to_12 module
+    wire converted_am_pm;           // AM/PM signal from convert_24_to_12 module
+    reg [9:0] seconds_counter;      // new for 1 second LED 10-bit counter for 1Hz toggle (1000 counts)
+
+    wire [5:0] clock_hours;         // Hours from clock_timezone
+    wire [5:0] clock_minutes;       // Minutes from clock_timezone
+    wire [5:0] stopwatch_minutes;   // Minutes from stopwatch
+    wire [5:0] stopwatch_seconds;   // Seconds from stopwatch
+
+    //fresh code to expose the internal clock_timezone realtime clock logic
+    wire [5:0] clock_hours_raw;   // Wire to hold hours_reg from clock_timezone assigned to hours_reg_out
+    wire [5:0] clock_minutes_raw; // Wire to hold minutes_reg from clock_timezone
+
+    //fresh code to stop clock increment while alarm is increment
+    reg set_time_mode;             // Tracks whether clock time is being manually set
+    reg set_time_prev;             // Stores the previous state of set_time for edge detection
+    wire set_time;                 // Signal to enable time setting mode (likely from BTN_C)
+    assign set_time = debounced_BTN_C;  // ✅ Ensure `set_time` is explicitly linked to `debounced_BTN_C`
+    wire set_time_mode_signal;     // New wire to hold set_time_mode output
+    reg debounced_BTN_C_prev;      // Track previous state of BTN_C for edge detection
+    wire [1:0] current_digit;      // ✅ Ensure this is 2-bit wire (fixes truncation)
+    reg set_time_mode_next; // New register to hold the next value of set_time_mode
+    reg BTN_U_prev;              // Stores the previous state of debounced_BTN_U for edge detection 
+
+    assign LD0 = state_mode_enable_alarm;  // ✅ ON when ALARM mode is active
+    assign LD1 = alarm_trigger;  // ✅ This will make sure the LED turns on when alarm is triggered
+    assign LD2 = am_pm_mode;  // ✅ AM/PM Indicator (ON = PM, OFF = AM)
+    assign LD3 = clk_1Hz;  // ✅ Directly use 1 Hz clock as the LED signal
+
+    // Button Debouncers
+    buttonDebouncer db_BTN_C (.clk_1kHz(clk_1kHz), .rst(rst), .button_in(BTN_C), .button_out(debounced_BTN_C));
+    buttonDebouncer db_BTN_U (.clk_1kHz(clk_1kHz), .rst(rst), .button_in(BTN_U), .button_out(debounced_BTN_U));
+    buttonDebouncer db_BTN_L (.clk_1kHz(clk_1kHz), .rst(rst), .button_in(BTN_L), .button_out(debounced_BTN_L));
+    buttonDebouncer db_BTN_R (.clk_1kHz(clk_1kHz), .rst(rst), .button_in(BTN_R), .button_out(debounced_BTN_R));
+    buttonDebouncer db_BTN_D (.clk_1kHz(clk_1kHz), .rst(rst), .button_in(BTN_D), .button_out(debounced_BTN_D));
+
+
+
+
+    // Switch debouncers
+    buttonDebouncer db_SW_0 (.clk_1kHz(clk_1kHz), .rst(rst), .button_in(SW_0), .button_out(debounced_SW_0));
+    buttonDebouncer db_SW_2 (.clk_1kHz(clk_1kHz), .rst(rst), .button_in(SW_2), .button_out(debounced_SW_2));
+    buttonDebouncer db_SW_4 (.clk_1kHz(clk_1kHz), .rst(rst), .button_in(SW_4), .button_out(debounced_SW_4));
+    buttonDebouncer db_SW_8 (.clk_1kHz(clk_1kHz), .rst(rst), .button_in(SW_8), .button_out(debounced_SW_8));
+
+
+    // State Machine Logic (Corrected for 3-bit states, SET states removed)
+    always @(posedge clk_1kHz or posedge rst) begin
+        if (rst) begin
+            current_state <= CLOCK;
+            timezone_set_mode <= 1'b0;
+            alarm_set_mode <= 1'b0;
+            debounced_BTN_C_prev <= 1'b0;
+        end else begin
+            debounced_BTN_C_prev <= debounced_BTN_C;
+
+            if (!debounced_BTN_C_prev && debounced_BTN_C) begin
+                case (current_state)
+                    CLOCK: begin
+                        if (SW_4 == 1'b0 && SW_8 == 1'b0) begin
+                            // Toggle clock_set_mode to switch between setting hours and minutes
+                            clock_set_mode <= ~clock_set_mode; 
+                        end else if (SW_4 == 1'b0 && SW_8 == 1'b1) begin
+                            current_state <= ALARM;
+                        end else if (SW_4 == 1'b1 && SW_8 == 1'b0) begin
+                            current_state <= STOPWATCH;
+                        end
+                        // No else needed here, stay in CLOCK if no other condition is met
+                    end
+                    ALARM: begin
+                        if (SW_4 == 1'b0 && SW_8 == 1'b0) begin
+                            current_state <= CLOCK;
+                        end
+                        // No else needed, stay in ALARM if switches are not both low
+                    end
+                    STOPWATCH: begin
+                        if (SW_4 == 1'b0 && SW_8 == 1'b0) begin
+                            current_state <= CLOCK;
+                        end
+                        // No else needed, stay in STOPWATCH if switches are not both low
+                    end
+                    // No default needed, all states are covered
+                endcase
+            end
+        end
+    end
+    // Ensure BTN_L and BTN_R are only active in the correct states
+    assign debounced_BTN_L_clock = (current_state == CLOCK) ? debounced_BTN_L : 1'b0;
+    assign debounced_BTN_R_clock = (current_state == CLOCK) ? debounced_BTN_R : 1'b0;
+
+    assign debounced_BTN_L_alarm = (current_state == ALARM) ? debounced_BTN_L : 1'b0;
+    assign debounced_BTN_R_alarm = (current_state == ALARM) ? debounced_BTN_R : 1'b0;
+
+
+
+    assign debug_long_press_active = long_press_active;
+
+// Submode Management based on state
+    always @(posedge clk_1kHz or posedge rst) begin
+        if (rst) begin
+            clock_set_mode <= 1'b0;
+            BTN_U_prev <= 1'b0; // Add this line to initialize BTN_U_prev
+        end else begin
+            case (current_state)
+                CLOCK: begin
+                    clock_set_mode <= 1'b0; // These should be 0 when not in clock set submode
+                    timezone_set_mode <= 1'b0;
+                    alarm_set_mode <= 1'b0;
+
+                    // Edge detection for debounced_BTN_U
+                    if (debounced_BTN_U &&!BTN_U_prev) begin
+                        timezone_set_mode <= ~timezone_set_mode;
+                    end
+                    BTN_U_prev <= debounced_BTN_U;
+                end
+                ALARM: begin
+                    clock_set_mode <= 1'b0;
+                    timezone_set_mode <= 1'b0;
+                    alarm_set_mode <= 1'b1;
+                end
+                STOPWATCH, RESERVED: begin
+                    clock_set_mode <= 1'b0;
+                    timezone_set_mode <= 1'b0;
+                    alarm_set_mode <= 1'b0;
+                end
+            endcase
+        end
+    end
+    // fresh code to replace two other code areas (Modified)
+    always @(posedge clk_1kHz or posedge rst) begin
+        if (rst) begin
+            set_time_mode <= 1'b0;
+            state_mode_enable_alarm <= 1'b0;
+        end else begin
+            case (current_state)
+                CLOCK: begin
+                    set_time_mode <= set_time; // ✅ Directly assign debounced BTN_C
+                    state_mode_enable_alarm <= 1'b0;
+                end
+                ALARM: begin
+                    state_mode_enable_alarm <= 1'b1;
+                    set_time_mode <= 1'b0;
+                end
+                STOPWATCH: begin
+                    set_time_mode <= 1'b0;
+                    state_mode_enable_alarm <= 1'b0;
+                end
+                default: begin
+                    set_time_mode <= 1'b0;
+                    state_mode_enable_alarm <= 1'b0;
+                end
+            endcase
+        end
+    end
+    //
+    always @(posedge clk_1kHz or posedge rst) begin
+        if (rst) begin
+            manual_update <= 1'b0;
+        end else if (set_time_mode || state_mode_enable_alarm) begin
+            if (debounced_BTN_L || debounced_BTN_R) begin
+                manual_update <= 1'b1;  // A button press triggers an immediate update
+            end
+        end else begin
+            manual_update <= 1'b0;  // Reset after the update is applied
+        end
+    end
+
+    // Multiplexer Logic
+    assign mux_hour = (current_state == STOPWATCH)? stopwatch_minutes: // Directly use stopwatch_minutes
+                      (current_state == ALARM)? alarm_hour:
+                      (current_state == CLOCK && clock_set_mode)? 
+                          ((debounced_SW_2) ? {2'b00, hours_12} : {2'b00, clock_hours}):  // ✅ Use 12-hour mode if SW_2 = 1
+                      (timezone_set_mode)? 
+                      ((debounced_SW_2) ? {2'b00, $signed(hours_12) + timezone_offset} : {2'b00, $signed(clock_hours) + timezone_offset}) :  // ✅ Adjust properly $signed
+                      ((debounced_SW_2) ? {2'b00, hours_12} : {2'b00, clock_hours});  // ✅ Default to proper mode
+
+    assign mux_minute = (current_state == STOPWATCH)? stopwatch_seconds: // Directly use stopwatch_seconds
+                        (current_state == ALARM)? alarm_minute:
+                        (current_state == CLOCK && clock_set_mode)? clock_minutes:
+                        clock_minutes;
+                        
+    // Clock Divider to generate 1 kHz clock
+    clock_divider clk_div_inst (
+        .clk(clk),
+        .rst(rst),
+        .debug_clock(debug_clock),  // Debug clock control
+        .clk_1kHz(clk_1kHz),
+        .clk_1Hz(clk_1Hz)  // **NEW**
+    );
+
+    // Clock Timezone Module
+    clock_timezone clock_timezone_inst (
+        .clk_1kHz(clk_1kHz),
+        .clk_1Hz(clk_1Hz),  // **NEW**
+        .rst(rst),
+        .set_time(set_time),  // ✅ Still driven by `debounced_BTN_C`
+        .set_timezone(debounced_BTN_U),  // ✅ This should match debounced button!
+        .timezone_select({debounced_SW_4, debounced_SW_8, 3'b000}),
+        .hours(clock_hours),
+        .minutes(clock_minutes),
+        .timezone_offset(timezone_offset),
+        .set_time_mode(set_time_mode_signal),     //Use the connected signal
+        .debounced_BTN_L(debounced_BTN_L_clock),  // Now gated by current_state
+        .debounced_BTN_R(debounced_BTN_R_clock),  // Now gated by current_state
+        .long_press_active_clock(long_press_active_clock), // from alarm for processing pre sevseg
+        .current_digit(current_digit),             // ✅ NEW: Pass anode multiplexer state
+        .hours_reg_out(clock_hours_raw),    // ✅ Now exposing hours_reg to top_level
+        .minutes_reg_out(clock_minutes_raw) // ✅ Now exposing minutes_reg to top_level
+    );
+
+    // Convert 24-to-12 Module
+    convert_24_to_12 convert_24_to_12_inst (
+        .hours_24(clock_hours),
+        .minutes_24(clock_minutes),
+        .mode_12hr_select(debounced_SW_2), // Use SW_2 to toggle 12/24-hour mode
+        .hours_12(hours_12),
+        .minutes_12(minutes_12),
+        .am_pm(converted_am_pm),
+        .buffer_hours(buffered_hour),
+        .buffer_minutes(buffered_minute),
+        .am_pm_mode(am_pm_mode) //output Sent to top_level for LED
+    );
+
+    // Alarm Module
+    alarm alarm_inst (
+        .clk_1kHz(clk_1kHz),
+        .rst(rst),
+        .set_hour(debounced_BTN_L_alarm), // Now gated by current_state
+        .set_minute(debounced_BTN_R_alarm), // Now gated by current_state
+        .toggle_alarm(debounced_SW_0),
+        .debounced_BTN_D(debounced_BTN_D), //Ensure the debounced version is passed
+        .state_mode_enable_alarm(state_mode_enable_alarm), //Newish:
+        .current_hour(clock_hours),
+        .current_minute(clock_minutes),
+        .alarm_trigger(alarm_trigger),
+        .alarm_latch(alarm_latch),
+        .alarm_hour(alarm_hour),
+        .alarm_minute(alarm_minute),
+        //.am_pm_mode(am_pm_mode), //advanced design for setting alarm in 12 hour mode now an LED
+        .long_press_active_alarm(long_press_active_alarm), // from alarm for processing pre sevseg
+        .current_digit(current_digit) // ✅ NEW: Pass anode multiplexer state
+    );
+
+    // Stopwatch Module
+    stopwatch stopwatch_inst (
+        .clk_1kHz(clk_1kHz),
+        .rst(rst),
+        .start_stop(debounced_BTN_C && (current_state == STOPWATCH)), // Start/stop only in stopwatch mode
+        .reset_button(debounced_BTN_U),
+        .enable_stopwatch(current_state == STOPWATCH), // ✅ Ensure stopwatch runs only in STOPWATCH state
+        .stopwatch_minutes(stopwatch_minutes),
+        .stopwatch_seconds(stopwatch_seconds)
+    );
+
+    // Seven-Segment Display
+    sevseg sevseg_inst (
+        .binary_hours(mux_hour),
+        .binary_minutes(mux_minute),
+        .clk_1kHz(clk_1kHz),
+        .rst(rst),
+        .manual_update(manual_update),  // NEW: Force immediate update when button is pressed
+        .seg(IO_SSEG),
+        .an(IO_SSEG_SEL),
+        .current_digit(current_digit),  // ✅ Ensure it's connected
+        .long_press_active(long_press_active) // comes from clock_timezone and alarm processed by top_level 
+    );
+ 
+
+
+
+
+
+endmodule

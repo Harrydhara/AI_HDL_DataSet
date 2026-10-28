@@ -1,0 +1,36 @@
+=== DP1 Baseline PPA Metrics ===
+Date: March 7, 2026
+Design: tqvp_gpio (GPIO + Interrupt Controller + Matrix Multiplier)
+
+Synthesis Results:
+- Total Cells:           159
+- Flip-Flops (DFF):      32
+- Combinational Logic:   127
+  - AND gates:           8
+  - ANDNOT gates:        16
+  - OR gates:            17
+  - ORNOT gates:         18
+  - XOR gates:           8
+  - NOT gates:           9
+  - MUX:                 32
+  - AOI3:                1
+  - OAI3:                8
+  - OAI4:                8
+  - NOR:                 2
+
+Wire Statistics:
+- Total Wires:           110
+- Wire Bits:             233
+- Public Wires:          14
+- Public Wire Bits:      116
+
+Performance Estimate:
+- Critical Path:         ~20 ns (estimated)
+- Max Frequency:         ~50 MHz (estimated)
+
+Power Estimate:
+- Estimated Power:       ~0.5 mW (placeholder - requires OpenLane)
+
+Area:
+- Cell Count:            159
+- Register Count:        32

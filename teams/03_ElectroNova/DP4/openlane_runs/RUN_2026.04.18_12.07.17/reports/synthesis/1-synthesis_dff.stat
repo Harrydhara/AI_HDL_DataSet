@@ -1,0 +1,25 @@
+
+55. Printing statistics.
+
+=== tqvp_dma ===
+
+   Number of wires:               4129
+   Number of wire bits:           4878
+   Number of public wires:          50
+   Number of public wire bits:     735
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               4782
+     $_ANDNOT_                     833
+     $_AND_                         79
+     $_MUX_                       2120
+     $_NAND_                       131
+     $_NOR_                         99
+     $_NOT_                         75
+     $_ORNOT_                      126
+     $_OR_                         310
+     $_XNOR_                        87
+     $_XOR_                        284
+     sky130_fd_sc_hd__dfxtp_2      638
+

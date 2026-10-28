@@ -1,0 +1,1692 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.38 (git sha1 543faed9c8c, clang++ 17.0.6 -fPIC -Os)
+
+[TCL: yosys -import] Command name collision: found pre-existing command `cd' -> skip.
+[TCL: yosys -import] Command name collision: found pre-existing command `eval' -> skip.
+[TCL: yosys -import] Command name collision: found pre-existing command `exec' -> skip.
+[TCL: yosys -import] Command name collision: found pre-existing command `read' -> skip.
+[TCL: yosys -import] Command name collision: found pre-existing command `trace' -> skip.
+
+1. Executing Liberty frontend: /root/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+Imported 428 cell types from liberty file.
+
+2. Executing Verilog-2005 frontend: /openlane/designs/new_tqvp_dma/src/tqvp_dma.v
+Parsing SystemVerilog input from `/openlane/designs/new_tqvp_dma/src/tqvp_dma.v' to AST representation.
+Storing AST representation for module `$abstract\tqvp_dma'.
+Successfully finished Verilog frontend.
+
+3. Executing HIERARCHY pass (managing design hierarchy).
+
+4. Executing AST frontend in derive mode using pre-parsed AST for module `\tqvp_dma'.
+Generating RTLIL representation for module `\tqvp_dma'.
+
+4.1. Analyzing design hierarchy..
+Top module:  \tqvp_dma
+
+4.2. Analyzing design hierarchy..
+Top module:  \tqvp_dma
+Removing unused module `$abstract\tqvp_dma'.
+Removed 1 unused modules.
+
+5. Generating Graphviz representation of design.
+Writing dot description to `/openlane/designs/new_tqvp_dma/runs/RUN_2026.04.18_12.07.17/tmp/synthesis/hierarchy.dot'.
+Dumping module tqvp_dma to page 1.
+Renaming module tqvp_dma to tqvp_dma.
+
+6. Executing TRIBUF pass.
+
+7. Executing HIERARCHY pass (managing design hierarchy).
+
+7.1. Analyzing design hierarchy..
+Top module:  \tqvp_dma
+
+7.2. Analyzing design hierarchy..
+Top module:  \tqvp_dma
+Removed 0 unused modules.
+
+8. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+9. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 10 switch rules as full_case in process $proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26 in module tqvp_dma.
+Removed a total of 0 dead cases.
+
+10. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 1 redundant assignment.
+Promoted 3 assignments to connections.
+
+11. Executing PROC_INIT pass (extract init attributes).
+
+12. Executing PROC_ARST pass (detect async resets in processes).
+
+13. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~21 debug messages>
+
+14. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+     1/38: $2$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$40
+     2/38: $2$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_DATA[31:0]$39
+     3/38: $2$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_ADDR[1:0]$38
+     4/38: $0\data_ready_r[0:0]
+     5/38: $0\busy[0:0]
+     6/38: $1$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_DATA[31:0]$32
+     7/38: $1$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_ADDR[1:0]$31
+     8/38: $0\data_out_r[31:0]
+     9/38: $0\fifo_count[2:0]
+    10/38: $0\fifo_tail[1:0]
+    11/38: $0\fifo_head[1:0]
+    12/38: $0\state[2:0]
+    13/38: $0\burst_count[1:0]
+    14/38: $0\remaining_write[31:0]
+    15/38: $0\remaining_read[31:0]
+    16/38: $0\src_stride_lat[31:0]
+    17/38: $0\sec_violation[0:0]
+    18/38: $0\done_flag[0:0]
+    19/38: $0\err_flag[0:0]
+    20/38: $0\src_stride[31:0]
+    21/38: $0\row_size_lat[31:0]
+    22/38: $0\words_in_row[31:0]
+    23/38: $0\irq_en[0:0]
+    24/38: $0\dst_bound[31:0]
+    25/38: $0\src_bound[31:0]
+    26/38: $0\src_addr[31:0]
+    27/38: $0\row_size[31:0]
+    28/38: $0\start_r[0:0]
+    29/38: $0\length[31:0]
+    30/38: $0\dst_addr[31:0]
+    31/38: $1$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$33
+    32/38: $0\mode_2d[0:0]
+    33/38: $0\m_valid[0:0]
+    34/38: $0\m_read[0:0]
+    35/38: $0\m_write[0:0]
+    36/38: $0\m_wstrb[3:0]
+    37/38: $0\m_wdata[31:0]
+    38/38: $0\m_addr[31:0]
+
+15. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+16. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\tqvp_dma.\m_addr' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$613' with positive edge clock.
+Creating register for signal `\tqvp_dma.\m_wdata' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$614' with positive edge clock.
+Creating register for signal `\tqvp_dma.\m_wstrb' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$615' with positive edge clock.
+Creating register for signal `\tqvp_dma.\m_write' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$616' with positive edge clock.
+Creating register for signal `\tqvp_dma.\m_read' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$617' with positive edge clock.
+Creating register for signal `\tqvp_dma.\m_valid' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$618' with positive edge clock.
+Creating register for signal `\tqvp_dma.\irq_en' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$619' with positive edge clock.
+Creating register for signal `\tqvp_dma.\mode_2d' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$620' with positive edge clock.
+Creating register for signal `\tqvp_dma.\src_addr' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$621' with positive edge clock.
+Creating register for signal `\tqvp_dma.\dst_addr' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$622' with positive edge clock.
+Creating register for signal `\tqvp_dma.\length' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$623' with positive edge clock.
+Creating register for signal `\tqvp_dma.\src_stride' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$624' with positive edge clock.
+Creating register for signal `\tqvp_dma.\row_size' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$625' with positive edge clock.
+Creating register for signal `\tqvp_dma.\src_bound' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$626' with positive edge clock.
+Creating register for signal `\tqvp_dma.\dst_bound' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$627' with positive edge clock.
+Creating register for signal `\tqvp_dma.\start_r' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$628' with positive edge clock.
+Creating register for signal `\tqvp_dma.\words_in_row' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$629' with positive edge clock.
+Creating register for signal `\tqvp_dma.\src_stride_lat' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$630' with positive edge clock.
+Creating register for signal `\tqvp_dma.\row_size_lat' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$631' with positive edge clock.
+Creating register for signal `\tqvp_dma.\busy' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$632' with positive edge clock.
+Creating register for signal `\tqvp_dma.\err_flag' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$633' with positive edge clock.
+Creating register for signal `\tqvp_dma.\done_flag' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$634' with positive edge clock.
+Creating register for signal `\tqvp_dma.\sec_violation' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$635' with positive edge clock.
+Creating register for signal `\tqvp_dma.\remaining_read' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$636' with positive edge clock.
+Creating register for signal `\tqvp_dma.\remaining_write' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$637' with positive edge clock.
+Creating register for signal `\tqvp_dma.\burst_count' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$638' with positive edge clock.
+Creating register for signal `\tqvp_dma.\state' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$639' with positive edge clock.
+Creating register for signal `\tqvp_dma.\fifo_head' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$640' with positive edge clock.
+Creating register for signal `\tqvp_dma.\fifo_tail' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$641' with positive edge clock.
+Creating register for signal `\tqvp_dma.\fifo_count' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$642' with positive edge clock.
+Creating register for signal `\tqvp_dma.\data_out_r' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$643' with positive edge clock.
+Creating register for signal `\tqvp_dma.\data_ready_r' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$644' with positive edge clock.
+Creating register for signal `\tqvp_dma.$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_ADDR' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$645' with positive edge clock.
+Creating register for signal `\tqvp_dma.$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_DATA' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$646' with positive edge clock.
+Creating register for signal `\tqvp_dma.$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN' using process `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+  created $dff cell `$procdff$647' with positive edge clock.
+
+17. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+18. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 21 empty switches in `\tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+Removing empty process `tqvp_dma.$proc$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:84$26'.
+Cleaned up 21 empty switches.
+
+19. Executing CHECK pass (checking for obvious problems).
+Checking module tqvp_dma...
+Found and reported 0 problems.
+
+20. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tqvp_dma.
+<suppressed ~55 debug messages>
+
+21. Executing FLATTEN pass (flatten design).
+
+22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tqvp_dma.
+
+23. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tqvp_dma..
+Removed 7 unused cells and 203 unused wires.
+<suppressed ~8 debug messages>
+
+24. Executing OPT pass (performing simple optimizations).
+
+24.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tqvp_dma.
+
+24.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tqvp_dma'.
+<suppressed ~129 debug messages>
+Removed a total of 43 cells.
+
+24.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tqvp_dma..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$105.
+    dead port 2/2 on $mux $procmux$93.
+    dead port 2/2 on $mux $procmux$99.
+Removed 3 multiplexer ports.
+<suppressed ~48 debug messages>
+
+24.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tqvp_dma.
+    Consolidated identical input bits for $mux cell $procmux$90:
+      Old ports: A=0, B=32'11111111111111111111111111111111, Y=$procmux$90_Y
+      New ports: A=1'0, B=1'1, Y=$procmux$90_Y [0]
+      New connections: $procmux$90_Y [31:1] = { $procmux$90_Y [0] $procmux$90_Y [0] $procmux$90_Y [0] $procmux$90_Y [0] $procmux$90_Y [0] $procmux$90_Y [0] $procmux$90_Y [0] $procmux$90_Y [0] $procmux$90_Y [0] $procmux$90_Y [0] $procmux$90_Y [0] $procmux$90_Y [0] $procmux$90_Y [0] $procmux$90_Y [0] $procmux$90_Y [0] $procmux$90_Y [0] $procmux$90_Y [0] $procmux$90_Y [0] $procmux$90_Y [0] $procmux$90_Y [0] $procmux$90_Y [0] $procmux$90_Y [0] $procmux$90_Y [0] $procmux$90_Y [0] $procmux$90_Y [0] $procmux$90_Y [0] $procmux$90_Y [0] $procmux$90_Y [0] $procmux$90_Y [0] $procmux$90_Y [0] $procmux$90_Y [0] }
+  Optimizing cells in module \tqvp_dma.
+    Consolidated identical input bits for $mux cell $procmux$493:
+      Old ports: A=0, B=$2$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$40, Y=$0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29
+      New ports: A=1'0, B=$procmux$90_Y [0], Y=$0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0]
+      New connections: $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [31:1] = { $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] $0$memwr$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:149$1_EN[31:0]$29 [0] }
+  Optimizing cells in module \tqvp_dma.
+Performed a total of 2 changes.
+
+24.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tqvp_dma'.
+<suppressed ~3 debug messages>
+Removed a total of 1 cells.
+
+24.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+24.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tqvp_dma..
+Removed 0 unused cells and 47 unused wires.
+<suppressed ~1 debug messages>
+
+24.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tqvp_dma.
+
+24.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+24.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tqvp_dma..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~49 debug messages>
+
+24.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tqvp_dma.
+Performed a total of 0 changes.
+
+24.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tqvp_dma'.
+Removed a total of 0 cells.
+
+24.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+24.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tqvp_dma..
+
+24.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tqvp_dma.
+
+24.16. Finished OPT passes. (There is nothing left to do.)
+
+25. Executing FSM pass (extract and optimize FSM).
+
+25.1. Executing FSM_DETECT pass (finding FSMs in design).
+Not marking tqvp_dma.m_wstrb as FSM state register:
+    Register is connected to module port.
+    Users of register don't seem to benefit from recoding.
+Found FSM state register tqvp_dma.state.
+
+25.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+Extracting FSM `\state' from module `\tqvp_dma'.
+  found $dff cell for state register: $procdff$639
+  root of input selection tree: $0\state[2:0]
+  found reset state: 3'000 (guessed from mux tree)
+  found ctrl input: \rst_n
+  found state code: 3'000
+  found ctrl input: \busy
+  found ctrl input: $logic_and$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:163$44_Y
+  found state code: 3'001
+  found ctrl input: \addr_fault
+  found ctrl input: $procmux$115_CMP
+  found ctrl input: $eq$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:70$14_Y
+  found ctrl input: $eq$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:70$13_Y
+  found ctrl input: $eq$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:66$4_Y
+  found ctrl input: $eq$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:69$10_Y
+  found ctrl input: $logic_and$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:259$78_Y
+  found ctrl input: \m_error
+  found ctrl input: \fifo_empty
+  found state code: 3'011
+  found ctrl input: $ne$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:193$46_Y
+  found state code: 3'101
+  found state code: 3'100
+  found ctrl input: $logic_and$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:211$51_Y
+  found ctrl input: $logic_and$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:235$67_Y
+  found ctrl input: $logic_and$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:193$47_Y
+  found ctrl input: $eq$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:200$49_Y
+  found state code: 3'010
+  found ctrl output: $eq$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:66$4_Y
+  found ctrl output: $eq$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:69$10_Y
+  found ctrl output: $eq$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:70$13_Y
+  found ctrl output: $eq$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:70$14_Y
+  found ctrl output: $procmux$115_CMP
+  ctrl inputs: { $logic_and$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:259$78_Y $logic_and$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:235$67_Y $logic_and$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:211$51_Y $eq$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:200$49_Y $logic_and$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:193$47_Y $ne$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:193$46_Y $logic_and$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:163$44_Y \addr_fault \fifo_empty \busy \m_error \rst_n }
+  ctrl outputs: { $procmux$115_CMP $0\state[2:0] $eq$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:70$14_Y $eq$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:70$13_Y $eq$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:69$10_Y $eq$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:66$4_Y }
+  transition:      3'000 12'-----------0 ->      3'000 8'00000000
+  transition:      3'000 12'------0--0-1 ->      3'000 8'00000000
+  transition:      3'000 12'------1--0-1 ->      3'001 8'00010000
+  transition:      3'000 12'------00-1-1 ->      3'000 8'00000000
+  transition:      3'000 12'------10-1-1 ->      3'001 8'00010000
+  transition:      3'000 12'-------1-1-1 ->      3'101 8'01010000
+  transition:      3'100 12'-----------0 ->      3'000 8'00001000
+  transition:      3'100 12'------0--0-1 ->      3'100 8'01001000
+  transition:      3'100 12'------1--0-1 ->      3'001 8'00011000
+  transition:      3'100 12'0-----00-1-1 ->      3'100 8'01001000
+  transition:      3'100 12'0-----10-1-1 ->      3'001 8'00011000
+  transition:      3'100 12'1------00101 ->      3'011 8'00111000
+  transition:      3'100 12'1----0-01101 ->      3'101 8'01011000
+  transition:      3'100 12'1----1-01101 ->      3'001 8'00011000
+  transition:      3'100 12'1------0-111 ->      3'101 8'01011000
+  transition:      3'100 12'-------1-1-1 ->      3'101 8'01011000
+  transition:      3'010 12'-----------0 ->      3'000 8'00000001
+  transition:      3'010 12'------0--0-1 ->      3'010 8'00100001
+  transition:      3'010 12'------1--0-1 ->      3'001 8'00010001
+  transition:      3'010 12'--0---00-1-1 ->      3'010 8'00100001
+  transition:      3'010 12'--0---10-1-1 ->      3'001 8'00010001
+  transition:      3'010 12'-01----0-101 ->      3'011 8'00110001
+  transition:      3'010 12'-11----0-101 ->      3'001 8'00010001
+  transition:      3'010 12'--1----0-111 ->      3'101 8'01010001
+  transition:      3'010 12'-------1-1-1 ->      3'101 8'01010001
+  transition:      3'001 12'-----------0 ->      3'000 8'00000010
+  transition:      3'001 12'------0--0-1 ->      3'001 8'00010010
+  transition:      3'001 12'------1--0-1 ->      3'001 8'00010010
+  transition:      3'001 12'----0--001-1 ->      3'011 8'00110010
+  transition:      3'001 12'---00-0011-1 ->      3'001 8'00010010
+  transition:      3'001 12'---00-1011-1 ->      3'001 8'00010010
+  transition:      3'001 12'---10--011-1 ->      3'101 8'01010010
+  transition:      3'001 12'----1--0-1-1 ->      3'010 8'00100010
+  transition:      3'001 12'-------1-1-1 ->      3'101 8'01010010
+  transition:      3'101 12'-----------0 ->      3'000 8'10000000
+  transition:      3'101 12'------0--0-1 ->      3'101 8'11010000
+  transition:      3'101 12'------1--0-1 ->      3'001 8'10010000
+  transition:      3'101 12'-------0-1-1 ->      3'000 8'10000000
+  transition:      3'101 12'-------1-1-1 ->      3'101 8'11010000
+  transition:      3'011 12'-----------0 ->      3'000 8'00000100
+  transition:      3'011 12'------0--0-1 ->      3'011 8'00110100
+  transition:      3'011 12'------1--0-1 ->      3'001 8'00010100
+  transition:      3'011 12'-------001-1 ->      3'100 8'01000100
+  transition:      3'011 12'------0011-1 ->      3'011 8'00110100
+  transition:      3'011 12'------1011-1 ->      3'001 8'00010100
+  transition:      3'011 12'-------1-1-1 ->      3'101 8'01010100
+
+25.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+Optimizing FSM `$fsm$\state$649' from module `\tqvp_dma'.
+  Merging pattern 12'------0--0-1 and 12'------1--0-1 from group (3 3 8'00010010).
+  Merging pattern 12'------1--0-1 and 12'------0--0-1 from group (3 3 8'00010010).
+  Merging pattern 12'---00-0011-1 and 12'---00-1011-1 from group (3 3 8'00010010).
+  Merging pattern 12'---00-1011-1 and 12'---00-0011-1 from group (3 3 8'00010010).
+
+25.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tqvp_dma..
+Removed 22 unused cells and 22 unused wires.
+<suppressed ~23 debug messages>
+
+25.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+Optimizing FSM `$fsm$\state$649' from module `\tqvp_dma'.
+  Removing unused output signal $0\state[2:0] [0].
+  Removing unused output signal $0\state[2:0] [1].
+  Removing unused output signal $0\state[2:0] [2].
+
+25.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+Recoding FSM `$fsm$\state$649' from module `\tqvp_dma' using `auto' encoding:
+  mapping auto encoding to `one-hot` for this FSM.
+  000 -> -----1
+  100 -> ----1-
+  010 -> ---1--
+  001 -> --1---
+  101 -> -1----
+  011 -> 1-----
+
+25.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+FSM `$fsm$\state$649' from module `tqvp_dma':
+-------------------------------------
+
+  Information on FSM $fsm$\state$649 (\state):
+
+  Number of input signals:   12
+  Number of output signals:   5
+  Number of state bits:       6
+
+  Input signals:
+    0: \rst_n
+    1: \m_error
+    2: \busy
+    3: \fifo_empty
+    4: \addr_fault
+    5: $logic_and$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:163$44_Y
+    6: $ne$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:193$46_Y
+    7: $logic_and$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:193$47_Y
+    8: $eq$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:200$49_Y
+    9: $logic_and$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:211$51_Y
+   10: $logic_and$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:235$67_Y
+   11: $logic_and$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:259$78_Y
+
+  Output signals:
+    0: $eq$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:66$4_Y
+    1: $eq$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:69$10_Y
+    2: $eq$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:70$13_Y
+    3: $eq$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:70$14_Y
+    4: $procmux$115_CMP
+
+  State encoding:
+    0:   6'-----1  <RESET STATE>
+    1:   6'----1-
+    2:   6'---1--
+    3:   6'--1---
+    4:   6'-1----
+    5:   6'1-----
+
+  Transition Table (state_in, ctrl_in, state_out, ctrl_out):
+      0:     0 12'-----------0   ->     0 5'00000
+      1:     0 12'------0--0-1   ->     0 5'00000
+      2:     0 12'------00-1-1   ->     0 5'00000
+      3:     0 12'------1--0-1   ->     3 5'00000
+      4:     0 12'------10-1-1   ->     3 5'00000
+      5:     0 12'-------1-1-1   ->     4 5'00000
+      6:     1 12'-----------0   ->     0 5'01000
+      7:     1 12'------0--0-1   ->     1 5'01000
+      8:     1 12'0-----00-1-1   ->     1 5'01000
+      9:     1 12'1----1-01101   ->     3 5'01000
+     10:     1 12'------1--0-1   ->     3 5'01000
+     11:     1 12'0-----10-1-1   ->     3 5'01000
+     12:     1 12'1----0-01101   ->     4 5'01000
+     13:     1 12'1------0-111   ->     4 5'01000
+     14:     1 12'-------1-1-1   ->     4 5'01000
+     15:     1 12'1------00101   ->     5 5'01000
+     16:     2 12'-----------0   ->     0 5'00001
+     17:     2 12'------0--0-1   ->     2 5'00001
+     18:     2 12'--0---00-1-1   ->     2 5'00001
+     19:     2 12'-11----0-101   ->     3 5'00001
+     20:     2 12'------1--0-1   ->     3 5'00001
+     21:     2 12'--0---10-1-1   ->     3 5'00001
+     22:     2 12'--1----0-111   ->     4 5'00001
+     23:     2 12'-------1-1-1   ->     4 5'00001
+     24:     2 12'-01----0-101   ->     5 5'00001
+     25:     3 12'-----------0   ->     0 5'00010
+     26:     3 12'----1--0-1-1   ->     2 5'00010
+     27:     3 12'---------0-1   ->     3 5'00010
+     28:     3 12'---00--011-1   ->     3 5'00010
+     29:     3 12'---10--011-1   ->     4 5'00010
+     30:     3 12'-------1-1-1   ->     4 5'00010
+     31:     3 12'----0--001-1   ->     5 5'00010
+     32:     4 12'-----------0   ->     0 5'10000
+     33:     4 12'-------0-1-1   ->     0 5'10000
+     34:     4 12'------1--0-1   ->     3 5'10000
+     35:     4 12'------0--0-1   ->     4 5'10000
+     36:     4 12'-------1-1-1   ->     4 5'10000
+     37:     5 12'-----------0   ->     0 5'00100
+     38:     5 12'-------001-1   ->     1 5'00100
+     39:     5 12'------1--0-1   ->     3 5'00100
+     40:     5 12'------1011-1   ->     3 5'00100
+     41:     5 12'-------1-1-1   ->     4 5'00100
+     42:     5 12'------0--0-1   ->     5 5'00100
+     43:     5 12'------0011-1   ->     5 5'00100
+
+-------------------------------------
+
+25.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+Mapping FSM `$fsm$\state$649' from module `\tqvp_dma'.
+
+26. Executing OPT pass (performing simple optimizations).
+
+26.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tqvp_dma.
+<suppressed ~1 debug messages>
+
+26.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tqvp_dma'.
+<suppressed ~12 debug messages>
+Removed a total of 4 cells.
+
+26.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tqvp_dma..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~47 debug messages>
+
+26.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tqvp_dma.
+Performed a total of 0 changes.
+
+26.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tqvp_dma'.
+Removed a total of 0 cells.
+
+26.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $procdff$644 ($dff) from module tqvp_dma (D = $procmux$107_Y, Q = \data_ready_r, rval = 1'0).
+Adding SRST signal on $procdff$643 ($dff) from module tqvp_dma (D = $procmux$137_Y, Q = \data_out_r, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$781 ($sdff) from module tqvp_dma (D = $procmux$131_Y, Q = \data_out_r).
+Adding SRST signal on $procdff$642 ($dff) from module tqvp_dma (D = $procmux$155_Y, Q = \fifo_count, rval = 3'000).
+Adding SRST signal on $procdff$641 ($dff) from module tqvp_dma (D = $procmux$161_Y, Q = \fifo_tail, rval = 2'00).
+Adding EN signal on $auto$ff.cc:266:slice$784 ($sdff) from module tqvp_dma (D = $add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:150$41_Y [1:0], Q = \fifo_tail).
+Adding SRST signal on $procdff$640 ($dff) from module tqvp_dma (D = $procmux$178_Y, Q = \fifo_head, rval = 2'00).
+Adding EN signal on $procdff$638 ($dff) from module tqvp_dma (D = $procmux$231_Y, Q = \burst_count).
+Adding EN signal on $procdff$637 ($dff) from module tqvp_dma (D = $procmux$246_Y, Q = \remaining_write).
+Adding EN signal on $procdff$636 ($dff) from module tqvp_dma (D = $procmux$263_Y, Q = \remaining_read).
+Adding SRST signal on $procdff$635 ($dff) from module tqvp_dma (D = $procmux$278_Y, Q = \sec_violation, rval = 1'0).
+Adding SRST signal on $procdff$634 ($dff) from module tqvp_dma (D = $procmux$301_Y, Q = \done_flag, rval = 1'0).
+Adding SRST signal on $procdff$633 ($dff) from module tqvp_dma (D = $procmux$325_Y, Q = \err_flag, rval = 1'0).
+Adding SRST signal on $procdff$632 ($dff) from module tqvp_dma (D = $procmux$119_Y, Q = \busy, rval = 1'0).
+Adding SRST signal on $procdff$631 ($dff) from module tqvp_dma (D = $procmux$342_Y, Q = \row_size_lat, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$798 ($sdff) from module tqvp_dma (D = \row_size, Q = \row_size_lat).
+Adding SRST signal on $procdff$630 ($dff) from module tqvp_dma (D = $procmux$268_Y, Q = \src_stride_lat, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$800 ($sdff) from module tqvp_dma (D = \src_stride, Q = \src_stride_lat).
+Adding SRST signal on $procdff$629 ($dff) from module tqvp_dma (D = $procmux$368_Y, Q = \words_in_row, rval = 0).
+Adding SRST signal on $procdff$628 ($dff) from module tqvp_dma (D = $procmux$455_Y, Q = \start_r, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$803 ($sdff) from module tqvp_dma (D = \data_in [0], Q = \start_r).
+Adding SRST signal on $procdff$627 ($dff) from module tqvp_dma (D = $procmux$389_Y, Q = \dst_bound, rval = 32'11111111111111111111111111111111).
+Adding EN signal on $auto$ff.cc:266:slice$811 ($sdff) from module tqvp_dma (D = \data_in, Q = \dst_bound).
+Adding SRST signal on $procdff$626 ($dff) from module tqvp_dma (D = $procmux$397_Y, Q = \src_bound, rval = 32'11111111111111111111111111111111).
+Adding EN signal on $auto$ff.cc:266:slice$815 ($sdff) from module tqvp_dma (D = \data_in, Q = \src_bound).
+Adding SRST signal on $procdff$625 ($dff) from module tqvp_dma (D = $procmux$441_Y, Q = \row_size, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$819 ($sdff) from module tqvp_dma (D = \data_in, Q = \row_size).
+Adding SRST signal on $procdff$624 ($dff) from module tqvp_dma (D = $procmux$337_Y, Q = \src_stride, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$823 ($sdff) from module tqvp_dma (D = \data_in, Q = \src_stride).
+Adding SRST signal on $procdff$623 ($dff) from module tqvp_dma (D = $procmux$466_Y, Q = \length, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$827 ($sdff) from module tqvp_dma (D = \data_in, Q = \length).
+Adding SRST signal on $procdff$622 ($dff) from module tqvp_dma (D = $procmux$487_Y, Q = \dst_addr, rval = 0).
+Adding SRST signal on $procdff$621 ($dff) from module tqvp_dma (D = $procmux$431_Y, Q = \src_addr, rval = 0).
+Adding SRST signal on $procdff$620 ($dff) from module tqvp_dma (D = $procmux$504_Y, Q = \mode_2d, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$833 ($sdff) from module tqvp_dma (D = \data_in [4], Q = \mode_2d).
+Adding SRST signal on $procdff$619 ($dff) from module tqvp_dma (D = $procmux$382_Y, Q = \irq_en, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$837 ($sdff) from module tqvp_dma (D = \data_in [1], Q = \irq_en).
+Adding SRST signal on $procdff$618 ($dff) from module tqvp_dma (D = $procmux$527_Y, Q = \m_valid, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$841 ($sdff) from module tqvp_dma (D = $procmux$525_Y, Q = \m_valid).
+Adding SRST signal on $procdff$617 ($dff) from module tqvp_dma (D = $procmux$546_Y, Q = \m_read, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$855 ($sdff) from module tqvp_dma (D = $procmux$544_Y, Q = \m_read).
+Adding SRST signal on $procdff$616 ($dff) from module tqvp_dma (D = $procmux$562_Y, Q = \m_write, rval = 1'0).
+Adding EN signal on $auto$ff.cc:266:slice$865 ($sdff) from module tqvp_dma (D = $procmux$560_Y, Q = \m_write).
+Adding SRST signal on $procdff$615 ($dff) from module tqvp_dma (D = $procmux$576_Y, Q = \m_wstrb, rval = 4'0000).
+Adding EN signal on $auto$ff.cc:266:slice$875 ($sdff) from module tqvp_dma (D = $ternary$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:245$76_Y, Q = \m_wstrb).
+Adding SRST signal on $procdff$614 ($dff) from module tqvp_dma (D = $procmux$590_Y, Q = \m_wdata, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$883 ($sdff) from module tqvp_dma (D = $memrd$\fifo$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:244$70_DATA, Q = \m_wdata).
+Adding SRST signal on $procdff$613 ($dff) from module tqvp_dma (D = $procmux$608_Y, Q = \m_addr, rval = 0).
+Adding EN signal on $auto$ff.cc:266:slice$891 ($sdff) from module tqvp_dma (D = $procmux$599_Y, Q = \m_addr).
+
+26.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tqvp_dma..
+Removed 66 unused cells and 78 unused wires.
+<suppressed ~67 debug messages>
+
+26.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tqvp_dma.
+<suppressed ~4 debug messages>
+
+26.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+26.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tqvp_dma..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~35 debug messages>
+
+26.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tqvp_dma.
+Performed a total of 0 changes.
+
+26.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tqvp_dma'.
+<suppressed ~51 debug messages>
+Removed a total of 17 cells.
+
+26.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+26.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tqvp_dma..
+Removed 0 unused cells and 17 unused wires.
+<suppressed ~1 debug messages>
+
+26.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tqvp_dma.
+
+26.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+26.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tqvp_dma..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~39 debug messages>
+
+26.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tqvp_dma.
+Performed a total of 0 changes.
+
+26.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tqvp_dma'.
+Removed a total of 0 cells.
+
+26.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+26.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tqvp_dma..
+
+26.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tqvp_dma.
+
+26.23. Finished OPT passes. (There is nothing left to do.)
+
+27. Executing WREDUCE pass (reducing word size of cells).
+Removed top 31 bits (of 32) from port B of cell tqvp_dma.$add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:150$41 ($add).
+Removed top 30 bits (of 32) from port Y of cell tqvp_dma.$add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:150$41 ($add).
+Removed top 31 bits (of 32) from port B of cell tqvp_dma.$add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:151$42 ($add).
+Removed top 29 bits (of 32) from port Y of cell tqvp_dma.$add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:151$42 ($add).
+Removed top 29 bits (of 32) from port B of cell tqvp_dma.$gt$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:214$52 ($gt).
+Removed top 29 bits (of 32) from port B of cell tqvp_dma.$sub$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:214$53 ($sub).
+Removed top 31 bits (of 32) from port B of cell tqvp_dma.$add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:215$55 ($add).
+Removed top 30 bits (of 32) from port Y of cell tqvp_dma.$add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:215$55 ($add).
+Removed top 29 bits (of 32) from port B of cell tqvp_dma.$add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:222$56 ($add).
+Removed top 29 bits (of 32) from port B of cell tqvp_dma.$add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:228$60 ($add).
+Removed top 29 bits (of 32) from port B of cell tqvp_dma.$ge$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:245$71 ($ge).
+Removed top 30 bits (of 32) from port B of cell tqvp_dma.$eq$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:246$72 ($eq).
+Removed top 30 bits (of 32) from port B of cell tqvp_dma.$eq$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:247$73 ($eq).
+Removed top 2 bits (of 4) from mux cell tqvp_dma.$ternary$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:247$74 ($mux).
+Removed top 1 bits (of 4) from mux cell tqvp_dma.$ternary$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:246$75 ($mux).
+Removed top 31 bits (of 32) from port B of cell tqvp_dma.$add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:262$79 ($add).
+Removed top 30 bits (of 32) from port Y of cell tqvp_dma.$add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:262$79 ($add).
+Removed top 31 bits (of 32) from port B of cell tqvp_dma.$sub$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:263$80 ($sub).
+Removed top 29 bits (of 32) from port Y of cell tqvp_dma.$sub$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:263$80 ($sub).
+Removed top 29 bits (of 32) from port B of cell tqvp_dma.$add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:264$81 ($add).
+Removed top 29 bits (of 32) from port B of cell tqvp_dma.$gt$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:265$82 ($gt).
+Removed top 29 bits (of 32) from port B of cell tqvp_dma.$sub$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:265$83 ($sub).
+Removed top 3 bits (of 5) from port B of cell tqvp_dma.$auto$fsm_map.cc:77:implement_pattern_cache$693 ($eq).
+Removed top 2 bits (of 6) from port B of cell tqvp_dma.$procmux$132_CMP0 ($eq).
+Removed top 3 bits (of 6) from port B of cell tqvp_dma.$procmux$133_CMP0 ($eq).
+Removed top 4 bits (of 6) from port B of cell tqvp_dma.$procmux$134_CMP0 ($eq).
+Removed top 5 bits (of 6) from port B of cell tqvp_dma.$procmux$135_CMP0 ($eq).
+Removed top 2 bits (of 5) from port B of cell tqvp_dma.$auto$fsm_map.cc:77:implement_pattern_cache$776 ($eq).
+Removed top 2 bits (of 4) from port B of cell tqvp_dma.$auto$fsm_map.cc:77:implement_pattern_cache$667 ($eq).
+Removed top 3 bits (of 5) from port B of cell tqvp_dma.$auto$fsm_map.cc:77:implement_pattern_cache$684 ($eq).
+Removed top 3 bits (of 5) from port B of cell tqvp_dma.$auto$fsm_map.cc:77:implement_pattern_cache$772 ($eq).
+Removed top 1 bits (of 3) from port B of cell tqvp_dma.$auto$fsm_map.cc:77:implement_pattern_cache$671 ($eq).
+Removed top 2 bits (of 4) from port B of cell tqvp_dma.$auto$fsm_map.cc:77:implement_pattern_cache$680 ($eq).
+Removed top 2 bits (of 3) from port B of cell tqvp_dma.$auto$fsm_map.cc:77:implement_pattern_cache$768 ($eq).
+Removed top 1 bits (of 2) from port B of cell tqvp_dma.$auto$fsm_map.cc:77:implement_pattern_cache$712 ($eq).
+Removed top 1 bits (of 6) from port B of cell tqvp_dma.$auto$fsm_map.cc:77:implement_pattern_cache$764 ($eq).
+Removed top 4 bits (of 6) from port B of cell tqvp_dma.$procmux$336_CMP0 ($eq).
+Removed top 3 bits (of 6) from port B of cell tqvp_dma.$auto$fsm_map.cc:77:implement_pattern_cache$720 ($eq).
+Removed top 3 bits (of 6) from port B of cell tqvp_dma.$procmux$440_CMP0 ($eq).
+Removed top 3 bits (of 6) from port B of cell tqvp_dma.$procmux$465_CMP0 ($eq).
+Removed top 3 bits (of 6) from port B of cell tqvp_dma.$procmux$476_CMP0 ($eq).
+Removed top 1 bits (of 5) from port B of cell tqvp_dma.$auto$fsm_map.cc:77:implement_pattern_cache$724 ($eq).
+Removed top 1 bits (of 5) from port B of cell tqvp_dma.$auto$fsm_map.cc:77:implement_pattern_cache$728 ($eq).
+Removed top 1 bits (of 3) from port B of cell tqvp_dma.$auto$opt_dff.cc:195:make_patterns_logic$852 ($ne).
+Removed top 30 bits (of 32) from wire tqvp_dma.$add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:150$41_Y.
+Removed top 30 bits (of 32) from wire tqvp_dma.$add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:215$55_Y.
+Removed top 30 bits (of 32) from wire tqvp_dma.$add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:262$79_Y.
+Removed top 1 bits (of 4) from wire tqvp_dma.$ternary$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:246$75_Y.
+Removed top 2 bits (of 4) from wire tqvp_dma.$ternary$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:247$74_Y.
+
+28. Executing PEEPOPT pass (run peephole optimizers).
+
+29. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tqvp_dma..
+Removed 0 unused cells and 5 unused wires.
+<suppressed ~1 debug messages>
+
+30. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module tqvp_dma:
+  creating $macc model for $add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:150$41 ($add).
+  creating $macc model for $add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:151$42 ($add).
+  creating $macc model for $add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:215$55 ($add).
+  creating $macc model for $add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:222$56 ($add).
+  creating $macc model for $add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:225$59 ($add).
+  creating $macc model for $add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:228$60 ($add).
+  creating $macc model for $add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:262$79 ($add).
+  creating $macc model for $add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:264$81 ($add).
+  creating $macc model for $sub$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:214$53 ($sub).
+  creating $macc model for $sub$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:225$58 ($sub).
+  creating $macc model for $sub$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:263$80 ($sub).
+  creating $macc model for $sub$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:265$83 ($sub).
+  merging $macc model for $sub$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:225$58 into $add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:225$59.
+  creating $alu model for $macc $sub$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:263$80.
+  creating $alu model for $macc $sub$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:265$83.
+  creating $alu model for $macc $sub$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:214$53.
+  creating $alu model for $macc $add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:264$81.
+  creating $alu model for $macc $add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:262$79.
+  creating $alu model for $macc $add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:228$60.
+  creating $alu model for $macc $add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:222$56.
+  creating $alu model for $macc $add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:215$55.
+  creating $alu model for $macc $add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:151$42.
+  creating $alu model for $macc $add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:150$41.
+  creating $macc cell for $add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:225$59: $auto$alumacc.cc:365:replace_macc$908
+  creating $alu model for $ge$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:222$57 ($ge): new $alu
+  creating $alu model for $ge$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:245$71 ($ge): new $alu
+  creating $alu model for $gt$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:214$52 ($gt): new $alu
+  creating $alu model for $gt$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:265$82 ($gt): merged with $ge$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:245$71.
+  creating $alu model for $gt$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:72$16 ($gt): new $alu
+  creating $alu model for $gt$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:73$18 ($gt): new $alu
+  creating $alu cell for $gt$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:73$18: $auto$alumacc.cc:485:replace_alu$914
+  creating $alu cell for $gt$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:72$16: $auto$alumacc.cc:485:replace_alu$919
+  creating $alu cell for $gt$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:214$52: $auto$alumacc.cc:485:replace_alu$924
+  creating $alu cell for $ge$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:245$71, $gt$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:265$82: $auto$alumacc.cc:485:replace_alu$929
+  creating $alu cell for $ge$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:222$57: $auto$alumacc.cc:485:replace_alu$938
+  creating $alu cell for $add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:150$41: $auto$alumacc.cc:485:replace_alu$951
+  creating $alu cell for $add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:151$42: $auto$alumacc.cc:485:replace_alu$954
+  creating $alu cell for $add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:215$55: $auto$alumacc.cc:485:replace_alu$957
+  creating $alu cell for $add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:222$56: $auto$alumacc.cc:485:replace_alu$960
+  creating $alu cell for $add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:228$60: $auto$alumacc.cc:485:replace_alu$963
+  creating $alu cell for $add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:262$79: $auto$alumacc.cc:485:replace_alu$966
+  creating $alu cell for $add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:264$81: $auto$alumacc.cc:485:replace_alu$969
+  creating $alu cell for $sub$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:214$53: $auto$alumacc.cc:485:replace_alu$972
+  creating $alu cell for $sub$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:265$83: $auto$alumacc.cc:485:replace_alu$975
+  creating $alu cell for $sub$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:263$80: $auto$alumacc.cc:485:replace_alu$978
+  created 15 $alu and 1 $macc cells.
+
+31. Executing SHARE pass (SAT-based resource sharing).
+
+32. Executing OPT pass (performing simple optimizations).
+
+32.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tqvp_dma.
+<suppressed ~2 debug messages>
+
+32.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tqvp_dma'.
+Removed a total of 0 cells.
+
+32.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tqvp_dma..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~39 debug messages>
+
+32.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tqvp_dma.
+Performed a total of 0 changes.
+
+32.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tqvp_dma'.
+Removed a total of 0 cells.
+
+32.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+32.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tqvp_dma..
+Removed 1 unused cells and 7 unused wires.
+<suppressed ~2 debug messages>
+
+32.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tqvp_dma.
+
+32.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+32.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tqvp_dma..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~39 debug messages>
+
+32.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tqvp_dma.
+Performed a total of 0 changes.
+
+32.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tqvp_dma'.
+Removed a total of 0 cells.
+
+32.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+32.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tqvp_dma..
+
+32.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tqvp_dma.
+
+32.16. Finished OPT passes. (There is nothing left to do.)
+
+33. Executing MEMORY pass.
+
+33.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+33.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+33.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+  Analyzing tqvp_dma.fifo write port 0.
+
+33.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+33.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+Checking read port `\fifo'[0] in module `\tqvp_dma': merging output FF to cell.
+    Write port 0: don't care on collision.
+
+33.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tqvp_dma..
+Removed 1 unused cells and 33 unused wires.
+<suppressed ~2 debug messages>
+
+33.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+33.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+33.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tqvp_dma..
+
+33.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+34. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tqvp_dma..
+
+35. Executing OPT pass (performing simple optimizations).
+
+35.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tqvp_dma.
+<suppressed ~27 debug messages>
+
+35.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tqvp_dma'.
+Removed a total of 0 cells.
+
+35.3. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $auto$ff.cc:266:slice$832 ($sdff) from module tqvp_dma (D = $procmux$431_Y [1:0], Q = \src_addr [1:0]).
+Adding EN signal on $auto$ff.cc:266:slice$831 ($sdff) from module tqvp_dma (D = $procmux$487_Y [1:0], Q = \dst_addr [1:0]).
+Adding EN signal on $auto$ff.cc:266:slice$802 ($sdff) from module tqvp_dma (D = $procmux$368_Y [1:0], Q = \words_in_row [1:0]).
+Adding EN signal on $auto$ff.cc:266:slice$793 ($dffe) from module tqvp_dma (D = $procmux$263_Y [1:0], Q = \remaining_read [1:0]).
+Adding EN signal on $auto$ff.cc:266:slice$792 ($dffe) from module tqvp_dma (D = $procmux$246_Y [1:0], Q = \remaining_write [1:0]).
+
+35.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tqvp_dma..
+Removed 4 unused cells and 16 unused wires.
+<suppressed ~5 debug messages>
+
+35.5. Rerunning OPT passes. (Removed registers in this run.)
+
+35.6. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tqvp_dma.
+<suppressed ~2 debug messages>
+
+35.7. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tqvp_dma'.
+<suppressed ~3 debug messages>
+Removed a total of 1 cells.
+
+35.8. Executing OPT_DFF pass (perform DFF optimizations).
+
+35.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tqvp_dma..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+35.10. Finished fast OPT passes.
+
+36. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+Mapping memory \fifo in module \tqvp_dma:
+  created 4 $dff cells and 0 static cells of width 32.
+Extracted data FF from read port 0 of tqvp_dma.fifo: $\fifo$rdreg[0]
+  read interface: 1 $dff and 3 $mux cells.
+  write interface: 4 write mux blocks.
+
+37. Executing OPT pass (performing simple optimizations).
+
+37.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tqvp_dma.
+<suppressed ~6 debug messages>
+
+37.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tqvp_dma'.
+Removed a total of 0 cells.
+
+37.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tqvp_dma..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~35 debug messages>
+
+37.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tqvp_dma.
+    Consolidated identical input bits for $mux cell $procmux$354:
+      Old ports: A={ $add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:222$56_Y [31:2] 2'x }, B=0, Y=$procmux$354_Y
+      New ports: A={ $add$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:222$56_Y [31:2] 1'x }, B=31'0000000000000000000000000000000, Y={ $procmux$354_Y [31:2] $procmux$354_Y [0] }
+      New connections: $procmux$354_Y [1] = $procmux$354_Y [0]
+    New ctrl vector for $pmux cell $procmux$512: $auto$opt_reduce.cc:134:opt_pmux$1105
+    Consolidated identical input bits for $mux cell $ternary$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:214$54:
+      Old ports: A={ $sub$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:214$53_Y [31:2] 2'x }, B=0, Y=$ternary$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:214$54_Y
+      New ports: A={ $sub$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:214$53_Y [31:2] 1'x }, B=31'0000000000000000000000000000000, Y={ $ternary$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:214$54_Y [31:2] $ternary$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:214$54_Y [0] }
+      New connections: $ternary$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:214$54_Y [1] = $ternary$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:214$54_Y [0]
+    Consolidated identical input bits for $mux cell $ternary$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:247$74:
+      Old ports: A=2'01, B=2'11, Y=$auto$wreduce.cc:461:run$907 [1:0]
+      New ports: A=1'0, B=1'1, Y=$auto$wreduce.cc:461:run$907 [1]
+      New connections: $auto$wreduce.cc:461:run$907 [0] = 1'1
+    Consolidated identical input bits for $mux cell $ternary$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:265$84:
+      Old ports: A={ $sub$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:265$83_Y [31:2] 2'x }, B=0, Y=$ternary$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:265$84_Y
+      New ports: A={ $sub$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:265$83_Y [31:2] 1'x }, B=31'0000000000000000000000000000000, Y={ $ternary$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:265$84_Y [31:2] $ternary$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:265$84_Y [0] }
+      New connections: $ternary$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:265$84_Y [1] = $ternary$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:265$84_Y [0]
+  Optimizing cells in module \tqvp_dma.
+    Consolidated identical input bits for $mux cell $ternary$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:246$75:
+      Old ports: A={ 1'0 $auto$wreduce.cc:461:run$907 [1:0] }, B=3'111, Y=$auto$wreduce.cc:461:run$906 [2:0]
+      New ports: A={ 1'0 $auto$wreduce.cc:461:run$907 [1] }, B=2'11, Y=$auto$wreduce.cc:461:run$906 [2:1]
+      New connections: $auto$wreduce.cc:461:run$906 [0] = 1'1
+  Optimizing cells in module \tqvp_dma.
+    Consolidated identical input bits for $mux cell $ternary$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:245$76:
+      Old ports: A={ 1'0 $auto$wreduce.cc:461:run$906 [2:0] }, B=4'1111, Y=$ternary$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:245$76_Y
+      New ports: A={ 1'0 $auto$wreduce.cc:461:run$906 [2:1] }, B=3'111, Y=$ternary$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:245$76_Y [3:1]
+      New connections: $ternary$/openlane/designs/new_tqvp_dma/src/tqvp_dma.v:245$76_Y [0] = 1'1
+  Optimizing cells in module \tqvp_dma.
+Performed a total of 7 changes.
+
+37.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tqvp_dma'.
+Removed a total of 0 cells.
+
+37.6. Executing OPT_SHARE pass.
+
+37.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+37.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tqvp_dma..
+Removed 3 unused cells and 14 unused wires.
+<suppressed ~4 debug messages>
+
+37.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tqvp_dma.
+<suppressed ~2 debug messages>
+
+37.10. Rerunning OPT passes. (Maybe there is more to do..)
+
+37.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tqvp_dma..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~35 debug messages>
+
+37.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tqvp_dma.
+Performed a total of 0 changes.
+
+37.13. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tqvp_dma'.
+Removed a total of 0 cells.
+
+37.14. Executing OPT_SHARE pass.
+
+37.15. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $memory\fifo[3]$1058 ($dff) from module tqvp_dma (D = \m_rdata, Q = \fifo[3]).
+Adding EN signal on $memory\fifo[2]$1056 ($dff) from module tqvp_dma (D = \m_rdata, Q = \fifo[2]).
+Adding EN signal on $memory\fifo[1]$1054 ($dff) from module tqvp_dma (D = \m_rdata, Q = \fifo[1]).
+Adding EN signal on $memory\fifo[0]$1052 ($dff) from module tqvp_dma (D = \m_rdata, Q = \fifo[0]).
+
+37.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tqvp_dma..
+Removed 4 unused cells and 5 unused wires.
+<suppressed ~5 debug messages>
+
+37.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tqvp_dma.
+
+37.18. Rerunning OPT passes. (Maybe there is more to do..)
+
+37.19. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tqvp_dma..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~31 debug messages>
+
+37.20. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tqvp_dma.
+Performed a total of 0 changes.
+
+37.21. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tqvp_dma'.
+Removed a total of 0 cells.
+
+37.22. Executing OPT_SHARE pass.
+
+37.23. Executing OPT_DFF pass (perform DFF optimizations).
+
+37.24. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tqvp_dma..
+
+37.25. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tqvp_dma.
+
+37.26. Finished OPT passes. (There is nothing left to do.)
+
+38. Executing TECHMAP pass (map to technology primitives).
+
+38.1. Executing Verilog-2005 frontend: /nix/store/sx2v0i73mn1ih2z1nk61pm9n5gjgpidy-yosys/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/nix/store/sx2v0i73mn1ih2z1nk61pm9n5gjgpidy-yosys/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+38.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $sdff.
+Using extmapper simplemap for cells of type $logic_or.
+Using extmapper simplemap for cells of type $and.
+Using template $paramod$076c9a7a3f037230073fe14dd4865d470cb48917\_90_alu for cells of type $alu.
+Using template $paramod$fbc7873bff55778c0b3173955b7e4bce1d9d6834\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $reduce_or.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $ne.
+Using extmapper simplemap for cells of type $reduce_and.
+Using extmapper simplemap for cells of type $dffe.
+Using extmapper simplemap for cells of type $dff.
+Using template $paramod$3ef7d3dd227da7627a99c5e5a6a4deb817573e39\_90_alu for cells of type $alu.
+Using template $paramod$175e67c02b86e96b1288b9dc100122520d7240d8\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using template $paramod$861f5302217787cd55fd1a501bc728125f176580\_90_alu for cells of type $alu.
+Using template $paramod$44a13d10af618e7fbe7b9aad2f6151ffcee1e2fa\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $not.
+Using extmapper maccmap for cells of type $macc.
+  add \src_addr (32 bits, unsigned)
+  add \src_stride_lat (32 bits, unsigned)
+  sub \words_in_row (32 bits, unsigned)
+  packed 1 (1) bits / 1 words into adder tree
+Using template $paramod$b8c0a997bce700f23568a5ada79cc6781d1f5ca0\_90_alu for cells of type $alu.
+Using template $paramod$59b03ae2620a41577de8da5f5c97b2919e82362b\_90_pmux for cells of type $pmux.
+Using extmapper simplemap for cells of type $sdffe.
+Using template $paramod$c5c783b17ab1d780abfad8cfe6563a0a7b47a3b0\_90_pmux for cells of type $pmux.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000011 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000010 for cells of type $lcu.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000011110 for cells of type $lcu.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000100000 for cells of type $fa.
+No more expansions possible.
+<suppressed ~2714 debug messages>
+
+39. Executing OPT pass (performing simple optimizations).
+
+39.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tqvp_dma.
+<suppressed ~1796 debug messages>
+
+39.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tqvp_dma'.
+<suppressed ~1431 debug messages>
+Removed a total of 477 cells.
+
+39.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+39.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tqvp_dma..
+Removed 440 unused cells and 1510 unused wires.
+<suppressed ~442 debug messages>
+
+39.5. Finished fast OPT passes.
+
+40. Executing ABC pass (technology mapping using ABC).
+
+40.1. Extracting gate netlist of module `\tqvp_dma' to `<abc-temp-dir>/input.blif'..
+Replacing 9 occurrences of constant undef bits with constant zero bits
+Extracted 3500 gates and 4021 wires to a netlist network with 518 inputs and 307 outputs.
+
+40.1.1. Executing ABC.
+Running ABC command: "/nix/store/wq2q0njg3sx8wvj2akz7x1qxwyrv9xlr-yosys-abc/bin/abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 13 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+40.1.2. Re-integrating ABC results.
+ABC RESULTS:              XNOR cells:       87
+ABC RESULTS:               XOR cells:      284
+ABC RESULTS:               MUX cells:     1150
+ABC RESULTS:               AND cells:       79
+ABC RESULTS:               NOT cells:       77
+ABC RESULTS:               NOR cells:      113
+ABC RESULTS:                OR cells:      310
+ABC RESULTS:             ORNOT cells:      126
+ABC RESULTS:            ANDNOT cells:      833
+ABC RESULTS:              NAND cells:      131
+ABC RESULTS:        internal signals:     3196
+ABC RESULTS:           input signals:      518
+ABC RESULTS:          output signals:      307
+Removing temp directory.
+
+41. Executing OPT pass (performing simple optimizations).
+
+41.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tqvp_dma.
+<suppressed ~654 debug messages>
+
+41.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tqvp_dma'.
+<suppressed ~42 debug messages>
+Removed a total of 14 cells.
+
+41.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+41.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tqvp_dma..
+Removed 2 unused cells and 1614 unused wires.
+<suppressed ~7 debug messages>
+
+41.5. Finished fast OPT passes.
+
+42. Executing HIERARCHY pass (managing design hierarchy).
+
+42.1. Analyzing design hierarchy..
+Top module:  \tqvp_dma
+
+42.2. Analyzing design hierarchy..
+Top module:  \tqvp_dma
+Removed 0 unused modules.
+
+43. Printing statistics.
+
+=== tqvp_dma ===
+
+   Number of wires:               3161
+   Number of wire bits:           3941
+   Number of public wires:          52
+   Number of public wire bits:     768
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               3812
+     $_ANDNOT_                     833
+     $_AND_                         79
+     $_DFFE_PP_                    194
+     $_DFF_P_                        6
+     $_MUX_                       1150
+     $_NAND_                       131
+     $_NOR_                         99
+     $_NOT_                         75
+     $_ORNOT_                      126
+     $_OR_                         310
+     $_SDFFE_PN0P_                 271
+     $_SDFFE_PN1P_                  64
+     $_SDFFE_PP0P_                   3
+     $_SDFF_PN0_                   100
+     $_XNOR_                        87
+     $_XOR_                        284
+
+44. Executing CHECK pass (checking for obvious problems).
+Checking module tqvp_dma...
+Found and reported 0 problems.
+
+45. Generating Graphviz representation of design.
+Writing dot description to `/openlane/designs/new_tqvp_dma/runs/RUN_2026.04.18_12.07.17/tmp/synthesis/post_techmap.dot'.
+Dumping module tqvp_dma to page 1.
+
+46. Executing SHARE pass (SAT-based resource sharing).
+
+47. Executing OPT pass (performing simple optimizations).
+
+47.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tqvp_dma.
+
+47.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tqvp_dma'.
+Removed a total of 0 cells.
+
+47.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \tqvp_dma..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+47.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \tqvp_dma.
+Performed a total of 0 changes.
+
+47.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\tqvp_dma'.
+Removed a total of 0 cells.
+
+47.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+47.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tqvp_dma..
+
+47.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tqvp_dma.
+
+47.9. Finished OPT passes. (There is nothing left to do.)
+
+48. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tqvp_dma..
+Removed 0 unused cells and 2 unused wires.
+<suppressed ~2 debug messages>
+
+49. Printing statistics.
+
+=== tqvp_dma ===
+
+   Number of wires:               3159
+   Number of wire bits:           3908
+   Number of public wires:          50
+   Number of public wire bits:     735
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               3812
+     $_ANDNOT_                     833
+     $_AND_                         79
+     $_DFFE_PP_                    194
+     $_DFF_P_                        6
+     $_MUX_                       1150
+     $_NAND_                       131
+     $_NOR_                         99
+     $_NOT_                         75
+     $_ORNOT_                      126
+     $_OR_                         310
+     $_SDFFE_PN0P_                 271
+     $_SDFFE_PN1P_                  64
+     $_SDFFE_PP0P_                   3
+     $_SDFF_PN0_                   100
+     $_XNOR_                        87
+     $_XOR_                        284
+
+mapping tbuf
+
+50. Executing TECHMAP pass (map to technology primitives).
+
+50.1. Executing Verilog-2005 frontend: /root/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.tech/openlane/sky130_fd_sc_hd/tribuff_map.v
+Parsing Verilog input from `/root/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.tech/openlane/sky130_fd_sc_hd/tribuff_map.v' to AST representation.
+Generating RTLIL representation for module `\$_TBUF_'.
+Successfully finished Verilog frontend.
+
+50.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~3 debug messages>
+
+51. Executing SIMPLEMAP pass (map simple cells to gate primitives).
+
+52. Executing TECHMAP pass (map to technology primitives).
+
+52.1. Executing Verilog-2005 frontend: /root/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.tech/openlane/sky130_fd_sc_hd/latch_map.v
+Parsing Verilog input from `/root/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.tech/openlane/sky130_fd_sc_hd/latch_map.v' to AST representation.
+Generating RTLIL representation for module `\$_DLATCH_P_'.
+Generating RTLIL representation for module `\$_DLATCH_N_'.
+Successfully finished Verilog frontend.
+
+52.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~4 debug messages>
+
+53. Executing SIMPLEMAP pass (map simple cells to gate primitives).
+
+54. Executing DFFLIBMAP pass (mapping DFF cells to sequential cells from liberty file).
+  cell sky130_fd_sc_hd__dfxtp_2 (noninv, pins=3, area=21.27) is a direct match for cell type $_DFF_P_.
+  cell sky130_fd_sc_hd__dfrtp_2 (noninv, pins=4, area=26.28) is a direct match for cell type $_DFF_PN0_.
+  cell sky130_fd_sc_hd__dfstp_2 (noninv, pins=4, area=26.28) is a direct match for cell type $_DFF_PN1_.
+  cell sky130_fd_sc_hd__dfbbn_2 (noninv, pins=6, area=35.03) is a direct match for cell type $_DFFSR_NNN_.
+  final dff cell mappings:
+    unmapped dff cell: $_DFF_N_
+    \sky130_fd_sc_hd__dfxtp_2 _DFF_P_ (.CLK( C), .D( D), .Q( Q));
+    unmapped dff cell: $_DFF_NN0_
+    unmapped dff cell: $_DFF_NN1_
+    unmapped dff cell: $_DFF_NP0_
+    unmapped dff cell: $_DFF_NP1_
+    \sky130_fd_sc_hd__dfrtp_2 _DFF_PN0_ (.CLK( C), .D( D), .Q( Q), .RESET_B( R));
+    \sky130_fd_sc_hd__dfstp_2 _DFF_PN1_ (.CLK( C), .D( D), .Q( Q), .SET_B( R));
+    unmapped dff cell: $_DFF_PP0_
+    unmapped dff cell: $_DFF_PP1_
+    \sky130_fd_sc_hd__dfbbn_2 _DFFSR_NNN_ (.CLK_N( C), .D( D), .Q( Q), .Q_N(~Q), .RESET_B( R), .SET_B( S));
+    unmapped dff cell: $_DFFSR_NNP_
+    unmapped dff cell: $_DFFSR_NPN_
+    unmapped dff cell: $_DFFSR_NPP_
+    unmapped dff cell: $_DFFSR_PNN_
+    unmapped dff cell: $_DFFSR_PNP_
+    unmapped dff cell: $_DFFSR_PPN_
+    unmapped dff cell: $_DFFSR_PPP_
+
+54.1. Executing DFFLEGALIZE pass (convert FFs to types supported by the target).
+Mapping DFF cells in module `\tqvp_dma':
+  mapped 638 $_DFF_P_ cells to \sky130_fd_sc_hd__dfxtp_2 cells.
+
+55. Printing statistics.
+
+=== tqvp_dma ===
+
+   Number of wires:               4129
+   Number of wire bits:           4878
+   Number of public wires:          50
+   Number of public wire bits:     735
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               4782
+     $_ANDNOT_                     833
+     $_AND_                         79
+     $_MUX_                       2120
+     $_NAND_                       131
+     $_NOR_                         99
+     $_NOT_                         75
+     $_ORNOT_                      126
+     $_OR_                         310
+     $_XNOR_                        87
+     $_XOR_                        284
+     sky130_fd_sc_hd__dfxtp_2      638
+
+[INFO]: USING STRATEGY AREA 0
+
+56. Executing ABC pass (technology mapping using ABC).
+
+56.1. Extracting gate netlist of module `\tqvp_dma' to `/tmp/yosys-abc-Q01Kxn/input.blif'..
+Extracted 4144 gates and 4860 wires to a netlist network with 714 inputs and 640 outputs.
+
+56.1.1. Executing ABC.
+Running ABC command: "/nix/store/wq2q0njg3sx8wvj2akz7x1qxwyrv9xlr-yosys-abc/bin/abc" -s -f /tmp/yosys-abc-Q01Kxn/abc.script 2>&1
+ABC: ABC command line: "source /tmp/yosys-abc-Q01Kxn/abc.script".
+ABC: 
+ABC: + read_blif /tmp/yosys-abc-Q01Kxn/input.blif 
+ABC: + read_lib -w /openlane/designs/new_tqvp_dma/runs/RUN_2026.04.18_12.07.17/tmp/synthesis/trimmed.lib 
+ABC: Parsing finished successfully.  Parsing time =     0.05 sec
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfbbn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfrtp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfsbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfstp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfstp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxtp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dfxtp_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtn_4".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sky130_fd_sc_hd__dlxtp_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sky130_fd_sc_hd__ebufn_8".
+ABC: Library "sky130A_merged" from "/openlane/designs/new_tqvp_dma/runs/RUN_2026.04.18_12.07.17/tmp/synthesis/trimmed.lib" has 175 cells (17 skipped: 14 seq; 3 tri-state; 0 no func; 0 dont_use).  Time =     0.27 sec
+ABC: Memory =    9.54 MB. Time =     0.27 sec
+ABC: Warning: Detected 2 multi-output gates (for example, "sky130_fd_sc_hd__fa_1").
+ABC: + read_constr -v /openlane/designs/new_tqvp_dma/runs/RUN_2026.04.18_12.07.17/tmp/synthesis/synthesis.sdc 
+ABC: Setting driving cell to be "sky130_fd_sc_hd__inv_2".
+ABC: Setting output load to be 33.442001.
+ABC: + read_constr /openlane/designs/new_tqvp_dma/runs/RUN_2026.04.18_12.07.17/tmp/synthesis/synthesis.sdc 
+ABC: + fx 
+ABC: + mfs 
+ABC: + strash 
+ABC: + drf -l 
+ABC: + balance 
+ABC: + drw -l 
+ABC: + drf -l 
+ABC: + balance 
+ABC: + drw -l 
+ABC: + drw -l -z 
+ABC: + balance 
+ABC: + drf -l -z 
+ABC: + drw -l -z 
+ABC: + balance 
+ABC: + retime -D -D 40000.0 -M 5 
+ABC: + scleanup 
+ABC: Error: The network is combinational.
+ABC: + fraig_store 
+ABC: + balance 
+ABC: + fraig_store 
+ABC: + balance 
+ABC: + drw -l 
+ABC: + drf -l 
+ABC: + balance 
+ABC: + drw -l 
+ABC: + drw -l -z 
+ABC: + balance 
+ABC: + drf -l -z 
+ABC: + drw -l -z 
+ABC: + balance 
+ABC: + fraig_store 
+ABC: + balance 
+ABC: + drw -l 
+ABC: + drf -l 
+ABC: + balance 
+ABC: + drw -l 
+ABC: + drw -l -z 
+ABC: + balance 
+ABC: + drf -l -z 
+ABC: + drw -l -z 
+ABC: + balance 
+ABC: + fraig_store 
+ABC: + balance 
+ABC: + drw -l 
+ABC: + drf -l 
+ABC: + balance 
+ABC: + drw -l 
+ABC: + drw -l -z 
+ABC: + balance 
+ABC: + drf -l -z 
+ABC: + drw -l -z 
+ABC: + balance 
+ABC: + fraig_store 
+ABC: + fraig_restore 
+ABC: + amap -m -Q 0.1 -F 20 -A 20 -C 5000 
+ABC: + retime -D -D 40000.0 
+ABC: + &get -n 
+ABC: + &st 
+ABC: + &dch 
+ABC: + &nf 
+ABC: + &put 
+ABC: + buffer -N 10 -S 750.0 
+ABC: + upsize -D 40000.0 
+ABC: Current delay (5942.50 ps) does not exceed the target delay (40000.00 ps). Upsizing is not performed.
+ABC: + dnsize -D 40000.0 
+ABC: + stime -p 
+ABC: WireLoad = "none"  Gates =   2950 ( 19.1 %)   Cap = 11.7 ff (  4.8 %)   Area =    24729.97 ( 79.7 %)   Delay =  6728.83 ps  (  0.8 %)               
+ABC: Path  0 --     511 : 0    9 pi                        A =   0.00  Df =  90.3  -49.7 ps  S = 133.1 ps  Cin =  0.0 ff  Cout =  28.0 ff  Cmax =   0.0 ff  G =    0  
+ABC: Path  1 --    2180 : 4    5 sky130_fd_sc_hd__or4_2    A =   8.76  Df = 766.2 -494.7 ps  S = 144.2 ps  Cin =  1.5 ff  Cout =  14.8 ff  Cmax = 310.4 ff  G =  929  
+ABC: Path  2 --    2201 : 4    3 sky130_fd_sc_hd__or4_2    A =   8.76  Df =1363.1 -955.6 ps  S = 122.3 ps  Cin =  1.5 ff  Cout =   8.6 ff  Cmax = 310.4 ff  G =  545  
+ABC: Path  3 --    2211 : 2    4 sky130_fd_sc_hd__or2_2    A =   6.26  Df =1711.5-1152.3 ps  S =  98.5 ps  Cin =  1.5 ff  Cout =  17.1 ff  Cmax = 299.4 ff  G = 1125  
+ABC: Path  4 --    2225 : 3    3 sky130_fd_sc_hd__or3_2    A =   7.51  Df =2158.5-1460.3 ps  S =  95.9 ps  Cin =  1.5 ff  Cout =   8.6 ff  Cmax = 310.4 ff  G =  539  
+ABC: Path  5 --    2232 : 2    4 sky130_fd_sc_hd__or2_2    A =   6.26  Df =2474.1-1650.1 ps  S =  74.8 ps  Cin =  1.5 ff  Cout =  10.1 ff  Cmax = 299.4 ff  G =  661  
+ABC: Path  6 --    2264 : 2    4 sky130_fd_sc_hd__or2_2    A =   6.26  Df =2805.1-1826.9 ps  S =  98.2 ps  Cin =  1.5 ff  Cout =  17.1 ff  Cmax = 299.4 ff  G = 1131  
+ABC: Path  7 --    2276 : 3    4 sky130_fd_sc_hd__or3_2    A =   7.51  Df =3289.8-2142.7 ps  S = 120.5 ps  Cin =  1.5 ff  Cout =  17.1 ff  Cmax = 310.4 ff  G = 1081  
+ABC: Path  8 --    2287 : 3    4 sky130_fd_sc_hd__or3_2    A =   7.51  Df =3782.8-2468.0 ps  S = 119.9 ps  Cin =  1.5 ff  Cout =  17.1 ff  Cmax = 310.4 ff  G = 1075  
+ABC: Path  9 --    2299 : 3    4 sky130_fd_sc_hd__or3_2    A =   7.51  Df =4275.7-2792.9 ps  S = 119.9 ps  Cin =  1.5 ff  Cout =  17.1 ff  Cmax = 310.4 ff  G = 1075  
+ABC: Path 10 --    2311 : 3    3 sky130_fd_sc_hd__or3_2    A =   7.51  Df =4731.8-3111.2 ps  S =  95.9 ps  Cin =  1.5 ff  Cout =   8.6 ff  Cmax = 310.4 ff  G =  539  
+ABC: Path 11 --    2318 : 2    4 sky130_fd_sc_hd__or2_2    A =   6.26  Df =5070.1-3298.3 ps  S =  98.5 ps  Cin =  1.5 ff  Cout =  17.1 ff  Cmax = 299.4 ff  G = 1125  
+ABC: Path 12 --    2330 : 3    3 sky130_fd_sc_hd__or3_2    A =   7.51  Df =5517.1-3606.2 ps  S =  95.9 ps  Cin =  1.5 ff  Cout =   8.6 ff  Cmax = 310.4 ff  G =  539  
+ABC: Path 13 --    2337 : 2    4 sky130_fd_sc_hd__or2_2    A =   6.26  Df =5845.0-3796.3 ps  S =  83.0 ps  Cin =  1.5 ff  Cout =  13.3 ff  Cmax = 299.4 ff  G =  870  
+ABC: Path 14 --    2344 : 2    2 sky130_fd_sc_hd__or2_2    A =   6.26  Df =6159.9-3973.2 ps  S =  77.6 ps  Cin =  1.5 ff  Cout =  10.9 ff  Cmax = 299.4 ff  G =  725  
+ABC: Path 15 --    2349 : 2    1 sky130_fd_sc_hd__xor2_2   A =  16.27  Df =6300.8-3998.0 ps  S =  80.9 ps  Cin =  8.6 ff  Cout =   1.8 ff  Cmax = 130.0 ff  G =   19  
+ABC: Path 16 --    2351 : 4    1 sky130_fd_sc_hd__a2bb2o_2 A =  11.26  Df =6510.4-2409.1 ps  S =  41.4 ps  Cin =  1.7 ff  Cout =   2.4 ff  Cmax = 300.3 ff  G =  134  
+ABC: Path 17 --    2353 : 3    1 sky130_fd_sc_hd__a21o_2   A =   8.76  Df =6728.8-2344.9 ps  S = 173.9 ps  Cin =  2.4 ff  Cout =  33.4 ff  Cmax = 309.5 ff  G = 1422  
+ABC: Start-point = pi510 (\remaining_write [2]).  End-point = po96 ($auto$rtlil.cc:2684:MuxGate$12500).
+ABC: + print_stats -m 
+ABC: netlist                       : i/o =  714/  640  lat =    0  nd =  2950  edge =   7852  area =24731.66  delay =20.00  lev = 20
+ABC: + write_blif /tmp/yosys-abc-Q01Kxn/output.blif 
+
+56.1.2. Re-integrating ABC results.
+ABC RESULTS:   sky130_fd_sc_hd__o221ai_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__o32ai_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__o22ai_2 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__a2111oi_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__nand2b_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__o31ai_2 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__and4b_2 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__or4_2 cells:       21
+ABC RESULTS:   sky130_fd_sc_hd__a311o_2 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__or4bb_2 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__o2bb2a_2 cells:       23
+ABC RESULTS:   sky130_fd_sc_hd__nor4_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__a211o_2 cells:       17
+ABC RESULTS:   sky130_fd_sc_hd__o21ba_2 cells:        6
+ABC RESULTS:   sky130_fd_sc_hd__a211oi_2 cells:        5
+ABC RESULTS:   sky130_fd_sc_hd__a31oi_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__nand3b_2 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__a21bo_2 cells:        9
+ABC RESULTS:   sky130_fd_sc_hd__o32a_2 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__a2111o_2 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__o21bai_2 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__and4bb_2 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__nand3_2 cells:        5
+ABC RESULTS:   sky130_fd_sc_hd__mux4_2 cells:       32
+ABC RESULTS:   sky130_fd_sc_hd__o311a_2 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__o31a_2 cells:       14
+ABC RESULTS:   sky130_fd_sc_hd__o2111ai_2 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__and2b_2 cells:       19
+ABC RESULTS:   sky130_fd_sc_hd__a41o_2 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__and4_2 cells:       17
+ABC RESULTS:   sky130_fd_sc_hd__o2111a_2 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__nor3_2 cells:        8
+ABC RESULTS:   sky130_fd_sc_hd__or3b_2 cells:       12
+ABC RESULTS:   sky130_fd_sc_hd__or4b_2 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__nor2b_2 cells:        2
+ABC RESULTS:   sky130_fd_sc_hd__o211ai_2 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__o211a_2 cells:      190
+ABC RESULTS:   sky130_fd_sc_hd__o21ai_2 cells:       67
+ABC RESULTS:   sky130_fd_sc_hd__a21oi_2 cells:       74
+ABC RESULTS:   sky130_fd_sc_hd__inv_2 cells:      130
+ABC RESULTS:   sky130_fd_sc_hd__and3b_2 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__a31o_2 cells:       35
+ABC RESULTS:   sky130_fd_sc_hd__o22a_2 cells:       26
+ABC RESULTS:   sky130_fd_sc_hd__or2_2 cells:      315
+ABC RESULTS:   sky130_fd_sc_hd__and3_2 cells:       47
+ABC RESULTS:   sky130_fd_sc_hd__o21a_2 cells:       40
+ABC RESULTS:   sky130_fd_sc_hd__a21boi_2 cells:        4
+ABC RESULTS:   sky130_fd_sc_hd__mux2_2 cells:      340
+ABC RESULTS:   sky130_fd_sc_hd__a22oi_2 cells:        5
+ABC RESULTS:   sky130_fd_sc_hd__a311oi_2 cells:        1
+ABC RESULTS:   sky130_fd_sc_hd__nor2_2 cells:      122
+ABC RESULTS:   sky130_fd_sc_hd__nor3b_2 cells:        3
+ABC RESULTS:   sky130_fd_sc_hd__a22o_2 cells:      114
+ABC RESULTS:   sky130_fd_sc_hd__buf_1 cells:      434
+ABC RESULTS:   sky130_fd_sc_hd__and2_2 cells:       95
+ABC RESULTS:   sky130_fd_sc_hd__a221o_2 cells:       97
+ABC RESULTS:   sky130_fd_sc_hd__o221a_2 cells:       46
+ABC RESULTS:   sky130_fd_sc_hd__xor2_2 cells:       62
+ABC RESULTS:   sky130_fd_sc_hd__a2bb2o_2 cells:       22
+ABC RESULTS:   sky130_fd_sc_hd__or3_2 cells:       37
+ABC RESULTS:   sky130_fd_sc_hd__a21o_2 cells:      100
+ABC RESULTS:   sky130_fd_sc_hd__nand2_2 cells:      191
+ABC RESULTS:   sky130_fd_sc_hd__or2b_2 cells:       14
+ABC RESULTS:   sky130_fd_sc_hd__xnor2_2 cells:       60
+ABC RESULTS:   sky130_fd_sc_hd__a32o_2 cells:       32
+ABC RESULTS:        internal signals:     3506
+ABC RESULTS:           input signals:      714
+ABC RESULTS:          output signals:      640
+Removing temp directory.
+
+57. Executing SETUNDEF pass (replace undef values with defined constants).
+
+58. Executing HILOMAP pass (mapping to constant drivers).
+
+59. Executing SPLITNETS pass (splitting up multi-bit signals).
+
+60. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \tqvp_dma..
+Removed 5 unused cells and 4873 unused wires.
+<suppressed ~8 debug messages>
+
+61. Executing INSBUF pass (insert buffer cells for connected wires).
+
+62. Executing CHECK pass (checking for obvious problems).
+Checking module tqvp_dma...
+Found and reported 0 problems.
+
+63. Printing statistics.
+
+=== tqvp_dma ===
+
+   Number of wires:               3498
+   Number of wire bits:           3677
+   Number of public wires:         554
+   Number of public wire bits:     733
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               3591
+     sky130_fd_sc_hd__a2111o_2       4
+     sky130_fd_sc_hd__a2111oi_2      1
+     sky130_fd_sc_hd__a211o_2       17
+     sky130_fd_sc_hd__a211oi_2       5
+     sky130_fd_sc_hd__a21bo_2        9
+     sky130_fd_sc_hd__a21boi_2       4
+     sky130_fd_sc_hd__a21o_2       100
+     sky130_fd_sc_hd__a21oi_2       74
+     sky130_fd_sc_hd__a221o_2       97
+     sky130_fd_sc_hd__a22o_2       114
+     sky130_fd_sc_hd__a22oi_2        5
+     sky130_fd_sc_hd__a2bb2o_2      22
+     sky130_fd_sc_hd__a311o_2        3
+     sky130_fd_sc_hd__a311oi_2       1
+     sky130_fd_sc_hd__a31o_2        35
+     sky130_fd_sc_hd__a31oi_2        1
+     sky130_fd_sc_hd__a32o_2        32
+     sky130_fd_sc_hd__a41o_2         3
+     sky130_fd_sc_hd__and2_2        95
+     sky130_fd_sc_hd__and2b_2       19
+     sky130_fd_sc_hd__and3_2        47
+     sky130_fd_sc_hd__and3b_2        3
+     sky130_fd_sc_hd__and4_2        17
+     sky130_fd_sc_hd__and4b_2        3
+     sky130_fd_sc_hd__and4bb_2       4
+     sky130_fd_sc_hd__buf_1        434
+     sky130_fd_sc_hd__conb_1         8
+     sky130_fd_sc_hd__dfxtp_2      637
+     sky130_fd_sc_hd__inv_2        128
+     sky130_fd_sc_hd__mux2_2       340
+     sky130_fd_sc_hd__mux4_2        32
+     sky130_fd_sc_hd__nand2_2      191
+     sky130_fd_sc_hd__nand2b_2       1
+     sky130_fd_sc_hd__nand3_2        5
+     sky130_fd_sc_hd__nand3b_2       2
+     sky130_fd_sc_hd__nor2_2       122
+     sky130_fd_sc_hd__nor2b_2        2
+     sky130_fd_sc_hd__nor3_2         8
+     sky130_fd_sc_hd__nor3b_2        3
+     sky130_fd_sc_hd__nor4_2         1
+     sky130_fd_sc_hd__o2111a_2       2
+     sky130_fd_sc_hd__o2111ai_2      2
+     sky130_fd_sc_hd__o211a_2      190
+     sky130_fd_sc_hd__o211ai_2       3
+     sky130_fd_sc_hd__o21a_2        40
+     sky130_fd_sc_hd__o21ai_2       66
+     sky130_fd_sc_hd__o21ba_2        6
+     sky130_fd_sc_hd__o21bai_2       2
+     sky130_fd_sc_hd__o221a_2       46
+     sky130_fd_sc_hd__o221ai_2       1
+     sky130_fd_sc_hd__o22a_2        26
+     sky130_fd_sc_hd__o22ai_2        2
+     sky130_fd_sc_hd__o2bb2a_2      23
+     sky130_fd_sc_hd__o311a_2        3
+     sky130_fd_sc_hd__o31a_2        14
+     sky130_fd_sc_hd__o31ai_2        2
+     sky130_fd_sc_hd__o32a_2         4
+     sky130_fd_sc_hd__o32ai_2        1
+     sky130_fd_sc_hd__or2_2        315
+     sky130_fd_sc_hd__or2b_2        14
+     sky130_fd_sc_hd__or3_2         37
+     sky130_fd_sc_hd__or3b_2        12
+     sky130_fd_sc_hd__or4_2         21
+     sky130_fd_sc_hd__or4b_2         4
+     sky130_fd_sc_hd__or4bb_2        4
+     sky130_fd_sc_hd__xnor2_2       60
+     sky130_fd_sc_hd__xor2_2        62
+
+   Chip area for module '\tqvp_dma': 38281.715200
+
+64. Executing Verilog backend.
+Dumping module `\tqvp_dma'.
+
+65. Executing JSON backend.
+
+End of script. Logfile hash: 11c25eee4f, CPU: user 1.90s system 0.03s, MEM: 69.12 MB peak
+Yosys 0.38 (git sha1 543faed9c8c, clang++ 17.0.6 -fPIC -Os)
+Time spent: 63% 2x abc (3 sec), 7% 27x opt_clean (0 sec), ...

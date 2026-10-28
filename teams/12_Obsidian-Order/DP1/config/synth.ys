@@ -1,0 +1,35 @@
+# Yosys synthesis script for tqvp_gpio
+# AI-HDL 2026 DP1 - Baseline PPA Report
+
+# Read Verilog source
+read_verilog ../src/tqvp_gpio.v
+
+# Set top module
+hierarchy -top tqvp_gpio
+
+# Translate processes (always blocks)
+proc
+
+# Flatten design
+flatten
+
+# Technology-independent optimizations
+opt
+
+# Map to generic cell library
+techmap
+
+# Clean up
+opt
+
+# Map flip-flops
+dfflibmap
+
+# Final optimization
+opt_clean
+
+# Print statistics to console and file
+tee -o synth_stats.txt stat
+
+# Write output netlist
+write_verilog -noattr synth_output.v

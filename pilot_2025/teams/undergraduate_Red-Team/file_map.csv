@@ -1,0 +1,12 @@
+released_path,path_in_original_submission,category
+ai_logs/Red Team Prompting.md,AI Prompts/Red Team Prompting.md,ai_logs
+docs/README.txt,README.txt,docs
+rtl/alarm.v,verilog code/sources_1/new/alarm.v,rtl
+rtl/buttonDebouncer.v,verilog code/sources_1/new/buttonDebouncer.v,rtl
+rtl/clock_divider.v,verilog code/sources_1/new/clock_divider.v,rtl
+rtl/clock_timezone.v,verilog code/sources_1/new/clock_timezone.v,rtl
+rtl/convert_12_to_24.v,verilog code/sources_1/new/convert_12_to_24.v,rtl
+rtl/seven_segment_display.v,verilog code/sources_1/new/seven_segment_display.v,rtl
+rtl/stopwatch.v,verilog code/sources_1/new/stopwatch.v,rtl
+rtl/top_level.v,verilog code/sources_1/new/top_level.v,rtl
+testbench/top_level_tb.v,verilog code/sim_1/new/top_level_tb.v,testbench

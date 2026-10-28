@@ -1,0 +1,77 @@
+user@host:~/AI-HDL/DP3_test$ make -f test_peripheral_security.mk
+iverilog -o tb_peripheral_security.out -Wall peripheral.v bist_ctrl.v systolic.v pe_macc.v pe_activation.v mvu.v vpu.v tb_peripheral_security.v
+bist_ctrl.v:56: warning: timescale for bist_ctrl inherited from another file.
+peripheral.v:2: ...: The inherited timescale is here.
+systolic.v:80: warning: timescale for systolic_2x2 inherited from another file.
+peripheral.v:2: ...: The inherited timescale is here.
+pe_macc.v:13: warning: timescale for pe_macc inherited from another file.
+peripheral.v:2: ...: The inherited timescale is here.
+pe_activation.v:13: warning: timescale for pe_activation inherited from another file.
+peripheral.v:2: ...: The inherited timescale is here.
+mvu.v:51: warning: timescale for mvu inherited from another file.
+peripheral.v:2: ...: The inherited timescale is here.
+vpu.v:39: warning: timescale for vpu inherited from another file.
+peripheral.v:2: ...: The inherited timescale is here.
+mvu.v:159: warning: @* is sensitive to all 4 words in array 'x'.
+mvu.v:160: warning: @* is sensitive to all 4 words in array 'x'.
+mvu.v:161: warning: @* is sensitive to all 4 words in array 'x'.
+mvu.v:162: warning: @* is sensitive to all 4 words in array 'x'.
+mvu.v:171: warning: @* is sensitive to all 16 words in array 'w'.
+vvp tb_peripheral_security.out
+VCD info: dumpfile tb_peripheral_security.vcd opened for output.
+
+=== T01 AUTH: BIST token gate ===
+  PASS [T001]   token_ok=0 at reset (CWE-1274)
+  PASS [T002] k=0 after wrong token (CWE-1274)
+  PASS [T003]  blocked without token (CWE-284)
+  PASS [T004] 1 after correct token (CWE-1274)
+  PASS [T005] art - auth gate passed (CWE-284)
+
+=== T02 JITTER: Timing oracle ===
+  PASS [T006] secutive deltas differ (CWE-203)
+
+=== T03 WLOCK: MVU weight-lock ===
+  PASS [T007]  before lock accepted (CWE-1244)
+  PASS [T008]  during lock rejected (CWE-1244)
+  PASS [T009]  after correct unlock (CWE-1298)
+  PASS [T010] unlock token rejected (CWE-1298)
+
+=== T04 FMASK: Fail register masking ===
+  PASS [T011] ed when no active run (CWE-1252)
+  PASS [T012] ed when no active run (CWE-1252)
+  PASS [T013] ed when no active run (CWE-1252)
+
+=== T05 ZERO: Zeroize on reset ===
+  PASS [T014] written before reset (pre-check)
+  PASS [T015] data cleared on rst_n (CWE-1239)
+  PASS [T016] _out cleared on rst_n (CWE-1239)
+  PASS [T017] n_ok cleared on rst_n (CWE-1239)
+
+=== T06 WDT: BIST watchdog ===
+    INFO: bist_active 1 cycle after start = 1 (fast RTL may show 0)
+  PASS [T018]  after run+WDT window (CWE-1271)
+    INFO: BIST status after run = 0x00000011
+  PASS [T019]  and WDT logic active (CWE-1271)
+
+=== T07 RLOCK: Register write-lock ===
+  PASS [T020] its set in status reg (CWE-1233)
+  PASS [T021] cked - write rejected (CWE-1233)
+  PASS [T022] cked - write rejected (CWE-1233)
+  PASS [T023] y - cannot be cleared (CWE-1233)
+
+=== T08 AFIX: Address port width ===
+  PASS [T024] - 7-bit decode correct (CWE-682)
+    INFO: 0x62 before=14  after=11
+  PASS [T025] 62 changed after start (CWE-682)
+  PASS [T026] ss reachable via 7-bit (CWE-682)
+
+==============================================
+ Security test summary
+  PASS : 26
+  FAIL : 0
+  TOTAL: 26
+==============================================
+
+ALL SECURITY TESTS PASSED -- RTL cleared for handoff
+
+tb_peripheral_security.v:409: $finish called at 2837000 (1ps)

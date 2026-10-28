@@ -1,0 +1,41 @@
+module debouncer (
+    input wire clk,          // Input clock
+    input wire button_in,    // Raw button signal
+    output reg button_out    // Debounced button signal
+);
+    // Parameters for debounce logic
+    localparam integer DEBOUNCE_DELAY = 5; // Number of clock cycles for stable input NOTE: Manually changed from 20 to 5.
+    
+    // Internal registers
+    reg [4:0] counter;           // Counter for stable button signal
+    reg button_sync1;            // First stage synchronizer
+    reg button_sync2;            // Second stage synchronizer
+    
+    // Two-stage synchronizer for metastability protection
+    always @(posedge clk) begin
+        button_sync1 <= button_in;    // First stage
+        button_sync2 <= button_sync1;  // Second stage
+    end
+    
+    // Debounce logic with proper initialization
+    initial begin
+        counter = 0;
+        button_out = 0;
+        button_sync1 = 0;
+        button_sync2 = 0;
+    end
+    
+    always @(posedge clk) begin
+        // Check if the input remains stable
+        if (button_sync2 == button_out) begin
+            counter <= 0; // Reset counter if the state matches
+        end else begin
+            if (counter >= DEBOUNCE_DELAY) begin
+                button_out <= button_sync2; // Update output if stable for required duration
+                counter <= 0;              // Reset counter after state change
+            end else begin
+                counter <= counter + 1; // Increment counter if there's a mismatch
+            end
+        end
+    end
+endmodule

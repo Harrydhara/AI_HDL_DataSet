@@ -1,0 +1,13 @@
+%Warning-EOFNEWLINE: /openlane/designs/new_tqvp_dma/src/tqvp_dma.v:295:22: Missing newline at end of file (POSIX 3.206).
+                                                                         : ... Suggest add newline.
+  295 | `default_nettype wire
+      |                      ^
+                     ... For warning description see https://verilator.org/warn/EOFNEWLINE?v=5.018
+                     ... Use "/* verilator lint_off EOFNEWLINE */" and lint_on around source to disable this message.
+%Warning-UNUSEDSIGNAL: /openlane/designs/new_tqvp_dma/src/tqvp_dma.v:10:19: Signal is not used: 'ui_in'
+                                                                          : ... note: In instance 'tqvp_dma'
+   10 |     input  [7:0]  ui_in,
+      |                   ^~~~~
+%Warning-CASEINCOMPLETE: /openlane/designs/new_tqvp_dma/src/tqvp_dma.v:109:17: Case values incompletely covered (example pattern 0x1)
+  109 |                 case (address)
+      |                 ^~~~

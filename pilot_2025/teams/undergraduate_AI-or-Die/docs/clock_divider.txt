@@ -1,0 +1,33 @@
+module clock_divider (
+    input wire clk_in,       // 100 MHz clock input
+    input wire reset,        // Synchronous reset
+    output reg clk_out       // Divided clock output
+);
+
+    // Calculate the number of cycles needed for 1 Hz
+    // 100MHz = 100,000,000 cycles per second
+    // Need to count to 50,000,000 for a full period (high + low)
+    // Using 27 bits to hold the count (2^27 = 134,217,728 > 100,000,000)
+    reg [26:0] counter;
+    
+    // Constants for flexibility
+    parameter DIVISOR = 27'd5;  // Count for 0.5 seconds (half period)   //EDITED changed DIvisor from 5000000 to 5
+    
+    // Counter and clock generation logic
+    always @(posedge clk_in) begin
+        if (reset) begin
+            counter <= 27'd0;
+            clk_out <= 1'b0;
+        end
+        else begin
+            if (counter == DIVISOR - 1) begin
+                counter <= 27'd0;
+                clk_out <= ~clk_out;  // Toggle the output clock
+            end
+            else begin
+                counter <= counter + 1'b1;
+            end
+        end
+    end
+
+endmodule

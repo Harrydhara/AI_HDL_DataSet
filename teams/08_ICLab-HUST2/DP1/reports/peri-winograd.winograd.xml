@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1773620366" />
+    <testcase name="test_winograd_all" classname="user_peripherals.winograd.winograd" file="/mnt/c/Users/user/Downloads/ICLab_HUST2-main3/ICLab_HUST2-main/testbench/tb_main/test_system/user_peripherals/winograd/winograd.py" lineno="80" time="330.53663420677185" sim_time_ns="1449540.037" ratio_time="4385.414162876784" />
+  </testsuite>
+</testsuites>

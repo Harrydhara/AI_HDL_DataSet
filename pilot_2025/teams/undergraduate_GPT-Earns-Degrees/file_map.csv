@@ -1,0 +1,8 @@
+released_path,path_in_original_submission,category
+ai_logs/AI Prompts and Responses - Member A.md,AI Prompts/AI Prompts and Responses - Member A.md,ai_logs
+rtl/button_debouncer.v,verilog code/sources_1/new/button_debouncer.v,rtl
+rtl/clock_divider.v,verilog code/sources_1/new/clock_divider.v,rtl
+rtl/seven_segment_display.v,verilog code/sources_1/new/seven_segment_display.v,rtl
+rtl/stopwatch.v,verilog code/sources_1/new/stopwatch.v,rtl
+rtl/top_level.v,verilog code/sources_1/new/top_level.v,rtl
+testbench/top_level_tb.v,verilog code/sim_1/new/top_level_tb.v,testbench

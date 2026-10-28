@@ -1,0 +1,166 @@
+user@host:~/AI-HDL/DP2_test$ iverilog -o tb_mvu tb_mvu.v mvu.v vpu.v pe_macc.v && vvp tb_mvu
+VCD info: dumpfile tb_mvu.vcd opened for output.
+
+===========================================================
+  TEST 1:     Basic matrix-vector multiply
+===========================================================
+  Matrix W:
+    [ 1  2  3  4 ]
+    [ 5  6  7  8 ]
+    [ 1  0  1  0 ]
+    [ 0  1  0  1 ]
+  Vector x: [1, 2, 3, 4]
+  Expected y: [30, 70, 4, 6]
+
+  [ PASS ]  y0 (row���x = 1+4+9+16)       got 0x0000001e (30)
+  [ PASS ]  y1 (r���·x = 5+12+21+32)     got 0x00000046 (70)
+  [ PASS ]  y2 (ro����x = 1+0+3+0)        got 0x00000004 (4)
+  [ PASS ]  y3 (ro����x = 0+2+0+4)        got 0x00000006 (6)
+-----------------------------------------------------------
+  TEST 1 RESULT: PASS  (4 checks)
+-----------------------------------------------------------
+
+===========================================================
+  TEST 2: peline timing (done pulse width)
+===========================================================
+  Identity W, x=[1,1,1,1].  start pulsed at cycle 0.
+  Expect: done=0 at cyc+1, done=0 at cyc+2,
+          done=1 at cyc+3, done=0 at cyc+4 (single-cycle pulse)
+
+  [ PASS ]  done before start  (exp 0)    got 0
+  [ PASS ]  done at cycle+1    (exp 0)    got 0
+  [ PASS ]  done at cycle+2    (exp 0)    got 0
+  [ PASS ]  done at cycle+3    (exp 1)    got 1
+  [ PASS ]  done at cycle+4    (exp 0)    got 0
+-----------------------------------------------------------
+  TEST 2 RESULT: PASS  (5 checks)
+-----------------------------------------------------------
+
+===========================================================
+  TEST 3: dentity matrix x vector = vector
+===========================================================
+  W = I4,  x = [5, 6, 7, 8]
+  Expected y: [5, 6, 7, 8]
+
+  [ PASS ]  y0 = x0 = 5                   got 0x00000005 (5)
+  [ PASS ]  y1 = x1 = 6                   got 0x00000006 (6)
+  [ PASS ]  y2 = x2 = 7                   got 0x00000007 (7)
+  [ PASS ]  y3 = x3 = 8                   got 0x00000008 (8)
+-----------------------------------------------------------
+  TEST 3 RESULT: PASS  (4 checks)
+-----------------------------------------------------------
+
+===========================================================
+  TEST 4: eight matrix -> all outputs zero
+===========================================================
+  W = 0,  x = [9, 9, 9, 9]
+  Expected y: [0, 0, 0, 0]
+
+  [ PASS ]  y0 (zero W)                   got 0x00000000 (0)
+  [ PASS ]  y1 (zero W)                   got 0x00000000 (0)
+  [ PASS ]  y2 (zero W)                   got 0x00000000 (0)
+  [ PASS ]  y3 (zero W)                   got 0x00000000 (0)
+-----------------------------------------------------------
+  TEST 4 RESULT: PASS  (4 checks)
+-----------------------------------------------------------
+
+===========================================================
+  TEST 5: input vector -> all outputs zero
+===========================================================
+  W = all 5s,  x = [0, 0, 0, 0]
+  Expected y: [0, 0, 0, 0]
+
+  [ PASS ]  y0 (zero x)                   got 0x00000000 (0)
+  [ PASS ]  y1 (zero x)                   got 0x00000000 (0)
+  [ PASS ]  y2 (zero x)                   got 0x00000000 (0)
+  [ PASS ]  y3 (zero x)                   got 0x00000000 (0)
+-----------------------------------------------------------
+  TEST 5 RESULT: PASS  (4 checks)
+-----------------------------------------------------------
+
+===========================================================
+  TEST 6: an reset clears done and outputs
+===========================================================
+  Run W=2s, x=[3,3,3,3] to put non-zero state in pipe,
+  then assert rst_n=0.  After release: done=0, y=0.
+
+  [ PASS ]  done after reset   (exp 0)    got 0
+  [ PASS ]  y0 after reset     (exp 0)    got 0x00000000 (0)
+  [ PASS ]  y1 after reset     (exp 0)    got 0x00000000 (0)
+  [ PASS ]  y2 after reset     (exp 0)    got 0x00000000 (0)
+  [ PASS ]  y3 after reset     (exp 0)    got 0x00000000 (0)
+-----------------------------------------------------------
+  TEST 6 RESULT: PASS  (5 checks)
+-----------------------------------------------------------
+
+===========================================================
+  TEST 7:     Reset asserted mid-operation
+===========================================================
+  W=10s, x=[10,10,10,10].  rst_n=0 one cycle after start.
+  After release: done=0, y0=0.
+
+  [ PASS ]  done after mid-op reset (exp 0)  got 0
+  [ PASS ]  y0 after mid-op reset  (exp 0)  got 0x00000000 (0)
+-----------------------------------------------------------
+  TEST 7 RESULT: PASS  (2 checks)
+-----------------------------------------------------------
+
+===========================================================
+  TEST 8: to-back operations (no idle gap)
+===========================================================
+  W = I4.
+  Op1: x=[1,1,1,1]  ->  expected y=[1,1,1,1]
+  Op2: x=[2,2,2,2]  ->  expected y=[2,2,2,2]  (immediate)
+
+  [ PASS ]  op1 y0 (exp 1)                got 0x00000001 (1)
+  [ PASS ]  op1 y1 (exp 1)                got 0x00000001 (1)
+  [ PASS ]  op1 y2 (exp 1)                got 0x00000001 (1)
+  [ PASS ]  op1 y3 (exp 1)                got 0x00000001 (1)
+  [ PASS ]  op2 y0 (exp 2)                got 0x00000002 (2)
+  [ PASS ]  op2 y1 (exp 2)                got 0x00000002 (2)
+  [ PASS ]  op2 y2 (exp 2)                got 0x00000002 (2)
+  [ PASS ]  op2 y3 (exp 2)                got 0x00000002 (2)
+-----------------------------------------------------------
+  TEST 8 RESULT: PASS  (8 checks)
+-----------------------------------------------------------
+
+===========================================================
+  TEST 9:      Register readback (x and w)
+===========================================================
+  Write known patterns to x[0], w[0][0], w[3][3] then read back.
+  x[0]    <- 0xAABBCCDD
+  w[0][0] <- 0x12345678  (addr 0x34)
+  w[3][3] <- 0xDEADBEEF  (addr 0x43)
+
+  [ PASS ]  x[0]    readback              got 0xaabbccdd (2864434397)
+  [ PASS ]  w[0][0] readback              got 0x12345678 (305419896)
+  [ PASS ]  w[3][3] readback              got 0xdeadbeef (3735928559)
+-----------------------------------------------------------
+  TEST 9 RESULT: PASS  (3 checks)
+-----------------------------------------------------------
+
+===========================================================
+  TEST 10: ll-ones matrix x all-ones vector
+===========================================================
+  W = all 1s,  x = [1, 1, 1, 1]
+  Expected y: [4, 4, 4, 4]
+
+  [ PASS ]  y0 (all-ones, exp 4)          got 0x00000004 (4)
+  [ PASS ]  y1 (all-ones, exp 4)          got 0x00000004 (4)
+  [ PASS ]  y2 (all-ones, exp 4)          got 0x00000004 (4)
+  [ PASS ]  y3 (all-ones, exp 4)          got 0x00000004 (4)
+-----------------------------------------------------------
+  TEST 10 RESULT: PASS  (4 checks)
+-----------------------------------------------------------
+
+###########################################################
+#                  MVU TESTBENCH SUMMARY                  #
+###########################################################
+#  Total checks :   43                                    #
+#  PASSED       :   43                                    #
+#  FAILED       :    0                                    #
+###########################################################
+#              >>> ALL TESTS PASSED <<<                   #
+###########################################################
+
+tb_mvu.v:534: $finish called at 3136000 (1ps)

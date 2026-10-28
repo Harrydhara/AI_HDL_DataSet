@@ -1,0 +1,28 @@
+# Read the RTL
+read_verilog rtl/accel.v
+
+# Define top module
+hierarchy -check -top accel
+
+# Convert processes
+proc
+
+# Optimization passes
+opt
+fsm
+opt
+memory
+opt
+
+# Technology mapping
+techmap
+opt
+
+# Write synthesized netlist
+write_verilog netlist/accel_netlist.v
+
+# Generate statistics
+stat
+
+# Generate visual schematic
+show -format png -prefix reports/accel

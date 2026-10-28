@@ -1,0 +1,47 @@
+# ============================================================
+# Bell Labs — University of Lagos, Nigeria
+# AI Hardware Design League 2026 — Team #63
+# Design Phase 2: Optimized Synthesis Script
+#
+# Differences from synth_dp1.ys:
+#   - Added opt_merge pass (merges identical logic cones)
+#   - Added opt_muxtree pass (removes unreachable MUX branches)
+#   - Added opt_reduce pass (simplifies logic expressions)
+#   - These additional passes target the MUX-heavy AES design
+#
+# Run with:
+#   yosys scripts/synth_dp2.ys 2>&1 | tee reports/dp2/post_opt_synthesis.txt
+# ============================================================
+
+# Step 1: Read optimized RTL
+# This is the DP2-optimized version with clock gating and is_final_reg
+read_verilog src/aes128/aes128_peripheral.v
+
+# Step 2: Synthesize targeting sky130_fd_sc_hd
+synth -top tqvp_belllabs_aes128
+
+# Step 3: Standard optimization
+opt
+
+# Step 4: Remove unused cells and wires
+opt_clean
+
+# Step 5: Merge identical logic cones — reduces duplicate MUX trees
+# This is the key addition vs synth_dp1.ys for this AES design
+opt_merge
+
+# Step 6: Remove unreachable MUX branches
+# Targets the is_final_reg registered path specifically
+opt_muxtree
+
+# Step 7: Final cleanup
+opt_clean
+
+# Step 8: Print statistics — compare against DP1 baseline
+stat
+
+# Step 9: Write optimized gate-level netlist
+write_verilog reports/dp2/netlist_optimized.v
+
+# Step 10: Write JSON report for automated analysis
+write_json reports/dp2/synthesis_optimized.json

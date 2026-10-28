@@ -1,0 +1,26 @@
+# Yosys synthesis script for new_dp1
+
+read_verilog -sv    ../src/project.v \
+                    ../src/tinyqv.v \
+                    ../src/cpu.v \
+                    ../src/core.v \
+                    ../src/alu.v \
+                    ../src/decode.v \
+                    ../src/register.v \
+                    ../src/latch_reg.v \
+                    ../src/counter.v \
+                    ../src/mem_ctrl.v \
+                    ../src/peripherals.v \
+                    ../src/qspi_ctrl.v \
+                    ../src/qspi_flash.v \
+                    ../src/uart_tx.v \
+                    ../src/time.v \
+                    ../src/tqvp_dma.v \
+
+hierarchy -check -top tt_um_tt_tinyQV
+
+synth -top tt_um_tt_tinyQV
+
+write_verilog -noattr ../output/synth_netlist.v
+write_json ../output/synth_netlist.json
+tee -o ../output/synth_stats.txt stat

@@ -1,0 +1,11 @@
+released_path,path_in_original_submission,category
+ai_logs/Promt - Member A.md,AI Prompts/Promt - Member A.md,ai_logs
+config/Basys-3-Master.xdc,verilog code/Basys-3-Master.xdc,config
+rtl/7_segment.v,verilog code/7_segment.v,rtl
+rtl/alarm.v,verilog code/alarm.v,rtl
+rtl/button_debouncer.v,verilog code/button_debouncer.v,rtl
+rtl/clock_divider.v,verilog code/clock_divider.v,rtl
+rtl/clock_timezone.v,verilog code/clock_timezone.v,rtl
+rtl/convert_12_to_24.v,verilog code/convert_12_to_24.v,rtl
+rtl/stop_watch.v,verilog code/stop_watch.v,rtl
+rtl/top_level.v,verilog code/top_level.v,rtl

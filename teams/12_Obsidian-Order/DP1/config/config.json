@@ -1,0 +1,34 @@
+{
+    "DESIGN_NAME": "tqvp_gpio",
+    "VERILOG_FILES": "dir::../../src/tqvp_gpio.v",
+    "CLOCK_PORT": "clk",
+    "CLOCK_PERIOD": 10.0,
+    
+    "FP_CORE_UTIL": 45,
+    "FP_ASPECT_RATIO": 1,
+    "FP_PDN_VPITCH": 25,
+    "FP_PDN_HPITCH": 25,
+    
+    "PL_TARGET_DENSITY": 0.55,
+    "PL_TIME_DRIVEN": true,
+    "PL_ROUTABILITY_DRIVEN": true,
+    
+    "GRT_ALLOW_CONGESTION": false,
+    "GRT_OVERFLOW_ITERS": 50,
+    
+    "DIODE_INSERTION_STRATEGY": 3,
+    
+    "RUN_CTS": true,
+    "ENABLE_CLOCK_GATING": true,
+    "CLOCK_GATE_CELL": "sky130_fd_sc_hd__dlclkp_1",
+    
+    "RUN_SPEF_EXTRACTION": true,
+    "RUN_STA": true,
+    "STA_CLOCK_UNCERTAINTY": 0.1,
+    
+    "pdk::sky130*": {
+        "CLOCK_PERIOD": 10.0,
+        "FP_CORE_UTIL": 40,
+        "PL_TARGET_DENSITY": 0.50
+    }
+}

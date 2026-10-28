@@ -1,0 +1,29 @@
+released_path,path_in_original_submission,category
+DP1/ai_logs/debugging.md,BIG-4-AI Accelerator (Matrix Math)-Complex/ai_logs/Debugging/debugging.md,ai_logs
+DP1/ai_logs/design_generation.md,BIG-4-AI Accelerator (Matrix Math)-Complex/ai_logs/Design generation/design_generation.md,ai_logs
+DP1/ai_logs/optimization.md,BIG-4-AI Accelerator (Matrix Math)-Complex/ai_logs/Optimization/optimization.md,ai_logs
+DP1/ai_logs/raw_logs.md,BIG-4-AI Accelerator (Matrix Math)-Complex/ai_logs/raw_logs/raw_logs.md,ai_logs
+DP1/docs/Baseline PPA Analysis_DP1.md,BIG-4-AI Accelerator (Matrix Math)-Complex/results/Report_Optimization_DP2/Baseline PPA Analysis_DP1.md,docs
+DP1/docs/Project_Plan.md,BIG-4-AI Accelerator (Matrix Math)-Complex/Project plan/Project_Plan.md,docs
+DP1/docs/Sysnthesis_DP1.md,BIG-4-AI Accelerator (Matrix Math)-Complex/results/synthesis/Sysnthesis_DP1.md,docs
+DP1/docs/Timing_DP1.md,BIG-4-AI Accelerator (Matrix Math)-Complex/results/timing/Timing_DP1.md,docs
+DP1/docs/ai_strategy.md,BIG-4-AI Accelerator (Matrix Math)-Complex/docs/ai_strategy.md,docs
+DP1/docs/challenges_faced.md,BIG-4-AI Accelerator (Matrix Math)-Complex/docs/challenges_faced.md,docs
+DP1/docs/design_methodology.md,BIG-4-AI Accelerator (Matrix Math)-Complex/docs/design_methodology.md,docs
+DP1/docs/fpga.md,BIG-4-AI Accelerator (Matrix Math)-Complex/results/fpga/fpga.md,docs
+DP1/docs/lessons_learned.md,BIG-4-AI Accelerator (Matrix Math)-Complex/docs/lessons_learned.md,docs
+DP1/docs/simulation_DP1.md,BIG-4-AI Accelerator (Matrix Math)-Complex/results/simulation/simulation_DP1.md,docs
+DP1/docs/submission-form.md,BIG-4-AI Accelerator (Matrix Math)-Complex/submission-form.md,docs
+DP1/rtl/optimized_top_module.v,BIG-4-AI Accelerator (Matrix Math)-Complex/src/optimized_top_module.v,rtl
+DP1/rtl/optimized_top_module_with_security.v,BIG-4-AI Accelerator (Matrix Math)-Complex/src/optimized_top_module_with_security.v,rtl
+DP1/rtl/sub_module1.v,BIG-4-AI Accelerator (Matrix Math)-Complex/src/sub_module1.v,rtl
+DP1/rtl/top_module.v,BIG-4-AI Accelerator (Matrix Math)-Complex/src/top_module.v,rtl
+DP2/docs/DP2_Report_Optimization.md,BIG-4-AI Accelerator (Matrix Math)-Complex/results/Report_Optimization_DP2/DP2_Report_Optimization.md,docs
+DP2/docs/Simulation_Optimization_DP2.md,BIG-4-AI Accelerator (Matrix Math)-Complex/results/simulation/Simulation_Optimization_DP2.md,docs
+DP2/docs/Sysnthesis_DP2.md,BIG-4-AI Accelerator (Matrix Math)-Complex/results/synthesis/Sysnthesis_DP2.md,docs
+DP2/docs/Timing_Optimization_DP2.md,BIG-4-AI Accelerator (Matrix Math)-Complex/results/timing/Timing_Optimization_DP2.md,docs
+DP2/testbench/test_DP2.py,BIG-4-AI Accelerator (Matrix Math)-Complex/results/timing/test_DP2.py,testbench
+DP3/docs/DP3_PPA_Report.md,BIG-4-AI Accelerator (Matrix Math)-Complex/results/Report_Optimization_And_Security_DP3/DP3_PPA_Report.md,docs
+DP3/docs/DP3_Security_Report.md,BIG-4-AI Accelerator (Matrix Math)-Complex/results/Report_Optimization_And_Security_DP3/DP3_Security_Report.md,docs
+DP3/docs/Simulation_Optimization_And_Security_DP3.md,BIG-4-AI Accelerator (Matrix Math)-Complex/results/simulation/Simulation_Optimization_And_Security_DP3.md,docs
+DP3/docs/Sysnthsis_DP3.md,BIG-4-AI Accelerator (Matrix Math)-Complex/results/synthesis/Sysnthsis_DP3.md,docs

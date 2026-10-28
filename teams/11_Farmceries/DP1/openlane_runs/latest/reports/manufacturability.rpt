@@ -1,0 +1,19 @@
+Design Name: tt_um_tqv_peripheral_harness
+Run Directory: /openlane/designs/dp1_uart/runs/RUN_2026.04.20_21.32.54
+----------------------------------------
+
+Magic DRC Summary:
+Source: /openlane/designs/dp1_uart/runs/RUN_2026.04.20_21.32.54/reports/signoff/drc.rpt
+Total Magic DRC violations is 0
+----------------------------------------
+
+LVS Summary:
+Source: /openlane/designs/dp1_uart/runs/RUN_2026.04.20_21.32.54/logs/signoff/38-tt_um_tqv_peripheral_harness.lef.lvs.log
+Number of nets: 1924                       |Number of nets: 1924                       
+Design is LVS clean.
+----------------------------------------
+
+Antenna Summary:
+Source: /openlane/designs/dp1_uart/runs/RUN_2026.04.20_21.32.54/logs/signoff/40-arc.log
+Pin violations: 0
+Net violations: 0

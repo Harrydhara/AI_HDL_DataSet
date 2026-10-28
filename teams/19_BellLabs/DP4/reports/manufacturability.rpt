@@ -1,0 +1,19 @@
+Design Name: tqvp_belllabs_aes128
+Run Directory: /home/user/AI-HDL/BellLabs_AIHDL/runs/FINAL_64MHZ
+----------------------------------------
+
+Magic DRC Summary:
+Source: /home/user/AI-HDL/BellLabs_AIHDL/runs/FINAL_64MHZ/reports/signoff/drc.rpt
+Total Magic DRC violations is 0
+----------------------------------------
+
+LVS Summary:
+Source: /home/user/AI-HDL/BellLabs_AIHDL/runs/FINAL_64MHZ/logs/signoff/43-tqvp_belllabs_aes128.lef.lvs.log
+Number of nets: 17301                      |Number of nets: 17301                      
+Design is LVS clean.
+----------------------------------------
+
+Antenna Summary:
+Source: /home/user/AI-HDL/BellLabs_AIHDL/runs/FINAL_64MHZ/logs/signoff/45-arc.log
+Pin violations: 1
+Net violations: 1

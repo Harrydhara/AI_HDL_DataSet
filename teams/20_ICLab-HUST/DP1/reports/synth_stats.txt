@@ -1,0 +1,476 @@
+
+21. Printing statistics.
+
+=== $paramod$c6073fd8a5b287029e036048d234daa072bb204f\tinyqv_core ===
+
+   Number of wires:                542
+   Number of wire bits:            767
+   Number of public wires:          77
+   Number of public wire bits:     295
+   Number of ports:                 37
+   Number of port bits:            134
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                621
+     $_ANDNOT_                     144
+     $_AND_                         31
+     $_DFFE_PN1P_                    1
+     $_DFFE_PN_                     50
+     $_DFFE_PP_                      9
+     $_DFF_P_                        3
+     $_MUX_                        124
+     $_NAND_                        24
+     $_NOR_                         29
+     $_NOT_                         14
+     $_ORNOT_                       38
+     $_OR_                         115
+     $_SDFFCE_PN0N_                  6
+     $_SDFFCE_PN0P_                  1
+     $_SDFFE_PN0P_                  11
+     $_SDFFE_PP0P_                   8
+     $_SDFFE_PP1P_                   1
+     $_XNOR_                         1
+     $_XOR_                          5
+     $paramod$c6073fd8a5b287029e036048d234daa072bb204f\tinyqv_registers      1
+     $paramod\tinyqv_counter\OUTPUT_WIDTH=s32'00000000000000000000000000000111      1
+     $paramod\tinyqv_mul\B_BITS=s32'00000000000000000000000000010000      1
+     tinyqv_alu                      1
+     tinyqv_counter                  1
+     tinyqv_shifter                  1
+
+=== $paramod$c6073fd8a5b287029e036048d234daa072bb204f\tinyqv_registers ===
+
+   Number of wires:                393
+   Number of wire bits:           1275
+   Number of public wires:          54
+   Number of public wire bits:     897
+   Number of ports:                 11
+   Number of port bits:             53
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                802
+     $_ANDNOT_                     145
+     $_AND_                          4
+     $_DFF_P_                      416
+     $_MUX_                         52
+     $_NAND_                        20
+     $_NOR_                          3
+     $_NOT_                          3
+     $_ORNOT_                       16
+     $_OR_                         143
+
+=== $paramod$d755ff5a733adc54feae1ee08934ae6298cc8303\uart_tx ===
+
+   Number of wires:                 58
+   Number of wire bits:             90
+   Number of public wires:          10
+   Number of public wire bits:      31
+   Number of ports:                  6
+   Number of port bits:             13
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 73
+     $_ANDNOT_                      14
+     $_AND_                          2
+     $_MUX_                          9
+     $_NAND_                         4
+     $_NOR_                          5
+     $_NOT_                          3
+     $_ORNOT_                        6
+     $_OR_                           6
+     $_SDFFE_PN0P_                  12
+     $_SDFFE_PP0N_                   5
+     $_SDFF_PN1_                     1
+     $_XNOR_                         1
+     $_XOR_                          5
+
+=== $paramod\tinyQV_peripherals\CLOCK_MHZ=s32'00000000000000000000000001000000 ===
+
+   Number of wires:                 41
+   Number of wire bits:            218
+   Number of public wires:          24
+   Number of public wire bits:     201
+   Number of ports:                 15
+   Number of port bits:            123
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 54
+     $_ANDNOT_                       2
+     $_AND_                          2
+     $_DFFE_PP_                      1
+     $_NAND_                         3
+     $_NOR_                          5
+     $_ORNOT_                        3
+     $_OR_                           4
+     $_SDFFCE_PN0P_                 32
+     $_SDFFE_PN0P_                   1
+     tqvp_dma                        1
+
+=== $paramod\tinyqv_counter\OUTPUT_WIDTH=s32'00000000000000000000000000000111 ===
+
+   Number of wires:                 20
+   Number of wire bits:             90
+   Number of public wires:          10
+   Number of public wire bits:      80
+   Number of ports:                  6
+   Number of port bits:             14
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 48
+     $_ANDNOT_                       3
+     $_AND_                          1
+     $_DFF_P_                       28
+     $_MUX_                          1
+     $_NAND_                         1
+     $_NOR_                          1
+     $_NOT_                          3
+     $_OR_                           1
+     $_SDFF_PN0_                     5
+     $_XNOR_                         1
+     $_XOR_                          3
+
+=== $paramod\tinyqv_mul\B_BITS=s32'00000000000000000000000000010000 ===
+
+   Number of wires:                433
+   Number of wire bits:            499
+   Number of public wires:           6
+   Number of public wire bits:      61
+   Number of ports:                  4
+   Number of port bits:             25
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                462
+     $_ANDNOT_                     119
+     $_AND_                         63
+     $_DFF_P_                       12
+     $_MUX_                         12
+     $_NAND_                        25
+     $_NOR_                         17
+     $_NOT_                         22
+     $_ORNOT_                        8
+     $_OR_                          53
+     $_SDFF_PP0_                     4
+     $_XNOR_                        24
+     $_XOR_                        103
+
+=== qspi_controller ===
+
+   Number of wires:                273
+   Number of wire bits:            389
+   Number of public wires:          33
+   Number of public wire bits:     119
+   Number of ports:                 19
+   Number of port bits:             66
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                331
+     $_ANDNOT_                      68
+     $_AND_                          7
+     $_DFFE_PN_                      3
+     $_DFFE_PP_                     32
+     $_DFF_N_                        1
+     $_MUX_                         85
+     $_NAND_                         9
+     $_NOR_                         14
+     $_NOT_                         13
+     $_ORNOT_                        7
+     $_OR_                          66
+     $_SDFFCE_PN0P_                  4
+     $_SDFFE_PP0N_                   2
+     $_SDFFE_PP0P_                   9
+     $_SDFFE_PP1P_                   3
+     $_SDFF_PN0_                     1
+     $_SDFF_PN1_                     2
+     $_SDFF_PP0_                     2
+     $_XOR_                          3
+
+=== tinyQV ===
+
+   Number of wires:                 56
+   Number of wire bits:            323
+   Number of public wires:          53
+   Number of public wire bits:     320
+   Number of ports:                 33
+   Number of port bits:            139
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 48
+     $_ANDNOT_                       1
+     $_DFF_P_                        1
+     $_MUX_                         33
+     $_NOR_                          1
+     $_OR_                          10
+     tinyqv_cpu                      1
+     tinyqv_mem_ctrl                 1
+
+=== tinyqv_alu ===
+
+   Number of wires:                 96
+   Number of wire bits:            116
+   Number of public wires:          10
+   Number of public wire bits:      30
+   Number of ports:                  8
+   Number of port bits:             20
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 92
+     $_ANDNOT_                      37
+     $_AND_                          1
+     $_MUX_                          3
+     $_NAND_                         6
+     $_NOR_                          6
+     $_NOT_                          5
+     $_ORNOT_                        3
+     $_OR_                          14
+     $_XNOR_                         5
+     $_XOR_                         12
+
+=== tinyqv_counter ===
+
+   Number of wires:                 20
+   Number of wire bits:             87
+   Number of public wires:          10
+   Number of public wire bits:      77
+   Number of ports:                  6
+   Number of port bits:             11
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 48
+     $_ANDNOT_                       3
+     $_AND_                          1
+     $_DFF_P_                       28
+     $_MUX_                          1
+     $_NAND_                         1
+     $_NOR_                          1
+     $_NOT_                          3
+     $_OR_                           1
+     $_SDFF_PN0_                     5
+     $_XNOR_                         1
+     $_XOR_                          3
+
+=== tinyqv_cpu ===
+
+   Number of wires:               1033
+   Number of wire bits:           1535
+   Number of public wires:         103
+   Number of public wire bits:     587
+   Number of ports:                 28
+   Number of port bits:            162
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               1244
+     $_ANDNOT_                     203
+     $_AND_                         43
+     $_DFFE_PP_                    128
+     $_DFF_P_                        1
+     $_MUX_                        306
+     $_NAND_                        36
+     $_NOR_                         57
+     $_NOT_                         42
+     $_ORNOT_                       22
+     $_OR_                         177
+     $_SDFFCE_PN1P_                  6
+     $_SDFFE_PN0P_                  87
+     $_SDFFE_PN1P_                   4
+     $_SDFFE_PP1P_                   2
+     $_SDFF_PN0_                     5
+     $_SDFF_PP0_                     2
+     $_XNOR_                        34
+     $_XOR_                         87
+     $paramod$c6073fd8a5b287029e036048d234daa072bb204f\tinyqv_core      1
+     tinyqv_decoder                  1
+
+=== tinyqv_decoder ===
+
+   Number of wires:                695
+   Number of wire bits:           1146
+   Number of public wires:          38
+   Number of public wire bits:     489
+   Number of ports:                 21
+   Number of port bits:            100
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                725
+     $_ANDNOT_                     259
+     $_AND_                         19
+     $_MUX_                        156
+     $_NAND_                        31
+     $_NOR_                         24
+     $_NOT_                         22
+     $_ORNOT_                       39
+     $_OR_                         175
+
+=== tinyqv_mem_ctrl ===
+
+   Number of wires:                307
+   Number of wire bits:            511
+   Number of public wires:          39
+   Number of public wire bits:     236
+   Number of ports:                 25
+   Number of port bits:            159
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                370
+     $_ANDNOT_                      91
+     $_AND_                          4
+     $_DFFE_PP_                     32
+     $_DFF_P_                        1
+     $_MUX_                         88
+     $_NAND_                        14
+     $_NOR_                          5
+     $_NOT_                          5
+     $_ORNOT_                       10
+     $_OR_                         104
+     $_SDFFE_PN0P_                   1
+     $_SDFFE_PP0N_                   3
+     $_SDFF_PN0_                     2
+     $_XNOR_                         3
+     $_XOR_                          6
+     qspi_controller                 1
+
+=== tinyqv_shifter ===
+
+   Number of wires:                156
+   Number of wire bits:            271
+   Number of public wires:          11
+   Number of public wire bits:     126
+   Number of ports:                  5
+   Number of port bits:             46
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                149
+     $_ANDNOT_                       4
+     $_AND_                          1
+     $_MUX_                        132
+     $_NOT_                          1
+     $_ORNOT_                        1
+     $_OR_                           2
+     $_XNOR_                         1
+     $_XOR_                          7
+
+=== tqvp_dma ===
+
+   Number of wires:               3592
+   Number of wire bits:           3990
+   Number of public wires:          33
+   Number of public wire bits:     431
+   Number of ports:                 11
+   Number of port bits:             94
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               3890
+     $_ANDNOT_                     511
+     $_AND_                        235
+     $_DFF_P_                        3
+     $_MUX_                       2351
+     $_NAND_                        57
+     $_NOR_                         19
+     $_NOT_                         19
+     $_ORNOT_                      156
+     $_OR_                         221
+     $_SDFFE_PN0P_                  17
+     $_SDFFE_PN1P_                   7
+     $_SDFF_PN0_                   264
+     $_XNOR_                        11
+     $_XOR_                         19
+
+=== tt_um_tt_tinyQV ===
+
+   Number of wires:                231
+   Number of wire bits:            495
+   Number of public wires:          58
+   Number of public wire bits:     305
+   Number of ports:                  8
+   Number of port bits:             43
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                268
+     $_ANDNOT_                      45
+     $_AND_                         15
+     $_DFFE_PP_                      1
+     $_DFF_N_                        1
+     $_DFF_P_                       27
+     $_MUX_                         42
+     $_NAND_                         4
+     $_NOR_                          6
+     $_NOT_                          7
+     $_ORNOT_                       10
+     $_OR_                          89
+     $_SDFF_PP0_                     7
+     $_XOR_                         11
+     $paramod$d755ff5a733adc54feae1ee08934ae6298cc8303\uart_tx      1
+     $paramod\tinyQV_peripherals\CLOCK_MHZ=s32'00000000000000000000000001000000      1
+     tinyQV                          1
+
+=== design hierarchy ===
+
+   tt_um_tt_tinyQV                   1
+     $paramod$d755ff5a733adc54feae1ee08934ae6298cc8303\uart_tx      1
+     $paramod\tinyQV_peripherals\CLOCK_MHZ=s32'00000000000000000000000001000000      1
+       tqvp_dma                      1
+     tinyQV                          1
+       tinyqv_cpu                    1
+         $paramod$c6073fd8a5b287029e036048d234daa072bb204f\tinyqv_core      1
+           $paramod$c6073fd8a5b287029e036048d234daa072bb204f\tinyqv_registers      1
+           $paramod\tinyqv_counter\OUTPUT_WIDTH=s32'00000000000000000000000000000111      1
+           $paramod\tinyqv_mul\B_BITS=s32'00000000000000000000000000010000      1
+           tinyqv_alu                1
+           tinyqv_counter            1
+           tinyqv_shifter            1
+         tinyqv_decoder              1
+       tinyqv_mem_ctrl               1
+         qspi_controller             1
+
+   Number of wires:               7946
+   Number of wire bits:          11802
+   Number of public wires:         569
+   Number of public wire bits:    4285
+   Number of ports:                243
+   Number of port bits:           1202
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:               9210
+     $_ANDNOT_                    1649
+     $_AND_                        429
+     $_DFFE_PN1P_                    1
+     $_DFFE_PN_                     53
+     $_DFFE_PP_                    203
+     $_DFF_N_                        2
+     $_DFF_P_                      520
+     $_MUX_                       3395
+     $_NAND_                       235
+     $_NOR_                        193
+     $_NOT_                        162
+     $_ORNOT_                      319
+     $_OR_                        1181
+     $_SDFFCE_PN0N_                  6
+     $_SDFFCE_PN0P_                 37
+     $_SDFFCE_PN1P_                  6
+     $_SDFFE_PN0P_                 129
+     $_SDFFE_PN1P_                  11
+     $_SDFFE_PP0N_                  10
+     $_SDFFE_PP0P_                  17
+     $_SDFFE_PP1P_                   6
+     $_SDFF_PN0_                   282
+     $_SDFF_PN1_                     3
+     $_SDFF_PP0_                    15
+     $_XNOR_                        82
+     $_XOR_                        264
+

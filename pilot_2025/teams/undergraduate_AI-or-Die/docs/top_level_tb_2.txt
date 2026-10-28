@@ -1,0 +1,225 @@
+`timescale 1ns / 1ps
+
+module top_level_tb_2;
+
+    // Inputs
+    reg clk;
+    reg rst;
+    reg button0;
+    reg button1;
+    reg button2;
+    reg button3;
+    reg [2:0] timezone_sel;
+    reg am_pm_sel;
+
+    // Outputs
+    wire [6:0] seg;
+    wire [3:0] an;
+    wire alarm_led;
+
+    // State parameters for readability
+    localparam AUTH_STATE = 3'b000;
+    localparam CLOCK_STATE = 3'b001;
+    localparam STOPWATCH_STATE = 3'b010;
+    localparam ALARM_STATE = 3'b011;
+    localparam CONVERT_STATE = 3'b100;
+    localparam LOCKOUT_STATE = 3'b101;
+
+    // Instantiate the Unit Under Test (UUT)
+    top_level uut (
+        .clk(clk),
+        .rst(rst),
+        .button0(button0),
+        .button1(button1),
+        .button2(button2),
+        .button3(button3),
+        .timezone_sel(timezone_sel),
+        .am_pm_sel(am_pm_sel),
+        .seg(seg),
+        .an(an),
+        .alarm_led(alarm_led)
+    );
+
+    // Clock generation (100MHz)
+    initial begin
+        clk = 0;
+        forever #5 clk = ~clk;
+    end
+
+    // Task for button press simulation
+    task press_button;
+        input integer button_num;
+        begin
+            case (button_num)
+                0: button0 = 1;
+                1: button1 = 1;
+                2: button2 = 1;
+                3: button3 = 1;
+            endcase
+            #100;  // Hold for 50ns **
+            case (button_num)
+                0: button0 = 0;
+                1: button1 = 0;
+                2: button2 = 0;
+                3: button3 = 0;
+            endcase
+            #100;  // Wait after release
+        end
+    endtask
+
+    // Task to check state
+    task check_state;
+        input [2:0] expected_state;
+        begin
+            if (uut.current_state !== expected_state) begin
+                $display("ERROR: State mismatch at time %t", $time);
+                $display("Expected state: %b, Got: %b", expected_state, uut.current_state);
+            end else begin
+                $display("State check passed at time %t: State = %b", $time, expected_state);
+            end
+        end
+    endtask
+
+    // Task for PIN entry
+    task enter_pin;
+        input [3:0] digit;
+        integer i;
+        begin
+            for (i = 0; i < digit; i = i + 1) begin
+                press_button(1); // Increment digit
+            end
+            press_button(2); // Move to next digit
+        end
+    endtask
+
+    // Test stimulus
+    initial begin
+        // Initialize inputs
+        rst = 1;
+        button0 = 0;
+        button1 = 0;
+        button2 = 0;
+        button3 = 0;
+        timezone_sel = 3'b000;
+        am_pm_sel = 0;
+
+        // Reset system
+        #100;
+        rst = 0;
+        #100;
+
+        // Test Case 1: Enter PIN (Correct: 1-2-3-4)
+        $display("\nTest Case 1: Entering Correct PIN");
+        enter_pin(4'd1);
+        enter_pin(4'd2);
+        enter_pin(4'd3);
+        enter_pin(4'd4);
+        press_button(3); // Confirm PIN
+        #100;
+        check_state(CLOCK_STATE);
+
+        // Test Case 2: Enter Incorrect PIN and get locked out
+        $display("\nTest Case 2: Entering Incorrect PINs to trigger LOCKOUT");
+        rst = 1; #50; rst = 0;  // Reset system
+        enter_pin(4'd5);
+        enter_pin(4'd6);
+        enter_pin(4'd7);
+        enter_pin(4'd8);
+        press_button(3);  // Confirm incorrect PIN
+        #100;
+        enter_pin(4'd5);
+        enter_pin(4'd6);
+        enter_pin(4'd7);
+        enter_pin(4'd8);
+        press_button(3);  // Confirm incorrect PIN
+        #100;
+        enter_pin(4'd5);
+        enter_pin(4'd6);
+        enter_pin(4'd7);
+        enter_pin(4'd8);
+        press_button(3);  // Confirm incorrect PIN
+        #100;
+        check_state(LOCKOUT_STATE); // Should be locked out
+
+        // Reset to re-test other functionalities
+        rst = 1; #50; rst = 0;  
+
+        // Test Case 3: Transition through states
+        $display("\nTest Case 3: Testing State Transitions");
+        
+        // Reset to re-test other functionalities
+        rst = 1; #50; rst = 0;
+
+        // Re-enter the correct PIN to unlock the watch before proceeding
+        $display("\nRe-entering Correct PIN After Reset");
+        enter_pin(4'd1);
+        enter_pin(4'd2);
+        enter_pin(4'd3);
+        enter_pin(4'd4);
+        press_button(3); // Confirm PIN
+        #100;
+        check_state(CLOCK_STATE);  // Ensure we are in CLOCK_STATE
+
+        // Now proceed with state transitions
+        $display("\nTest Case 3: Testing State Transitions");
+        press_button(0); check_state(STOPWATCH_STATE);
+        press_button(0); check_state(ALARM_STATE);
+        press_button(0); check_state(CONVERT_STATE);
+        press_button(0); check_state(CLOCK_STATE);
+
+        // Test Case 4: Stopwatch Controls
+        $display("\nTest Case 4: Testing Stopwatch Controls");
+        press_button(0); //Move to ALARM_STATE     ***Added manually
+        press_button(1); // Start stopwatch
+        #200;
+        press_button(1); // Stop stopwatch
+        press_button(2); // Reset stopwatch
+
+        // Test Case 5: Alarm Functionality
+        $display("\nTest Case 5: Testing Alarm Functionality");
+        press_button(0);  // Move to ALARM_STATE
+        press_button(1);  // Increment alarm hour
+        press_button(2);  // Increment alarm minute
+        press_button(3);  // Confirm alarm
+        #500;
+        $display("Alarm LED state: %b", alarm_led);
+
+        // Test Case 6: AM/PM Conversion
+        $display("\nTest Case 6: Testing AM/PM Conversion");
+        press_button(0);  // Move to CONVERT_STATE
+        am_pm_sel = 1; #1000;
+        am_pm_sel = 0; #1000;
+
+        // Test Case 7: Reset behavior
+        $display("\nTest Case 7: Testing Reset Behavior");
+        press_button(0); press_button(0);
+        #100;
+        rst = 1;
+        #100;
+        rst = 0;
+        check_state(AUTH_STATE); //MODIFIED MANUALLY
+
+        // End Simulation
+        $display("\nSimulation Completed Successfully.");
+        #1000;
+        $finish;
+    end
+
+    // Monitor state transitions
+    always @(uut.current_state) begin
+        $display("Time=%0t State changed to: %b", $time, uut.current_state);
+    end
+
+    // Monitor display outputs
+    always @(an) begin
+        if (an === 4'b1110) begin
+            $display("Time=%0t Display segment value: %b", $time, seg);
+        end
+    end
+
+    // Monitor alarm LED
+    always @(alarm_led) begin
+        $display("Time=%0t Alarm LED changed to: %b", $time, alarm_led);
+    end
+
+endmodule

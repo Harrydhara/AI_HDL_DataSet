@@ -1,0 +1,16 @@
+released_path,path_in_original_submission,category
+ai_logs/DP1_and_DP2.md,UDH_CAT_Prompting/DP1_and_DP2.md,ai_logs
+ai_logs/Power_Opt.md,UDH_CAT_Prompting/Power_Opt.md,ai_logs
+ai_logs/README.md,UDH_CAT_Prompting/README.md,ai_logs
+ai_logs/Utilization_Opt.md,UDH_CAT_Prompting/Utilization_Opt.md,ai_logs
+config/Basys-3-master.xdc,verilog code/constraints/Basys-3-master.xdc,config
+other/tb_alarm_clock_with_digital_clock,verilog code/simulation_files/tb_alarm_clock_with_digital_clock,other
+rtl/alarm.v,verilog code/source_files/alarm.v,rtl
+rtl/buttonDebouncer.v,verilog code/source_files/buttonDebouncer.v,rtl
+rtl/clock_divider.v,verilog code/source_files/clock_divider.v,rtl
+rtl/convert_12_to_24.v,verilog code/source_files/convert_12_to_24.v,rtl
+rtl/digital_clock.v,verilog code/source_files/digital_clock.v,rtl
+rtl/seven_segment_display.v,verilog code/source_files/seven_segment_display.v,rtl
+rtl/stopwatch.v,verilog code/source_files/stopwatch.v,rtl
+rtl/top_level.v,verilog code/source_files/top_level.v,rtl
+testbench/tb_top_level.v,verilog code/simulation_files/tb_top_level.v,testbench

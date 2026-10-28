@@ -1,0 +1,51 @@
+CVC: Log output to /openlane/designs/DP2/runs/RUN_2026.04.15_22.41.08/reports/signoff/tt_um_ingenius_crc_DP2.rpt
+CVC: Error output to /openlane/designs/DP2/runs/RUN_2026.04.15_22.41.08/reports/signoff/tt_um_ingenius_crc_DP2.rpt.error.gz
+CVC: Debug output to /openlane/designs/DP2/runs/RUN_2026.04.15_22.41.08/reports/signoff/tt_um_ingenius_crc_DP2.rpt.debug.gz
+CVC: Circuit Validation Check  Version 1.1.4
+CVC: Start: Wed Apr 15 22:53:01 2026
+
+Using the following parameters for CVC (Circuit Validation Check) from /home/user/open_pdks/sky130/sky130A/libs.tech/openlane/cvc/cvcrc
+CVC_TOP = 'tt_um_ingenius_crc_DP2'
+CVC_NETLIST = '/openlane/designs/DP2/runs/RUN_2026.04.15_22.41.08/tmp/signoff/tt_um_ingenius_crc_DP2.cdl'
+CVC_MODE = 'tt_um_ingenius_crc_DP2'
+CVC_MODEL_FILE = '/home/user/open_pdks/sky130/sky130A/libs.tech/openlane/cvc/models'
+CVC_POWER_FILE = '/openlane/designs/DP2/runs/RUN_2026.04.15_22.41.08/tmp/signoff/tt_um_ingenius_crc_DP2.power'
+CVC_FUSE_FILE = ''
+CVC_REPORT_FILE = '/openlane/designs/DP2/runs/RUN_2026.04.15_22.41.08/reports/signoff/tt_um_ingenius_crc_DP2.rpt'
+CVC_REPORT_TITLE = 'CVC $CVC_TOP'
+CVC_CIRCUIT_ERROR_LIMIT = '100'
+CVC_SEARCH_LIMIT = '100'
+CVC_LEAK_LIMIT = '0.0002'
+CVC_SOI = 'false'
+CVC_SCRC = 'false'
+CVC_VTH_GATES = 'false'
+CVC_MIN_VTH_GATES = 'false'
+CVC_IGNORE_VTH_FLOATING = 'false'
+CVC_IGNORE_NO_LEAK_FLOATING = 'false'
+CVC_LEAK_OVERVOLTAGE = 'true'
+CVC_LOGIC_DIODES = 'false'
+CVC_ANALOG_GATES = 'true'
+CVC_BACKUP_RESULTS = 'false'
+CVC_MOS_DIODE_ERROR_THRESHOLD = '0'
+CVC_SHORT_ERROR_THRESHOLD = '0'
+CVC_BIAS_ERROR_THRESHOLD = '0'
+CVC_FORWARD_ERROR_THRESHOLD = '0'
+CVC_FLOATING_ERROR_THRESHOLD = '0'
+CVC_GATE_ERROR_THRESHOLD = '0'
+CVC_LEAK?_ERROR_THRESHOLD = '0'
+CVC_EXPECTED_ERROR_THRESHOLD = '0'
+CVC_OVERVOLTAGE_ERROR_THRESHOLD = '0'
+CVC_PARALLEL_CIRCUIT_PORT_LIMIT = '0'
+CVC_CELL_ERROR_LIMIT_FILE = ''
+CVC_CELL_CHECKSUM_FILE = ''
+CVC_LARGE_CIRCUIT_SIZE = '10000000'
+CVC_NET_CHECK_FILE = ''
+CVC_MODEL_CHECK_FILE = ''
+End of parameters
+
+CVC: Reading device model settings...
+CVC: Reading power settings...
+CVC: Parsing netlist /openlane/designs/DP2/runs/RUN_2026.04.15_22.41.08/tmp/signoff/tt_um_ingenius_crc_DP2.cdl
+Cdl fixed data size 69182
+Usage CDL: Time: 0  Memory: 52620  I/O: 4320  Swap: 0
+CVC: Counting and linking...

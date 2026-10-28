@@ -1,0 +1,18 @@
+OpenROAD b16bda7e82721d10566ff7e2b68f1ff0be9f9e38 
+Features included (+) or not (-): +Charts +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ODB-0227] LEF file: /openlane/designs/new_tqvp_dma/runs/RUN_2026.04.18_12.07.17/tmp/merged.nom.lef, created 13 layers, 25 vias, 441 library cells
+[INFO ODB-0127] Reading DEF file: /openlane/designs/new_tqvp_dma/runs/RUN_2026.04.18_12.07.17/results/routing/tqvp_dma.def
+[INFO ODB-0128] Design: tqvp_dma
+[INFO ODB-0130]     Created 202 pins.
+[INFO ODB-0131]     Created 30255 components and 131546 component-terminals.
+[INFO ODB-0132]     Created 2 special nets and 114472 connections.
+[INFO ODB-0133]     Created 4339 nets and 16984 connections.
+[INFO ODB-0134] Finished DEF file: /openlane/designs/new_tqvp_dma/runs/RUN_2026.04.18_12.07.17/results/routing/tqvp_dma.def
+Top-level design name: tqvp_dma
+Found default power net 'vccd1'
+Found default ground net 'vssd1'
+Found 1 power ports.
+Found 1 ground ports.
+Modified power connections of 30255/30255 cells.

@@ -1,0 +1,3 @@
+Startpoint: m_error (input port clocked by clk)
+     4    0.05    0.22    0.17    8.17 ^ m_error (in)
+                                         m_error (net)

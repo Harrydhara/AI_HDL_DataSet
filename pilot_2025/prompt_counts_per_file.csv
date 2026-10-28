@@ -1,0 +1,35 @@
+team,rule,prompts,file,released_path
+ChipX,image-only-pdf,0,AI Prompts\AI_chat - Member A.pdf,"(empty file, not released)"
+UET1,"manual: two unlabeled prompts (power/area, security)",2,AI Prompts\Promt - Member A.docx,pilot_2025/teams/graduate_UET1/ai_logs/Promt - Member A.md
+UET3,prompt_label,1,AI Prompts\UET3_Sup_Doc_1_AI prompt and reponse.docx,pilot_2025/teams/graduate_UET3/ai_logs/UET3_Sup_Doc_1_AI prompt and reponse.md
+UHD_CAT,emoji_user,42,UDH_CAT_Prompting\DP1_and_DP2.md,pilot_2025/teams/graduate_UHD-CAT/ai_logs/DP1_and_DP2.md
+UHD_CAT,emoji_user,4,UDH_CAT_Prompting\Power_Opt.md,pilot_2025/teams/graduate_UHD-CAT/ai_logs/Power_Opt.md
+UHD_CAT,emoji_user,1,UDH_CAT_Prompting\Utilization_Opt.md,pilot_2025/teams/graduate_UHD-CAT/ai_logs/Utilization_Opt.md
+UHD_CAT,skipped:pdf-copy,0,UDH_CAT_Prompting\DP1_and_DP2.pdf,pilot_2025/teams/graduate_UHD-CAT/ai_logs/DP1_and_DP2.md
+UHD_CAT,skipped:pdf-copy,0,UDH_CAT_Prompting\Power_Opt.pdf,pilot_2025/teams/graduate_UHD-CAT/ai_logs/Power_Opt.md
+UHD_CAT,skipped:pdf-copy,0,UDH_CAT_Prompting\Utilization_Opt.pdf,pilot_2025/teams/graduate_UHD-CAT/ai_logs/Utilization_Opt.md
+AI_or_Die,assistant_turn,6,AI Prompts\Phase3_Pt2_Sample_prompts.docx,pilot_2025/teams/undergraduate_AI-or-Die/ai_logs/Phase3_Pt2_Sample_prompts.md
+Blue Team,share-link-only,0,AI Prompts\text - Member A.txt,pilot_2025/teams/undergraduate_Blue-Team/ai_logs/text - Member A.txt
+CC-1,said,30,PimaCC-chatGPT logs\ChatGPT - Phase2q sevseg sync vivado linter fixes.md,pilot_2025/teams/undergraduate_CC-1/ai_logs/ChatGPT - Phase2q sevseg sync vivado linter fixes.md
+CC-1,"said (re-export, not counted)",0,PimaCC-chatGPT logs\ChatGPT - Phase2q sevseg sync.md,pilot_2025/teams/undergraduate_CC-1/ai_logs/ChatGPT - Phase2q sevseg sync.md
+CC-1,page-capture,0,PimaCC-chatGPT logs\Claude.md,pilot_2025/teams/undergraduate_CC-1/ai_logs/Claude.md
+CC-1,page-capture,0,PimaCC-chatGPT logs\Gemini.md,pilot_2025/teams/undergraduate_CC-1/ai_logs/Gemini.md
+CC-1,page-capture,0,PimaCC-chatGPT logs\Grok _ X.md,pilot_2025/teams/undergraduate_CC-1/ai_logs/Grok _ X.md
+CC-1,said,49,PimaCC-chatGPT logs\Phase 2 Verilog - Clock Module Design Changes.md,pilot_2025/teams/undergraduate_CC-1/ai_logs/Phase 2 Verilog - Clock Module Design Changes.md
+CC-1,said,13,PimaCC-chatGPT logs\Phase 2 Verilog - Phase 2 Context YAML.md,pilot_2025/teams/undergraduate_CC-1/ai_logs/Phase 2 Verilog - Phase 2 Context YAML.md
+CC-1,said,47,PimaCC-chatGPT logs\Phase 2 Verilog - Phase 2p Verilog Summary(3).md,pilot_2025/teams/undergraduate_CC-1/ai_logs/Phase 2 Verilog - Phase 2p Verilog Summary(3).md
+CC-1,said,35,PimaCC-chatGPT logs\Phase 2 Verilog - Phase2p Debugging Tips(1).md,pilot_2025/teams/undergraduate_CC-1/ai_logs/Phase 2 Verilog - Phase2p Debugging Tips(1).md
+CC-1,page-capture,0,PimaCC-chatGPT logs\Phase 2 Verilog - Phase2p Debugging Tips.md,pilot_2025/teams/undergraduate_CC-1/ai_logs/Phase 2 Verilog - Phase2p Debugging Tips.md
+CC-1,said,11,PimaCC-chatGPT logs\Phase 2 Verilog - Seven Segment Display Stability.md,pilot_2025/teams/undergraduate_CC-1/ai_logs/Phase 2 Verilog - Seven Segment Display Stability.md
+CC-1,said,2,PimaCC-chatGPT logs\Phase2q sevseg sync - Current_state Signal Analysis.md,pilot_2025/teams/undergraduate_CC-1/ai_logs/Phase2q sevseg sync - Current_state Signal Analysis.md
+CC-1,said,55,PimaCC-chatGPT logs\Phase2q sevseg sync - Stopwatch Testbench Sequence (1).md,pilot_2025/teams/undergraduate_CC-1/ai_logs/Phase2q sevseg sync - Stopwatch Testbench Sequence (1).md
+CC-1,"said (re-export, not counted)",0,PimaCC-chatGPT logs\Phase2q sevseg sync - Stopwatch Testbench Sequence.md,pilot_2025/teams/undergraduate_CC-1/ai_logs/Phase2q sevseg sync - Stopwatch Testbench Sequence.md
+CC-1,page-capture,0,PimaCC-chatGPT logs\Vivado module interface summary.md,pilot_2025/teams/undergraduate_CC-1/ai_logs/Vivado module interface summary.md
+CC-1,no-turn-markers,0,PimaCC-chatGPT logs\transcripts overview document.docx,pilot_2025/teams/undergraduate_CC-1/ai_logs/transcripts overview document.md
+DigiDynamos,share-link-only,0,AI Response\Phase 1\link to conservation chatGPT prompts.txt,pilot_2025/teams/undergraduate_DigiDynamos/ai_logs/Phase 1__link to conservation chatGPT prompts.txt
+DigiDynamos,share-link-only,0,AI Response\Phase 2\link to conservation chatGPT prompts copy.txt,pilot_2025/teams/undergraduate_DigiDynamos/ai_logs/link to conservation chatGPT prompts copy.txt
+DigiDynamos,share-link-only,0,AI Response\Phase 3.1\link to conservation chatGPT prompts.txt,pilot_2025/teams/undergraduate_DigiDynamos/ai_logs/Phase 3.1__link to conservation chatGPT prompts.txt
+DigiDynamos,manual: two prompts in a pasted exchange,2,AI Response\Phase3.2\Chatgpt-Prompt.docx,pilot_2025/teams/undergraduate_DigiDynamos/ai_logs/Chatgpt-Prompt.md
+GPT_Earns_Degrees,prompt_numbered,7,AI Prompts\AI Prompts and Responses - Member A.pdf,pilot_2025/teams/undergraduate_GPT-Earns-Degrees/ai_logs/AI Prompts and Responses - Member A.md
+Red Team,share-link-only,0,AI Prompts\Red Team Prompting.docx,pilot_2025/teams/undergraduate_Red-Team/ai_logs/Red Team Prompting.md
+UET2,response_label,2,AI Prompts\PromptScript - Member A.docx,pilot_2025/teams/undergraduate_UET2/ai_logs/PromptScript - Member A.md

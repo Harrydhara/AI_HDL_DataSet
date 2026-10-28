@@ -1,0 +1,20 @@
+=== DP1 BASELINE PPA — tqvp_belllabs_aes128 ===
+Date: 2026-04-16
+Tool: Yosys 0.62+9
+Target library: sky130_fd_sc_hd
+
+Total cells:     12,287
+Flip-flops:         816  (169 DFF_P + 256 SDFFE_PN0N + 384 SDFFE_PN0P + 5 SDFF_PN0 + 2 SDFF_PP0)
+MUX cells:        7,725
+AND/NAND:           492  (358 AND + 134 NAND)
+OR/NOR:             730  (671 OR + 59 NOR)
+XOR/XNOR:           972  (622 XOR + 350 XNOR)
+NOT:                637
+ANDNOT/ORNOT:       915  (724 ANDNOT + 191 ORNOT)
+Total wires:     11,319
+Wire bits:       13,315
+Public wires:       154
+Ports:               11
+
+NOTE: These are the DP2 optimization targets.
+Target improvements: reduce MUX count, reduce flip-flop count via clock gating.

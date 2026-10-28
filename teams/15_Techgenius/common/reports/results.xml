@@ -1,0 +1,26 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1769676355" />
+    <testcase name="test_bruteforce_pin" classname="test" file="/home/user/AIHDL-2026/tinyqv-full-peripheral-template/src/test/test.py" lineno="15" time="2.1522908210754395" sim_time_ns="55460.001" ratio_time="25767.89365866839">
+      <failure message="Test failed with RANDOM_SEED=1769676355" />
+    </testcase>
+    <testcase name="test_bruteforce_short_pin" classname="test" file="/home/user/AIHDL-2026/tinyqv-full-peripheral-template/src/test/test.py" lineno="75" time="0.1868436336517334" sim_time_ns="8070.001000000004" ratio_time="43191.201339201405">
+      <failure message="Test failed with RANDOM_SEED=1769676355" />
+    </testcase>
+    <testcase name="test_bruteforce_variable_length" classname="test" file="/home/user/AIHDL-2026/tinyqv-full-peripheral-template/src/test/test.py" lineno="104" time="101.23962020874023" sim_time_ns="599435.0" ratio_time="5920.952674101888">
+      <failure message="Test failed with RANDOM_SEED=1769676355" />
+    </testcase>
+    <testcase name="test_bruteforce_hash_mode" classname="test" file="/home/user/AIHDL-2026/tinyqv-full-peripheral-template/src/test/test.py" lineno="137" time="0" sim_time_ns="0" ratio_time="nan">
+      <failure message="Test failed with RANDOM_SEED=1769676355" />
+    </testcase>
+    <testcase name="test_bruteforce_exhaustion" classname="test" file="/home/user/AIHDL-2026/tinyqv-full-peripheral-template/src/test/test.py" lineno="194" time="0" sim_time_ns="0" ratio_time="nan">
+      <failure message="Test failed with RANDOM_SEED=1769676355" />
+    </testcase>
+    <testcase name="test_bruteforce_speed_measurement" classname="test" file="/home/user/AIHDL-2026/tinyqv-full-peripheral-template/src/test/test.py" lineno="230" time="0" sim_time_ns="0" ratio_time="nan">
+      <failure message="Test failed with RANDOM_SEED=1769676355" />
+    </testcase>
+    <testcase name="test_bruteforce_alphanumeric" classname="test" file="/home/user/AIHDL-2026/tinyqv-full-peripheral-template/src/test/test.py" lineno="264" time="0" sim_time_ns="0" ratio_time="nan">
+      <failure message="Test failed with RANDOM_SEED=1769676355" />
+    </testcase>
+  </testsuite>
+</testsuites>

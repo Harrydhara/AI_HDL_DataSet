@@ -1,0 +1,31 @@
+=== DP2 FINAL METRICS — OpenLane Full Flow ===
+Date: 2026-04-23
+Tool: OpenLane v1.0.2
+PDK: SkyWater Sky130A
+Design: tqvp_belllabs_aes128
+
+TIMING:
+  Critical path: 3.04 ns
+  Fmax: 328.9 MHz
+  WNS (Worst Negative Slack): 0.0 ns — TIMING MET
+  TNS (Total Negative Slack): 0.0 ns
+
+POWER (Typical corner):
+  Internal power: 0.00404 uW
+  Switching power: 0.0046 uW
+  Leakage power:  8.39e-08 uW
+  Total:          0.00864 uW
+
+AREA:
+  Core area: 338,712.352 um²
+  Cell count: 12,689
+
+SIGN-OFF:
+  DRC violations: 0
+  LVS errors: 0
+  Flow status: COMPLETED
+
+OPTIMIZATIONS IMPLEMENTED:
+  1. Clock gating — all register banks gated by FSM state
+  2. MUX reduction — is_final registered flag
+  3. Regression: 2 NIST test vectors PASS

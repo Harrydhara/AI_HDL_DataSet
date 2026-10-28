@@ -1,0 +1,111 @@
+`timescale 1ns / 1ps
+
+module pin_auth(
+    input wire clk,            // System clock
+    input wire rst,            // System reset
+    input wire button1,        // Increment digit
+    input wire button2,        // Move to next digit
+    input wire button3,        // Confirm PIN
+    output reg unlocked,       // High when correct PIN is entered
+    output reg lockout,        // High if locked out after max attempts
+    output reg [15:0] entered_pin, // Flattened 4-digit PIN (4 bits per digit)
+    output reg [1:0] active_digit, // Indicates which digit is active (0-3)
+    output reg [2:0] attempts_left // Number of attempts remaining
+);
+
+    // Parameters for PIN digits (hardcoded PIN: 1234)
+    localparam [3:0] PIN_0 = 4'd1;
+    localparam [3:0] PIN_1 = 4'd2;
+    localparam [3:0] PIN_2 = 4'd3;
+    localparam [3:0] PIN_3 = 4'd4;
+    localparam MAX_ATTEMPTS = 3;
+
+    // Internal Registers
+    reg [3:0] pin_digits [3:0]; // Stores user-entered PIN digits
+    reg [3:0] temp_digit;       // Temporary digit being incremented
+
+    // Button Edge Detection Registers
+    reg button1_prev, button2_prev, button3_prev;
+    wire button1_edge, button2_edge, button3_edge;
+
+    // FSM States
+    reg [1:0] current_state;
+    localparam LOCKED = 2'b00;
+    localparam ENTERING = 2'b01;
+    localparam UNLOCKED = 2'b10;
+    localparam LOCKOUT = 2'b11;
+
+    // Detect Rising Edges of Buttons
+    always @(posedge clk) begin
+        button1_prev <= button1;
+        button2_prev <= button2;
+        button3_prev <= button3;
+    end
+    assign button1_edge = button1 & ~button1_prev; // Detects 0 -> 1 transition
+    assign button2_edge = button2 & ~button2_prev; // Detects 0 -> 1 transition
+    assign button3_edge = button3 & ~button3_prev; // Detects 0 -> 1 transition
+
+    // Main state machine
+    always @(posedge clk or posedge rst) begin
+        if (rst) begin
+            current_state <= LOCKED;
+            active_digit <= 0;
+            temp_digit <= 0;
+            unlocked <= 0;
+            attempts_left <= MAX_ATTEMPTS;
+            lockout <= 0;
+            entered_pin <= 16'd0;
+            
+            // Explicitly Initialize pin_digits to 0
+            pin_digits[0] <= 4'd0;
+            pin_digits[1] <= 4'd0;
+            pin_digits[2] <= 4'd0;
+            pin_digits[3] <= 4'd0;
+            
+        end else begin
+            case (current_state)
+                LOCKED: begin
+                    unlocked <= 0;
+                    if (button1_edge) begin // Use edge detection
+                        temp_digit <= (temp_digit == 9) ? 0 : temp_digit + 1; // Increment digit
+                    end
+                    if (button2_edge) begin // Use edge detection
+                        pin_digits[active_digit] <= temp_digit; // Save digit
+                        temp_digit <= 0;
+                        active_digit <= (active_digit == 3) ? 0 : active_digit + 1;
+                    end
+                    if (button3_edge) begin // Use edge detection
+                        // Verify PIN
+                        if ((pin_digits[0] == PIN_0) &&
+                            (pin_digits[1] == PIN_1) &&
+                            (pin_digits[2] == PIN_2) &&
+                            (pin_digits[3] == PIN_3)) begin
+                            unlocked <= 1;
+                            current_state <= UNLOCKED;
+                        end else begin
+                            attempts_left <= attempts_left - 1;
+                            if (attempts_left == 1) begin
+                                lockout <= 1;
+                                current_state <= LOCKOUT;
+                            end
+                        end
+                    end
+                end
+                UNLOCKED: begin
+                    unlocked <= 1;
+                end
+                LOCKOUT: begin
+                    lockout <= 1;
+                    unlocked <= 0;
+                end
+                default: current_state <= LOCKED;
+            endcase
+        end
+    end
+
+    // Flatten pin_digits array into entered_pin output
+    always @(*) begin
+        entered_pin = {pin_digits[3], pin_digits[2], pin_digits[1], pin_digits[0]};
+    end
+
+endmodule

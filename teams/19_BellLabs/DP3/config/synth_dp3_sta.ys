@@ -1,0 +1,25 @@
+# ============================================================
+# Bell Labs — AI-HDL 2026 — DP3 Security STA Script
+# ============================================================
+
+# Step 1: Read the RTL
+read_verilog src/aes128/aes128_peripheral.v
+
+# Step 2: Synthesize targeting Sky130A
+synth -top tqvp_belllabs_aes128
+
+# Step 3: Optimizations
+opt
+opt_clean
+
+# Step 4: Print area statistics
+stat
+
+# Step 5: Static timing analysis — prints critical path and Fmax
+sta
+
+# Step 6: Power estimation
+power -hier
+
+# Step 7: Write secure netlist
+write_verilog reports/dp3/sta_netlist.v

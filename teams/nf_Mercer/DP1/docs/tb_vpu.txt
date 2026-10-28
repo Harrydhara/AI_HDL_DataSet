@@ -1,0 +1,5 @@
+user@host:~/AI-HDL/DP_test2$ iverilog -g2012 -o sim_vpu peripheral.v tb_tqvp_vpu.v
+    vvp sim_vpu
+    VPU_RESULT = 70 (expected 70)
+    VPU_DONE = 1
+    tb_tqvp_vpu.v:97: $finish called at 355000 (1ps)

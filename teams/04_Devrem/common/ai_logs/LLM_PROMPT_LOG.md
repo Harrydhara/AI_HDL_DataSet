@@ -1,0 +1,563 @@
+# LLM Prompt Log - AI-HDL 2026 Design Phases 1 / 2 / 3 / 4
+
+**Project:** 8-Point FFT Accelerator Peripheral  
+**Team:** Devrem  
+**LLM Used:** Claude (Anthropic)  
+**Date:** January 29, 2026
+
+---
+
+## Summary
+
+This document contains the key prompts used to generate the 8-Point FFT Accelerator peripheral for the TinyQV RISC-V core. The design was iteratively developed through conversation with Claude.
+
+---
+
+## Prompt 1: Project Initialization & Module Selection
+
+**Prompt:**
+
+```
+Read the details about the design competition I am participating.
+[Attached: AI-HDL 2026 Design Phase 1 Documentation]
+```
+
+**Response Summary:**  
+Claude analyzed the competition requirements, timeline, deliverables, and grading criteria. Identified key requirements: synthesizable RTL, verification, synthesis report, documentation, and GitHub tag.
+
+---
+
+## Prompt 2: Module Selection
+
+**Prompt:**
+
+```
+Now think like I am complete n00b in this stuff. I've just got installed programs in my WSL, rest is up to you, help me step by step.
+```
+
+**Follow-up:**
+
+```
+What about Fourier transform module?
+```
+
+**Response Summary:**  
+Claude recommended an 8-point FFT as a good balance between complexity (earning innovation points) and achievability. Outlined the register map and architecture approach using Radix-2 Decimation-in-Time algorithm with fixed-point arithmetic.
+
+---
+
+## Prompt 3: FFT Core Generation
+
+**Prompt:**
+
+```
+[After cloning repos and setting up project structure]
+Yes, proceed with generating the FFT Verilog code.
+```
+
+**Generated Files:**
+
+- `fft_8point.v` - 8-point FFT computation engine
+- `peripheral.v` - TinyQV bus interface wrapper
+
+**Key Design Decisions Made by LLM:**
+
+1. Radix-2 DIT (Decimation-in-Time) algorithm
+2. Q1.15 fixed-point format for twiddle factors
+3. Sequential butterfly computation (area-optimized)
+4. 3-stage pipeline: IDLE → STAGE1 → STAGE2 → STAGE3 → DONE
+5. Bit-reversed input ordering handled in hardware
+6. Complex multiplication with rounding
+
+---
+
+## Prompt 4: Testbench Generation
+
+**Prompt:**
+
+```
+[Implicit - part of the FFT generation request]
+Generate testbench to verify the FFT works.
+```
+
+**Generated File:**
+
+- `fft_8point_tb.v` - Comprehensive testbench
+
+**Test Cases Generated:**
+
+1. DC Signal (all ones) → Verify X[0] = 8×input, rest = 0
+2. Impulse (delta function) → Verify flat spectrum
+3. Alternating signal → Verify Nyquist bin response
+4. Single-cycle sine wave → Verify bins 1 and 7
+5. Two-cycle cosine wave → Verify bins 2 and 6
+
+---
+
+## Prompt 5: Synthesis Script
+
+**Prompt:**
+
+```
+[After successful simulation]
+Run synthesis with Yosys to get baseline PPA estimates.
+```
+
+**Generated:**
+
+- Yosys synthesis script (`synth.ys`)
+- Commands for running synthesis
+
+**Synthesis Results:**
+
+- Total Cells: 12,172
+- Flip-Flops: 854
+- NAND Gates: 5,709
+- XOR Gates: 2,561
+
+---
+
+## Prompt 6: Block Diagram Generation
+
+**Prompt:**
+
+```
+Yes generate block diagram.
+```
+
+**Generated Files:**
+
+- `fft_block_diagram.svg` - Hardware architecture diagram
+- `fft_butterfly_flow.svg` - FFT signal flow diagram
+
+---
+
+## Prompt 7: Documentation
+
+**Prompt:**
+
+```
+[Implicit - part of project setup]
+Create project documentation.
+```
+
+**Generated File:**
+
+- `docs/info.md` - Register map, usage example, architecture description
+
+---
+
+## Key LLM Contributions
+
+| Component | LLM Contribution |
+|-----------|------------------|
+| Architecture | Radix-2 DIT FFT with sequential butterflies |
+| Fixed-Point | Q1.15 twiddle factors with proper rounding |
+| Interface | TinyQV-compatible memory-mapped registers |
+| Verification | 5 mathematically-verified test cases |
+| Synthesis | Yosys script and gate-level analysis |
+| Documentation | Register map, block diagrams, usage examples |
+
+---
+
+## Design Iterations
+
+### Iteration 1: Initial FFT Core
+
+- Generated basic 8-point FFT structure
+- Implemented butterfly unit with complex multiplication
+
+### Iteration 2: Peripheral Wrapper
+
+- Added TinyQV bus interface
+- Implemented register map for CPU access
+- Added interrupt on completion
+
+### Iteration 3: Synthesis Fix
+
+- Fixed Yosys `abc` command syntax (removed NOT from gate list)
+- Successfully synthesized to ~12K cells
+
+---
+
+## Verification Results
+
+All LLM-generated test cases passed:
+
+```
+Test 1: DC Signal (all ones)         - PASS
+Test 2: Impulse Signal               - PASS  
+Test 3: Alternating Signal (Nyquist) - PASS
+Test 4: Single Cycle Sine Wave       - PASS
+Test 5: Two-Cycle Cosine Wave        - PASS
+```
+
+---
+
+## Lessons Learned
+
+1. **Fixed-Point Precision:** Q1.15 format provides sufficient precision for 8-point FFT with minimal rounding errors.
+
+2. **Bit-Reversal:** Handling bit-reversal at input stage simplifies the butterfly addressing.
+
+3. **Sequential vs Parallel:** Sequential butterfly computation trades latency for area - appropriate for peripheral use case.
+
+4. **Synthesis Tools:** Yosys ABC command syntax requires careful attention to supported gate types.
+
+---
+
+## Files Generated by LLM
+
+| File | Lines | Purpose |
+|------|-------|---------|
+| `fft_8point.v` | ~280 | FFT computation core |
+| `peripheral.v` | ~200 | Bus interface wrapper |
+| `fft_8point_tb.v` | ~300 | Verification testbench |
+| `docs/info.md` | ~80 | Documentation |
+| `fft_block_diagram.svg` | ~250 | Architecture diagram |
+| `fft_butterfly_flow.svg` | ~200 | Signal flow diagram |
+| `synth.ys` | ~12 | Synthesis script |
+
+**Total LLM-Generated Code:** ~1,300 lines
+
+---
+
+*This prompt log was generated as part of the AI-HDL 2026 competition requirements to document the AI-assisted design methodology.*
+
+---
+
+## Design Phase 3 — Security Hardening
+
+*Date: 2026-03-25 | LLM: Claude Sonnet 4.6*
+
+---
+
+## Prompt DP3-1: Attack Surface Mapping
+
+**Prompt:**
+```
+Read the DP3 brief. Map the attack surface of the current peripheral (fft_8point.v,
+peripheral.v, tt_wrapper.v). Produce docs/ATTACK_SURFACE_MAP.md.
+```
+
+**Generated:** `docs/ATTACK_SURFACE_MAP.md` — 4 trust boundaries, 12 entry points, data flow table.
+
+---
+
+## Prompt DP3-2: CIA Analysis
+
+**Prompt:**
+```
+Perform CIA analysis on the attack surface. Produce docs/CIA_ANALYSIS.md.
+```
+
+**Generated:** `docs/CIA_ANALYSIS.md` — 4 assets × 3 CIA dimensions, per-asset threat summary.
+
+---
+
+## Prompt DP3-3: STRIDE Analysis
+
+**Prompt:**
+```
+Perform STRIDE threat analysis. Cross-reference all 6 STRIDE categories against the
+attack surface. Produce docs/STRIDE_ANALYSIS.md.
+```
+
+**Generated:** `docs/STRIDE_ANALYSIS.md` — 18 threats catalogued with root cause and RTL evidence.
+
+---
+
+## Prompt DP3-4: DREAD Scoring
+
+**Prompt:**
+```
+Score all STRIDE threats using DREAD methodology. Rank by severity.
+Produce docs/DREAD_SCORES.md.
+```
+
+**Generated:** `docs/DREAD_SCORES.md` — 18 threats ranked; 8 CRITICAL, 9 HIGH, 1 MEDIUM.
+
+---
+
+## Prompt DP3-5: CWE Mapping
+
+**Prompt:**
+```
+Map the identified threats to hardware-relevant CWEs (CWE-1234, CWE-1262, CWE-1271,
+CWE-1272, CWE-1351, CWE-1231, CWE-276, CWE-390, CWE-682).
+Produce docs/CWE_FINDINGS.md.
+```
+
+**Generated:** `docs/CWE_FINDINGS.md` — 9 CWE evaluations with YES/PARTIAL/NO verdicts and RTL evidence.
+
+---
+
+## Prompt DP3-6: Mitigation Plan
+
+**Prompt:**
+```
+Design countermeasures for all CRITICAL and HIGH threats. Specify CM-A through CM-I
+with exact RTL change specifications. Produce docs/MITIGATION_PLAN.md.
+```
+
+**Generated:** `docs/MITIGATION_PLAN.md` — 9 countermeasures with Verilog code specifications.
+
+---
+
+## Prompt DP3-7: Peripheral Hardening (peripheral.v)
+
+**Prompt:**
+```
+Implement CM-A (SPI lock register), CM-B (input zeroization), CM-C (interrupt-clear bit),
+CM-D (write_error flag), CM-H (input read-back removed), CM-I (uo_out masked) in
+src/peripheral.v.
+```
+
+**Modified:** `src/peripheral.v` — all 6 countermeasures implemented. Register map extended
+to CONTROL[3:0] and STATUS[2:0].
+
+---
+
+## Prompt DP3-8: FFT Core Hardening (fft_8point.v)
+
+**Prompt:**
+```
+Implement CM-G (stage register reset init), CM-F (FSM hardening + fsm_error port),
+CM-E (butterfly overflow saturation), CM-B (stage register zeroization in DONE state)
+in src/fft_8point.v.
+```
+
+**Modified:** `src/fft_8point.v` — full rewrite of reset block, DONE state, butterfly Stage 2;
+added `fsm_error` output port.
+
+---
+
+## Prompt DP3-9: Wrapper Hardening (tt_wrapper.v)
+
+**Prompt:**
+```
+Implement CM-A SPI lock gating in src/tt_wrapper.v. Wire spi_lock from peripheral
+to gate data_write_n, data_read_n, and data_out_masked.
+```
+
+**Modified:** `src/tt_wrapper.v` — `spi_lock` wire declared, instantiation extended,
+`always @(*)` block replaced with lock-gated version.
+
+**Bug fixed (colleague report):** `reg [7:0] ui_in_sync` → `wire [7:0] ui_in_sync`
+(iverilog rejected continuous assignment driving a reg — committed separately).
+
+---
+
+## Prompt DP3-10: Security Testbench
+
+**Prompt:**
+```
+Create src/security_tb.v with 9 test scenarios covering all 9 countermeasures.
+Must compile with: iverilog -o sec_test fft_8point.v peripheral.v tt_wrapper.v security_tb.v
+```
+
+**Generated:** `src/security_tb.v` — 9 scenarios, 11 checks. Includes synchronizer and
+spi_reg stubs for standalone compilation. All 11 checks PASSED on first WSL run.
+
+---
+
+## Prompt DP3-11: Regression Results
+
+**Prompt:**
+```
+Analyze WSL simulation results (11/11 PASS, functional 3/3 PASS, Yosys 0 errors).
+Produce docs/REGRESSION_RESULTS.md and docs/SECURITY_VALIDATION_RESULTS.md.
+```
+
+**Generated:** `docs/REGRESSION_RESULTS.md`, `docs/SECURITY_VALIDATION_RESULTS.md`
+
+---
+
+## Prompt DP3-12: PPA Impact Analysis
+
+**Prompt:**
+```
+Read synthesis_report.txt (DP1) and synthesis_report_dp2.txt (DP2). Compare with
+DP3 Yosys results (11,396 cells, 925 FFs). Produce docs/PPA_IMPACT_ANALYSIS.md.
+```
+
+**Generated:** `docs/PPA_IMPACT_ANALYSIS.md` — DP1/DP2/DP3 cell count and FF comparison,
+per-countermeasure overhead breakdown.
+
+---
+
+## Prompt DP3-13: Final Security Report
+
+**Prompt:**
+```
+Synthesize all DP3 docs into a single final submission document.
+Produce docs/DP3_SECURITY_REPORT.md.
+```
+
+**Generated:** `docs/DP3_SECURITY_REPORT.md` — executive summary, threat model, countermeasures,
+validation results, PPA impact, residual risks, document index.
+
+---
+
+## Prompt DP3-14: README + Log + Commit
+
+**Prompt:**
+```
+Update README.md to DP3, append DP3 section to LLM_PROMPT_LOG.md, commit all DP3 docs.
+```
+
+**Modified:** `README.md` (phase, features, PPA table, file tree, verification, register map),
+`docs/LLM_PROMPT_LOG.md` (this section).
+
+---
+
+## DP3 Summary
+
+| Component | LLM Contribution |
+|-----------|-----------------|
+| Threat Modelling | Attack surface map, CIA, STRIDE (18 threats), DREAD scores, 9 CWE mappings |
+| Countermeasure Design | Mitigation plan specifying CM-A…CM-I with RTL code |
+| RTL Hardening | peripheral.v, fft_8point.v, tt_wrapper.v — all 9 CMs implemented |
+| Security Testbench | security_tb.v — 9 scenarios, 11 checks, 11/11 PASS |
+| Analysis Documents | REGRESSION_RESULTS, SECURITY_VALIDATION_RESULTS, PPA_IMPACT_ANALYSIS, DP3_SECURITY_REPORT |
+
+**Total DP3 LLM-generated/modified content:** ~1,800 lines RTL + ~900 lines documentation
+
+---
+
+# Design Phase 4 (DP4) — Netlist to Chip Tapeout
+
+## Prompt DP4-1: Project State Review & DP4 Kickoff
+
+**Prompt:**
+```
+Read the design stage 3 document to remember where we left, then keep going with phase 4
+described in AI-HDL 2026 - Design Phase 4 Documentation.pdf.
+This is a github repo for the project. Keep the workflow in mind: push files to repo,
+colleague downloads, runs required tools, sends results back, then we push the final project.
+```
+
+**Actions:**
+- Reviewed DP3 (Security Evaluation) and DP4 (Netlist to Chip Tapeout) documentation
+- Explored complete project state: source files, config, docs, git history
+- Identified critical bug: `fft_8point.v` missing from `info.yaml` source_files list
+
+---
+
+## Prompt DP4-2: Fix info.yaml
+
+**Prompt:** (Automated fix based on review)
+
+**Modified:** `info.yaml`
+- Added `fft_8point.v` to source_files (was missing — would cause synthesis failure)
+- Filled in project metadata: title, author, description
+- Fixed clock_hz: 64000000 → 71500000 (matching config.json 14ns period)
+- Filled in pinout descriptions for uo_out (fft_busy, fft_done) and ui_in (unused)
+
+---
+
+## Prompt DP4-3: OpenLane Run Instructions
+
+**Prompt:** (Generated as part of DP4 preparation)
+
+**Generated:** `docs/DP4_OPENLANE_INSTRUCTIONS.md` — step-by-step guide for colleague to:
+- Set up OpenLane environment (3 options: tt tool, OpenLane standalone, AIHDL template)
+- Run the full ASIC flow
+- Collect all required output files (GDSII, STA, DRC, LVS reports)
+- Troubleshoot common issues
+
+---
+
+## Prompt DP4-4: Final Project Report (DP1-DP4)
+
+**Prompt:** (Generated as part of DP4 preparation)
+
+**Generated:** `docs/DP4_FINAL_PROJECT_REPORT.md` — comprehensive report covering:
+- Full design journey across all 4 phases
+- Architecture overview, register map, pinout
+- DP1 design decisions and baseline metrics
+- DP2 optimization techniques and PPA improvements
+- DP3 threat modeling and countermeasure summary
+- DP4 physical design flow and configuration (with TBD placeholders for OpenLane results)
+- AI-assisted methodology reflection
+- Lessons learned
+
+---
+
+## Prompt DP4-5: README & Documentation Update
+
+**Prompt:** (Generated as part of DP4 preparation)
+
+**Modified:** `README.md`
+- Updated phase to DP4
+- Added DP4 Physical Design section with OpenLane config summary
+- Updated file structure to include DP4 docs
+- Added OpenLane to tools list
+
+**Modified:** `docs/LLM_PROMPT_LOG.md` (this section)
+
+---
+
+## DP4 Summary (Pre-OpenLane)
+
+| Component | LLM Contribution |
+|-----------|-----------------|
+| Bug Fix | `fft_8point.v` missing from info.yaml source_files — would have caused OpenLane synthesis failure |
+| Configuration | Verified config.json correctness for TT OpenLane flow |
+| Instructions | DP4_OPENLANE_INSTRUCTIONS.md for colleague to run flow |
+| Final Report | DP4_FINAL_PROJECT_REPORT.md — comprehensive DP1-DP4 report with TBD placeholders |
+| Documentation | README, LLM_PROMPT_LOG updated for DP4 |
+
+---
+
+## Prompt DP4-6: Tile Size Fix (1x2 → 4x2 → 6x2)
+
+**Problem:** Design area (103,292 um²) exceeded 1x2 tile core area (34,255 um²) by 3.5x.
+
+**Iteration 1:** Changed tiles to 4x2, PL_TARGET_DENSITY_PCT to 80.
+**Result:** Failed — `[DPL-0036] Detailed placement failed` after timing buffers and antenna diodes consumed remaining space.
+
+**Iteration 2:** Changed tiles to 6x2, PL_TARGET_DENSITY_PCT to 65.
+**Result:** **SUCCESS** — Full 72-step OpenLane flow completed. DRC/LVS clean, 59.8% utilization.
+
+**Key learning:** sky130 standard cells are much larger than abstract Yosys gates. Infrastructure overhead (timing repair buffers +2,469 cells, clock tree +157 cells, antenna diodes +206 cells, fill/tap cells +30,460) must be accounted for when selecting tile size.
+
+---
+
+## Prompt DP4-7: OpenLane Results Analysis & Report Finalization
+
+**Prompt:**
+```
+Colleague sent the runs folder. Analyze the OpenLane output metrics,
+fill TBD placeholders in the final report, and prepare for submission.
+```
+
+**Actions:**
+- Analyzed `metrics.json`: DRC=0, LVS=0, setup slack=+3.17ns (nom), power=6.30mW
+- Copied GDSII, LEF, render, metrics to `gds/` directory
+- Filled all TBD placeholders in `docs/DP4_FINAL_PROJECT_REPORT.md`
+- Updated `README.md` with final PPA table and sign-off results
+- Updated `docs/LLM_PROMPT_LOG.md` (this section)
+
+---
+
+## DP4 Final Summary
+
+| Component | LLM Contribution |
+|-----------|-----------------|
+| Bug Fix | `fft_8point.v` missing from info.yaml source_files |
+| Tile Sizing | 3 iterations: 1x2 (fail) → 4x2 (fail) → 6x2 (success) |
+| Configuration | config.json tuning (density, tile size) across iterations |
+| Instructions | DP4_OPENLANE_INSTRUCTIONS.md for colleague |
+| Results Analysis | Parsed 329-line metrics.json, extracted key PPA numbers |
+| Final Report | DP4_FINAL_PROJECT_REPORT.md — all TBD placeholders filled with real data |
+| Documentation | README, LLM_PROMPT_LOG updated for final submission |
+
+**Key DP4 Results:**
+- **GDSII:** `gds/tt_um_tqv_peripheral_harness.gds` (23.7 MB)
+- **DRC:** 0 errors (CLEAN)
+- **LVS:** 0 mismatches (CLEAN)
+- **Setup Slack:** +3.17 ns (nom_tt_025C_1v80)
+- **Hold Slack:** +0.31 ns (all corners clean)
+- **Power:** 6.30 mW
+- **Utilization:** 59.8% on 6x2 tile

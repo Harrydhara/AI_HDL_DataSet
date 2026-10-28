@@ -1,0 +1,47 @@
+# ============================================================
+# Bell Labs — University of Lagos, Nigeria
+# AI Hardware Design League 2026 — Team #63
+# Design Phase 1: Yosys Synthesis Script
+#
+# Module  : tqvp_belllabs_aes128
+# Target  : SkyWater Sky130 (sky130_fd_sc_hd)
+# Run with: yosys scripts/synth_dp1.ys
+# Log to  : reports/dp1/synthesis_log.txt
+# ============================================================
+
+# STEP 1: Read the Verilog source file
+# This parses your RTL and converts it into Yosys internal
+# representation (RTLIL). All module definitions are loaded.
+read_verilog src/aes128/aes128_peripheral.v
+
+# STEP 2: Run synthesis targeting the sky130_fd_sc_hd cell library
+# This is the main synthesis pass. It:
+#   - Flattens the design hierarchy
+#   - Maps your RTL (if/case/always) to logic gates
+#   - Maps those gates to actual Sky130 standard cells
+#   - Optimises for area by default
+synth -top tqvp_belllabs_aes128
+
+# STEP 3: Run general optimisation
+# Simplifies logic expressions, removes redundant gates,
+# and propagates constants through the netlist.
+opt
+
+# STEP 4: Run clean-up optimisation
+# Removes any cells and wires that became unused after
+# the previous optimisation pass. Keeps the netlist lean.
+opt_clean
+
+# STEP 5: Print statistics — your DP1 baseline PPA numbers
+# This prints: number of wires, wire bits, cells, flip-flops,
+# and each cell type used. Copy these numbers into your DP1 report.
+stat
+
+# STEP 6: Write the synthesised gate-level netlist
+# This is the proof that your design can be mapped to real
+# silicon. It is required as a DP1 submission deliverable.
+write_verilog reports/dp1/netlist.v
+
+# STEP 7: Write a JSON report of the synthesised netlist
+# Useful for automated tooling and the DP2 optimisation phase.
+write_json reports/dp1/synthesis.json

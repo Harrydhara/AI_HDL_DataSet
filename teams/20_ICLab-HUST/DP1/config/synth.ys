@@ -1,0 +1,47 @@
+# TinyQV DMA Synthesis Script for Yosys
+# Run with: yosys synth.ys
+
+# Read all RTL files
+read_verilog rtl/alu.v
+read_verilog rtl/core.v
+read_verilog rtl/counter.v
+read_verilog rtl/cpu.v
+read_verilog rtl/decode.v
+read_verilog rtl/latch_reg.v
+read_verilog rtl/mem_ctrl.v
+read_verilog rtl/qspi_ctrl.v
+read_verilog rtl/qspi_flash.v
+read_verilog rtl/register.v
+read_verilog rtl/time.v
+read_verilog rtl/tinyqv_dma.v
+read_verilog rtl/dma_arbiter.v
+read_verilog rtl/tinyqv_dma_top.v
+
+# Set top module and build hierarchy
+hierarchy -top tinyqv_dma_top
+
+# High-level synthesis
+proc
+flatten
+opt
+
+# Technology-independent optimization
+techmap
+opt
+
+# Map to generic gates
+abc -g AND,OR,XOR,MUX,AOI3,OAI3,AOI4,OAI4
+
+# Final cleanup
+opt_clean
+clean
+
+# Print design statistics
+stat
+
+# Write synthesized output to synthesis folder
+write_verilog -noattr synthesis/synthesized.v
+
+# Write JSON for visualization or nextpnr
+write_json synthesis/design.json
+

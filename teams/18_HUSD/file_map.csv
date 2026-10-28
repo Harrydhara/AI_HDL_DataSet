@@ -1,0 +1,32 @@
+released_path,path_in_original_submission,category
+DP1/ai_logs/debugging.md,ai logs/debugging.md,ai_logs
+DP1/ai_logs/design_generation.md,ai logs/design_generation.md,ai_logs
+DP1/ai_logs/raw_logs.md,ai logs/raw_logs.md,ai_logs
+DP1/docs/README.md,README.md,docs
+DP1/docs/ai_strategy.md,docs/ai_strategy.md,docs
+DP1/docs/challenges_faced.md,docs/challenges_faced.md,docs
+DP1/docs/design_methodology.md,docs/design_methodology.md,docs
+DP1/docs/fpga.md,results/fpga/fpga.md,docs
+DP1/docs/lessons_learned.md,docs/lessons_learned.md,docs
+DP1/docs/simulation.md,results/simulation/simulation.md,docs
+DP1/docs/submission-form.md,submission-form.md,docs
+DP1/docs/synthesis.md,results/synthesis/dp1_baseline/synthesis.md,docs
+DP1/docs/test_vector.md,testbench/test_vector.md,docs
+DP1/docs/timing.md,results/timing/timing.md,docs
+DP1/reports/metrics.csv,results/synthesis/dp1_baseline/metrics.csv,reports
+DP1/rtl/ai logs__peripheral.v,ai logs/peripheral.v,rtl
+DP1/rtl/ai logs__peripheral_optimized.v,ai logs/peripheral_optimized.v,rtl
+DP1/rtl/ai logs__tt_wrapper.v,ai logs/tt_wrapper.v,rtl
+DP1/rtl/src__peripheral.v,src/peripheral.v,rtl
+DP1/rtl/src__peripheral_optimized.v,src/peripheral_optimized.v,rtl
+DP1/rtl/src__tt_wrapper.v,src/tt_wrapper.v,rtl
+DP1/testbench/tb_custom.v,testbench/tb_custom.v,testbench
+DP1/testbench/tb_main.v,testbench/tb_main.v,testbench
+DP2/ai_logs/DP2.md,ai logs/DP2.md,ai_logs
+DP2/docs/README.md,README.md,docs
+DP2/docs/optimization_report_dp2.md,docs/optimization_report_dp2.md,docs
+DP2/docs/synthesis.md,results/synthesis/dp2_optimized/synthesis.md,docs
+DP2/reports/metrics dp2.csv,results/synthesis/dp2_optimized/metrics dp2.csv,reports
+DP2/rtl/peripheral.v,src/peripheral.v,rtl
+DP2/testbench/tb_custom.v,src/tb_custom.v,testbench
+DP3/docs/DP3_Security_Report.md,docs/DP3_Security_Report.md,docs

@@ -1,0 +1,227 @@
+
+===========================================================================
+report_checks -unconstrained
+===========================================================================
+======================= Typical Corner ===================================
+
+Startpoint: m_ready (input port clocked by clk)
+Endpoint: _6486_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                  0.15    0.00    0.00   clock clk (rise edge)
+                          0.00    0.00   clock network delay (ideal)
+                          8.00    8.00 ^ input external delay
+     3    0.02    0.11    0.08    8.08 ^ m_ready (in)
+                                         m_ready (net)
+                  0.11    0.00    8.08 ^ _3195_/C (sky130_fd_sc_hd__nand3_2)
+     9    0.05    0.30    0.27    8.35 v _3195_/Y (sky130_fd_sc_hd__nand3_2)
+                                         _0885_ (net)
+                  0.30    0.00    8.35 v _3381_/B (sky130_fd_sc_hd__nor2_2)
+     3    0.02    0.27    0.34    8.70 ^ _3381_/Y (sky130_fd_sc_hd__nor2_2)
+                                         _1066_ (net)
+                  0.27    0.00    8.70 ^ _3382_/C1 (sky130_fd_sc_hd__o2111ai_2)
+     3    0.01    0.16    0.23    8.93 v _3382_/Y (sky130_fd_sc_hd__o2111ai_2)
+                                         _1067_ (net)
+                  0.16    0.00    8.93 v _3388_/B (sky130_fd_sc_hd__nor2_2)
+     3    0.02    0.24    0.26    9.19 ^ _3388_/Y (sky130_fd_sc_hd__nor2_2)
+                                         _1073_ (net)
+                  0.24    0.00    9.19 ^ _3453_/A (sky130_fd_sc_hd__buf_1)
+    10    0.04    0.43    0.41    9.59 ^ _3453_/X (sky130_fd_sc_hd__buf_1)
+                                         _1127_ (net)
+                  0.43    0.00    9.59 ^ _3460_/A (sky130_fd_sc_hd__buf_1)
+    10    0.07    0.84    0.72   10.32 ^ _3460_/X (sky130_fd_sc_hd__buf_1)
+                                         _1133_ (net)
+                  0.84    0.01   10.33 ^ _3571_/A (sky130_fd_sc_hd__nor2_2)
+     2    0.01    0.12    0.10   10.43 v _3571_/Y (sky130_fd_sc_hd__nor2_2)
+                                         _1222_ (net)
+                  0.12    0.00   10.43 v _5745_/A1 (sky130_fd_sc_hd__mux2_2)
+     1    0.00    0.05    0.30   10.73 v _5745_/X (sky130_fd_sc_hd__mux2_2)
+                                         _2840_ (net)
+                  0.05    0.00   10.73 v _5746_/A (sky130_fd_sc_hd__buf_1)
+     1    0.00    0.02    0.09   10.81 v _5746_/X (sky130_fd_sc_hd__buf_1)
+                                         _0596_ (net)
+                  0.02    0.00   10.81 v _6486_/D (sky130_fd_sc_hd__dfxtp_2)
+                                 10.81   data arrival time
+
+                  0.15   40.00   40.00   clock clk (rise edge)
+                          0.00   40.00   clock network delay (ideal)
+                         -0.25   39.75   clock uncertainty
+                          0.00   39.75   clock reconvergence pessimism
+                                 39.75 ^ _6486_/CLK (sky130_fd_sc_hd__dfxtp_2)
+                         -0.08   39.67   library setup time
+                                 39.67   data required time
+-----------------------------------------------------------------------------
+                                 39.67   data required time
+                                -10.81   data arrival time
+-----------------------------------------------------------------------------
+                                 28.86   slack (MET)
+
+
+
+
+===========================================================================
+report_checks --slack_max -0.01
+============================================================================
+======================= Typical Corner ===================================
+
+No paths found.
+
+
+===========================================================================
+ report_check_types -max_slew -max_cap -max_fanout -violators
+============================================================================
+======================= Typical Corner ===================================
+
+max slew
+
+Pin                                    Limit    Slew   Slack
+------------------------------------------------------------
+_3444_/A                                0.75    0.97   -0.22 (VIOLATED)
+_3525_/A                                0.75    0.97   -0.22 (VIOLATED)
+_3478_/A                                0.75    0.97   -0.22 (VIOLATED)
+_3531_/A                                0.75    0.97   -0.22 (VIOLATED)
+_3528_/A                                0.75    0.97   -0.22 (VIOLATED)
+_4657_/B1                               0.75    0.97   -0.22 (VIOLATED)
+_4801_/B1                               0.75    0.97   -0.22 (VIOLATED)
+_4935_/A                                0.75    0.97   -0.22 (VIOLATED)
+_5738_/B1                               0.75    0.97   -0.22 (VIOLATED)
+_3436_/X                                0.75    0.97   -0.22 (VIOLATED)
+_5760_/C1                               0.75    0.97   -0.22 (VIOLATED)
+_3761_/B1                               0.75    0.85   -0.10 (VIOLATED)
+_3768_/B1                               0.75    0.85   -0.10 (VIOLATED)
+_3664_/B1                               0.75    0.85   -0.10 (VIOLATED)
+_3645_/B1                               0.75    0.85   -0.10 (VIOLATED)
+_4715_/A2_N                             0.75    0.85   -0.10 (VIOLATED)
+_3682_/B1                               0.75    0.85   -0.10 (VIOLATED)
+_3555_/B1                               0.75    0.85   -0.10 (VIOLATED)
+_3608_/B1                               0.75    0.85   -0.10 (VIOLATED)
+_3695_/B1                               0.75    0.85   -0.10 (VIOLATED)
+_3554_/X                                0.75    0.85   -0.10 (VIOLATED)
+_3710_/B1                               0.75    0.85   -0.10 (VIOLATED)
+_4994_/S0                               0.75    0.85   -0.10 (VIOLATED)
+_4991_/S0                               0.75    0.85   -0.10 (VIOLATED)
+_4997_/S0                               0.75    0.85   -0.10 (VIOLATED)
+_4985_/S0                               0.75    0.85   -0.10 (VIOLATED)
+_4970_/S0                               0.75    0.85   -0.10 (VIOLATED)
+_4981_/S0                               0.75    0.85   -0.10 (VIOLATED)
+_4978_/S0                               0.75    0.85   -0.10 (VIOLATED)
+_4974_/S0                               0.75    0.85   -0.10 (VIOLATED)
+_4965_/X                                0.75    0.85   -0.10 (VIOLATED)
+_4966_/S0                               0.75    0.85   -0.10 (VIOLATED)
+_4988_/S0                               0.75    0.85   -0.10 (VIOLATED)
+_5729_/A1                               0.75    0.84   -0.09 (VIOLATED)
+_5745_/A0                               0.75    0.84   -0.09 (VIOLATED)
+_3571_/A                                0.75    0.84   -0.09 (VIOLATED)
+_4615_/B2                               0.75    0.84   -0.09 (VIOLATED)
+_4853_/B2                               0.75    0.84   -0.09 (VIOLATED)
+_3516_/B1                               0.75    0.84   -0.09 (VIOLATED)
+_3460_/X                                0.75    0.84   -0.09 (VIOLATED)
+_3461_/B1                               0.75    0.84   -0.09 (VIOLATED)
+_3465_/B1                               0.75    0.84   -0.09 (VIOLATED)
+_3469_/B1                               0.75    0.84   -0.09 (VIOLATED)
+_3486_/B1                               0.75    0.84   -0.09 (VIOLATED)
+_5030_/S0                               0.75    0.83   -0.08 (VIOLATED)
+_5024_/S0                               0.75    0.83   -0.08 (VIOLATED)
+_5027_/S0                               0.75    0.83   -0.08 (VIOLATED)
+_5021_/S0                               0.75    0.83   -0.08 (VIOLATED)
+_5016_/S0                               0.75    0.83   -0.08 (VIOLATED)
+_5033_/S0                               0.75    0.83   -0.08 (VIOLATED)
+_5005_/S0                               0.75    0.83   -0.08 (VIOLATED)
+_5013_/S0                               0.75    0.83   -0.08 (VIOLATED)
+_5001_/S0                               0.75    0.83   -0.08 (VIOLATED)
+_5009_/S0                               0.75    0.83   -0.08 (VIOLATED)
+_5000_/X                                0.75    0.83   -0.08 (VIOLATED)
+_3706_/A                                0.75    0.81   -0.06 (VIOLATED)
+_3691_/A                                0.75    0.81   -0.06 (VIOLATED)
+_3678_/A                                0.75    0.81   -0.06 (VIOLATED)
+_3540_/A1_N                             0.75    0.81   -0.06 (VIOLATED)
+_3660_/A                                0.75    0.81   -0.06 (VIOLATED)
+_3545_/A1_N                             0.75    0.81   -0.06 (VIOLATED)
+_3641_/A                                0.75    0.81   -0.06 (VIOLATED)
+_3550_/A                                0.75    0.81   -0.06 (VIOLATED)
+_3605_/A                                0.75    0.81   -0.06 (VIOLATED)
+_3536_/X                                0.75    0.80   -0.05 (VIOLATED)
+_4713_/A2                               0.75    0.80   -0.05 (VIOLATED)
+_5754_/B1                               0.75    0.78   -0.03 (VIOLATED)
+_5752_/A                                0.75    0.78   -0.03 (VIOLATED)
+_5711_/A                                0.75    0.78   -0.03 (VIOLATED)
+_5687_/A                                0.75    0.78   -0.03 (VIOLATED)
+_3516_/A2                               0.75    0.78   -0.03 (VIOLATED)
+_5675_/A                                0.75    0.78   -0.03 (VIOLATED)
+_5699_/A                                0.75    0.78   -0.03 (VIOLATED)
+_5652_/A                                0.75    0.78   -0.03 (VIOLATED)
+_5663_/A                                0.75    0.78   -0.03 (VIOLATED)
+_5645_/A                                0.75    0.78   -0.03 (VIOLATED)
+_3515_/X                                0.75    0.78   -0.03 (VIOLATED)
+_3546_/A                                0.75    0.78   -0.03 (VIOLATED)
+_3561_/A                                0.75    0.78   -0.03 (VIOLATED)
+_3541_/A                                0.75    0.78   -0.03 (VIOLATED)
+_3568_/A                                0.75    0.78   -0.03 (VIOLATED)
+_3590_/A                                0.75    0.78   -0.03 (VIOLATED)
+_3906_/B1                               0.75    0.78   -0.03 (VIOLATED)
+_3596_/A                                0.75    0.78   -0.03 (VIOLATED)
+_3918_/B1                               0.75    0.78   -0.03 (VIOLATED)
+_3925_/B1                               0.75    0.78   -0.03 (VIOLATED)
+_3932_/B1                               0.75    0.78   -0.03 (VIOLATED)
+_3535_/X                                0.75    0.78   -0.03 (VIOLATED)
+_4950_/S0                               0.75    0.77   -0.02 (VIOLATED)
+_4953_/S0                               0.75    0.77   -0.02 (VIOLATED)
+_4962_/S0                               0.75    0.77   -0.02 (VIOLATED)
+_4956_/S0                               0.75    0.77   -0.02 (VIOLATED)
+_4946_/S0                               0.75    0.77   -0.02 (VIOLATED)
+_4959_/S0                               0.75    0.77   -0.02 (VIOLATED)
+_5757_/S                                0.75    0.77   -0.02 (VIOLATED)
+_5759_/B2                               0.75    0.77   -0.02 (VIOLATED)
+_5760_/A1                               0.75    0.77   -0.02 (VIOLATED)
+_4943_/S0                               0.75    0.77   -0.02 (VIOLATED)
+_4941_/X                                0.75    0.77   -0.02 (VIOLATED)
+
+
+max slew violations count Typical: 99
+max fanout violations count Typical: 0
+max cap violations count Typical: 0
+
+===========================================================================
+report_parasitic_annotation -report_unannotated
+============================================================================
+Found 17 unannotated drivers.
+ clk
+ ui_in[0]
+ ui_in[1]
+ ui_in[2]
+ ui_in[3]
+ ui_in[4]
+ ui_in[5]
+ ui_in[6]
+ ui_in[7]
+ _6527_/HI
+ _6528_/HI
+ _6529_/HI
+ _6530_/HI
+ _6531_/HI
+ _6532_/HI
+ _6533_/HI
+ _6534_/HI
+Found 0 partially unannotated drivers.
+
+===========================================================================
+max slew violation count 99
+max fanout violation count 0
+max cap violation count 0
+============================================================================
+
+===========================================================================
+check_setup -verbose -unconstrained_endpoints -multiple_clock -no_clock -no_input_delay -loops -generated_clocks
+===========================================================================
+Warning: There are 8 unconstrained endpoints.
+  uo_out[0]
+  uo_out[1]
+  uo_out[2]
+  uo_out[3]
+  uo_out[4]
+  uo_out[5]
+  uo_out[6]
+  uo_out[7]

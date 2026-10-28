@@ -1,0 +1,29 @@
+[*]
+[*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
+[*] Sat Mar  7 10:39:40 2026
+[*]
+[dumpfile] "/home/user/AI-HDL/tiny_gpu_aihdl/designs/tiny_gpu/sim/wave.vcd"
+[dumpfile_mtime] "Sat Mar  7 09:51:37 2026"
+[dumpfile_size] 1594
+[savefile] "/home/user/AI-HDL/tiny_gpu_aihdl/designs/tiny_gpu/sim/gtkwaveFirstFile.gtkw"
+[timestart] 0
+[size] 1920 1080
+[pos] -1 -1
+*-13.076724 25130 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb_tiny_gpu.
+[treeopen] tb_tiny_gpu.dut.
+[sst_width] 297
+[signals_width] 206
+[sst_expanded] 1
+[sst_vpaned_height] 324
+@28
+tb_tiny_gpu.clk
+tb_tiny_gpu.rst
+@22
+tb_tiny_gpu.addr[31:0]
+tb_tiny_gpu.wdata[31:0]
+tb_tiny_gpu.rdata[31:0]
+@28
+tb_tiny_gpu.we
+[pattern_trace] 1
+[pattern_trace] 0

@@ -1,0 +1,8 @@
+released_path,path_in_original_submission,category
+common/ai_logs/prompt logs.txt,prompt logs.txt,ai_logs
+common/config/Makefile,Makefile,config
+common/firmware/riscv_pwm_demo.c,riscv_pwm_demo.c,firmware
+common/rtl/pwm_generator.v,pwm_generator.v,rtl
+common/rtl/riscv_integration.v,riscv_integration.v,rtl
+common/rtl/top_level_soc.v,top_level_soc.v,rtl
+common/testbench/pwm_tb.v,pwm_tb.v,testbench
