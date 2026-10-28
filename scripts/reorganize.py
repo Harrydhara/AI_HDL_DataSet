@@ -2,8 +2,10 @@
 
 usage: python reorganize.py <built_release_dir> <out_dir>
 
-teams/<rank>_<team>/<phase>/<category>/<file>
-pilot_2025/teams/<division>_<team>/<category>/<file>
+AI-HDL_2026/teams/<rank>_<team>/<phase>/<category>/<file>
+AI-HDL_2025_pilot/teams/<division>_<team>/<category>/<file>
+Each cycle folder also holds that cycle's tables (index.csv, prompt counts, artifact counts);
+README.md, DATASHEET.md, LICENSE and scripts/ stay at the top level.
 
 Categories: ai_logs, rtl, testbench, netlists, reports, layout, openlane_runs, config, docs, other.
 Files are flattened into their category folder; when two files would share a name, the
@@ -16,6 +18,8 @@ import os, re, sys, csv, shutil, collections
 IN, OUT = sys.argv[1], sys.argv[2]
 LP = (lambda p: "\\\\?\\" + os.path.realpath(p)) if os.name == "nt" else (lambda p: p)
 IN, OUT = LP(IN), LP(OUT)
+C26, C25 = "AI-HDL_2026", "AI-HDL_2025_pilot"        # one output folder per competition cycle
+CYCLE_TABLES = {"index.csv", "prompt_counts.csv", "prompt_counts_per_file.csv", "artifact_stats.csv", "build_report.json"}
 
 CATS = ["ai_logs", "rtl", "testbench", "netlists", "reports", "layout", "openlane_runs", "firmware", "config", "docs", "other"]
 SKIP_FILES = {".gitignore", ".gitkeep", ".gitattributes", ".ds_store", ".keep", "keep"}
@@ -194,7 +198,7 @@ def arrange(src_team, dst_team, phased):
     return rows, counts
 
 
-def team_card(dst_team, title, meta, counts, phased, prompts):
+def team_card(dst_team, title, meta, counts, phased, prompts, cycle_dir):
     phases = sorted({p for p, _ in counts}, key=lambda p: (p == "common", p))
     used = [c for c in CATS if any(counts[(p, c)] for p in phases)]
     L = [f"# {title}", ""]
@@ -205,7 +209,9 @@ def team_card(dst_team, title, meta, counts, phased, prompts):
     if prompts:
         L += ["## Distinct logged prompts", "", "| " + " | ".join(prompts[0]) + " |", "|" + "---|" * len(prompts[0]),
               "| " + " | ".join(str(x) for x in prompts[1]) + " |", "",
-              "Counted from this team's logs; a prompt repeated in a later, cumulative log is counted once, in its first phase. See `prompt_counts_per_file.csv` at the repository root for the rule applied to each log. Counts describe what was logged, not effort.", ""]
+              "Counted from this team's logs; a prompt repeated in a later, cumulative log is counted once, in its first phase. "
+              f"See `prompt_counts_per_file.csv` in the `{cycle_dir}` folder for the rule applied to each log. "
+              "Counts describe what was logged, not effort.", ""]
     L += ["## Files", ""]
     if phased:
         L.append("| Folder | " + " | ".join(phases) + " |")
@@ -228,18 +234,19 @@ def read_csv(path):
 # ---------------------------------------------------------------------------
 if os.path.exists(OUT):
     shutil.rmtree(OUT)
-os.makedirs(OUT)
+os.makedirs(os.path.join(OUT, C26))
 for f in os.listdir(IN):
     if f in ("teams", "pilot_2025", ".git"):
         continue
     s = os.path.join(IN, f)
-    (shutil.copytree if os.path.isdir(s) else shutil.copyfile)(s, os.path.join(OUT, f))
+    dst = os.path.join(OUT, C26, f) if f in CYCLE_TABLES else os.path.join(OUT, f)
+    (shutil.copytree if os.path.isdir(s) else shutil.copyfile)(s, dst)
 
 index = {r["folder"]: r for r in read_csv(os.path.join(IN, "index.csv"))}
 allmap = {}
 for team in sorted(os.listdir(os.path.join(IN, "teams"))):
     r = index.get(team, {})
-    rows, counts = arrange(os.path.join(IN, "teams", team), os.path.join(OUT, "teams", team), True)
+    rows, counts = arrange(os.path.join(IN, "teams", team), os.path.join(OUT, C26, "teams", team), True)
     allmap[("2026", team)] = rows
     meta = [("Cycle", "2026 (second cycle)"), ("Final leaderboard rank", r.get("final_rank") or "not on the final leaderboard"),
             ("Institution", r.get("institution")), ("Country", r.get("country")),
@@ -247,20 +254,20 @@ for team in sorted(os.listdir(os.path.join(IN, "teams"))):
             ("Phases with prompt logs", (r.get("phases_with_prompt_logs") or "none found").replace(";", ", ")),
             ("Taped out", r.get("taped_out"))]
     pr = (["DP1", "DP2", "DP3", "DP4"], [r.get(f"distinct_prompts_DP{i}", "") for i in range(1, 5)]) if r else None
-    team_card(os.path.join(OUT, "teams", team), r.get("team", team), meta, counts, True, pr)
+    team_card(os.path.join(OUT, C26, "teams", team), r.get("team", team), meta, counts, True, pr, C26)
 
 pidx = {r["folder"]: r for r in read_csv(os.path.join(IN, "pilot_2025", "index.csv"))}
-os.makedirs(os.path.join(OUT, "pilot_2025"), exist_ok=True)
+os.makedirs(os.path.join(OUT, C25), exist_ok=True)
 for f in os.listdir(os.path.join(IN, "pilot_2025")):
     if f != "teams":
-        shutil.copyfile(os.path.join(IN, "pilot_2025", f), os.path.join(OUT, "pilot_2025", f))
+        shutil.copyfile(os.path.join(IN, "pilot_2025", f), os.path.join(OUT, C25, f))
 for team in sorted(os.listdir(os.path.join(IN, "pilot_2025", "teams"))):
     r = pidx.get(team, {})
-    rows, counts = arrange(os.path.join(IN, "pilot_2025", "teams", team), os.path.join(OUT, "pilot_2025", "teams", team), False)
+    rows, counts = arrange(os.path.join(IN, "pilot_2025", "teams", team), os.path.join(OUT, C25, "teams", team), False)
     allmap[("2025", team)] = rows
     meta = [("Cycle", "2025 pilot (digital watch on a Basys-3 FPGA)"), ("Division", r.get("division")), ("Notes", r.get("notes"))]
     pr = (["Prompts counted", "Countable logs"], [r.get("prompts_counted", ""), r.get("countable_logs", "")]) if r else None
-    team_card(os.path.join(OUT, "pilot_2025", "teams", team), r.get("team", team), meta, counts, False, pr)
+    team_card(os.path.join(OUT, C25, "teams", team), r.get("team", team), meta, counts, False, pr, C25)
 
 
 # add the released path to the per-file prompt-count tables
@@ -274,7 +281,7 @@ def add_released(path, cycle, team_of):
             continue
         for new, rel, cat in mp:
             inner = rel.split("/", 1)[1] if cycle == "2026" and "/" in rel else rel
-            lookup[(team, inner.lower())] = f"{'pilot_2025/' if cycle == '2025' else ''}teams/{team}/{new}"
+            lookup[(team, inner.lower())] = f"{C25 if cycle == '2025' else C26}/teams/{team}/{new}"
     out_rows = []
     for row in rows:
         folder = team_of(row["team"])
@@ -295,9 +302,9 @@ def add_released(path, cycle, team_of):
 
 
 folder_by_team = {r["team"]: f for f, r in index.items()}
-add_released(os.path.join(OUT, "prompt_counts_per_file.csv"), "2026", lambda t: folder_by_team.get(t, ""))
+add_released(os.path.join(OUT, C26, "prompt_counts_per_file.csv"), "2026", lambda t: folder_by_team.get(t, ""))
 pfolder = {r["team"]: f for f, r in pidx.items()}
-add_released(os.path.join(OUT, "pilot_2025", "prompt_counts_per_file.csv"), "2025", lambda t: pfolder.get(t, ""))
+add_released(os.path.join(OUT, C25, "prompt_counts_per_file.csv"), "2025", lambda t: pfolder.get(t, ""))
 
 tot = collections.Counter()
 for rows in allmap.values():

@@ -1,7 +1,7 @@
 """Redraw the prompt-count figure (heatmap + phase shares) from the prompt-count table.
 
 usage: make_fig8.py [OUT.png]  -> OUT.png (both panels) and OUT_shares.png (the phase-share donut alone)
-Reads prompt_counts.csv at the release root (prompt_counts_by_team.csv in the analysis folder)."""
+Reads AI-HDL_2026/prompt_counts.csv in the release (prompt_counts_by_team.csv in the analysis folder)."""
 import csv, os, sys
 import matplotlib
 matplotlib.use("Agg")
@@ -9,7 +9,8 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
 
 here = os.path.dirname(os.path.abspath(__file__))
-src = next(p for p in (os.path.join(here, "..", "prompt_counts.csv"), os.path.join(here, "..", "prompt_counts_by_team.csv"))
+src = next(p for p in (os.path.join(here, "..", "AI-HDL_2026", "prompt_counts.csv"),
+                       os.path.join(here, "..", "prompt_counts_by_team.csv"))
            if os.path.exists(p))
 out = sys.argv[1] if len(sys.argv) > 1 else os.path.join(here, "fig_8_recount.png")
 

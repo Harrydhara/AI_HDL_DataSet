@@ -3,6 +3,7 @@
 usage: python build_release.py <out_dir> [--dry-run]
 
 Layout: teams/<rank>_<team>/<DP1..DP4|common>/<original relative path>
+(reorganize.py then regroups files by type and moves them under AI-HDL_2026/ in the published release)
  - files are placed in the phase named by their path (challenge-N, DP-N, ...), else the
    phase folder they were submitted in, else common/
  - identical files are stored once per team (at the earliest phase they appear)

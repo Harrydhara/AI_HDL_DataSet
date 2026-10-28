@@ -15,8 +15,8 @@ import csv, os, sys, collections
 sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
 import extract_prompts as E
 
-DEVREM_PLAN = "teams/04_Devrem/DP3/ai_logs/dp3_claude_code_prompts.md"
-DEVREM_LOG = "teams/04_Devrem/common/ai_logs/LLM_PROMPT_LOG.md"
+DEVREM_PLAN = "AI-HDL_2026/teams/04_Devrem/DP3/ai_logs/dp3_claude_code_prompts.md"
+DEVREM_LOG = "AI-HDL_2026/teams/04_Devrem/common/ai_logs/LLM_PROMPT_LOG.md"
 
 # (released file, phase, prompt indices or None for the whole file, reason)
 CORRECTIONS = [
@@ -25,9 +25,10 @@ CORRECTIONS = [
      "DP3 entries of LLM_PROMPT_LOG.md, and 11 of the 27 matches are lines of a flow diagram"),
     (DEVREM_LOG, "DP4", "(Automated fix", "entry records an automated fix, not a prompt"),
     (DEVREM_LOG, "DP4", "(Generated as part of DP4 preparation)", "entry records generated files, not a prompt"),
-    ("teams/05_Maestro/DP4/ai_logs/design_generation4.md", "DP4", [0], "empty template entry"),
-    ("teams/12_Obsidian-Order/DP1/ai_logs/prompts_log.md", "DP1", [1], "template placeholder '[exact prompt text]'"),
-    ("teams/08_ICLab-HUST2/DP3/ai_logs/security_hardening.md", "DP3", [4],
+    ("AI-HDL_2026/teams/05_Maestro/DP4/ai_logs/design_generation4.md", "DP4", [0], "empty template entry"),
+    ("AI-HDL_2026/teams/12_Obsidian-Order/DP1/ai_logs/prompts_log.md", "DP1", [1],
+     "template placeholder '[exact prompt text]'"),
+    ("AI-HDL_2026/teams/08_ICLab-HUST2/DP3/ai_logs/security_hardening.md", "DP3", [4],
      "note '(part of same implementation session as CM-1)', not a separate prompt"),
 ]
 
@@ -60,7 +61,7 @@ if __name__ == "__main__":
     records, bad = E.load()
     assert not bad, bad
     recs, raw, cur, dis = tables(records)
-    path = os.path.join(E.ROOT, "prompt_counts.csv")
+    path = os.path.join(E.ROOT, "AI-HDL_2026", "prompt_counts.csv")
     old = {r["team"]: r for r in csv.DictReader(open(path, encoding="utf8"))}
     fields = list(next(iter(old.values())).keys())
     tot = collections.Counter()

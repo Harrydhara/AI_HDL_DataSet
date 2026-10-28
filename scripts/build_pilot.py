@@ -7,6 +7,7 @@ Layout: pilot_2025/teams/<graduate|undergraduate>_<team>/<original relative path
  - prompt logs in Word/PDF are converted to anonymized Markdown (an image-only PDF is left out)
  - images, archives and other binary files are left out
 Also writes pilot_2025/index.csv and pilot_2025/prompt_counts_per_file.csv.
+reorganize.py then moves this folder to AI-HDL_2025_pilot/ in the published release.
 """
 import os, re, sys, csv, hashlib, collections
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

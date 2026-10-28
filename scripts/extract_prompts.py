@@ -1,6 +1,6 @@
 """Extract the text of every counted prompt from the released logs.
 
-Reads prompt_counts_per_file.csv (one row per counted log segment, with the counting rule
+Reads AI-HDL_2026/prompt_counts_per_file.csv (one row per counted log segment, with the counting rule
 that count.py applied to it) and returns one record per prompt: team, phase, log kind
 (raw export or curated log), released file, position in the file, and the prompt text.
 
@@ -122,7 +122,7 @@ def prompts_in(rule, text):
 
 def load():
     """All counted prompts, and the log segments whose released copy gave a different count."""
-    rows = list(csv.DictReader(open(os.path.join(ROOT, "prompt_counts_per_file.csv"), encoding="utf8")))
+    rows = list(csv.DictReader(open(os.path.join(ROOT, "AI-HDL_2026", "prompt_counts_per_file.csv"), encoding="utf8")))
     by_file = collections.defaultdict(list)
     for r in rows:
         if r["kind"] in ("raw", "curated") and int(r["prompts"]) > 0:

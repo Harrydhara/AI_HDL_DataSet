@@ -16,7 +16,7 @@ Public datasets for LLM-based hardware design mostly contain single-turn RTL gen
 One instance is a team's design trajectory. It is the team's submissions for up to four design phases (DP1 functional RTL, DP2 PPA optimization, DP3 security hardening, DP4 physical design) of a custom peripheral attached to the TinyQV RISC-V core.
 
 **How many instances are there?**
-21 teams from the 2026 cycle (20 of the 22 second-cycle finalists plus one non-finalist), and 11 teams from the 2025 pilot cycle (`pilot_2025/`; FPGA digital-watch designs without layouts). The five teams with prompt logs for all four phases and a DP4 layout, and the two designs submitted for fabrication, are marked in `index.csv`.
+21 teams from the 2026 cycle (`AI-HDL_2026/`: 20 of the 22 second-cycle finalists plus one non-finalist), and 11 teams from the 2025 pilot cycle (`AI-HDL_2025_pilot/`; FPGA digital-watch designs without layouts). The five teams with prompt logs for all four phases and a DP4 layout, and the two designs submitted for fabrication, are marked in `AI-HDL_2026/index.csv`.
 
 **What does each instance contain?**
 - RTL and its revisions
@@ -29,7 +29,7 @@ One instance is a team's design trajectory. It is the team's submissions for up 
 
 **Is there a label or target?**
 - **Tool outputs** from the open-source flow: simulation results, synthesis cell counts, timing slack, power, DRC / LVS results.
-- **Phase gating:** the 20 released finalists passed all four phase gates; their final-leaderboard rank is in `index.csv`. Mercer is not a finalist.
+- **Phase gating:** the 20 released finalists passed all four phase gates; their final-leaderboard rank is in `AI-HDL_2026/index.csv`. Mercer is not a finalist.
 
 None of these is an independent verification: gates were judged by graders against a rubric, power values are vectorless estimates, and functional evidence is limited to each team's own testbenches.
 

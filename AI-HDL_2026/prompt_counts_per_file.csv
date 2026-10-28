@@ -1,0 +1,113 @@
+team,phase,kind,rule,prompts,file,released_path
+NeCRL,DP2,raw,user_label,20,NECRL---AI-HDL-main\DP2_submission\AI Logs\cursor_area_and_density_in_480x400_run1.md,AI-HDL_2026/teams/01_NeCRL/DP2/ai_logs/cursor_area_and_density_in_480x400_run1.md
+NeCRL,DP2,raw,user_label,14,NECRL---AI-HDL-main\DP2_submission\AI Logs\cursor_improving_ppa_in_design.md,AI-HDL_2026/teams/01_NeCRL/DP2/ai_logs/cursor_improving_ppa_in_design.md
+NeCRL,DP3,raw,user_label,23,NECRL---AI-HDL-main\DP3_submission\AI_chatlogs\Rank 6.md,AI-HDL_2026/teams/01_NeCRL/DP3/ai_logs/Rank 6.md
+NeCRL,DP3,raw,user_label,20,NECRL---AI-HDL-main\DP3_submission\AI_chatlogs\Rank1\chatlog.md,AI-HDL_2026/teams/01_NeCRL/DP3/ai_logs/Rank1__chatlog.md
+NeCRL,DP3,raw,user_label,10,NECRL---AI-HDL-main\DP3_submission\AI_chatlogs\Rank2\chatlog.md,AI-HDL_2026/teams/01_NeCRL/DP3/ai_logs/Rank2__chatlog.md
+NeCRL,DP3,raw,user_label,4,NECRL---AI-HDL-main\DP3_submission\AI_chatlogs\Rank5\rank5.md,AI-HDL_2026/teams/01_NeCRL/DP3/ai_logs/rank5.md
+NeCRL,DP3,raw,user_label,3,NECRL---AI-HDL-main\DP3_submission\AI_chatlogs\Rank7\rank7.md,AI-HDL_2026/teams/01_NeCRL/DP3/ai_logs/rank7.md
+NeCRL,DP1,raw,said,19,NECRL---AI-HDL-main\DP1_submission\AI_Chat_Logs\Member C Milestone1 AI Logs.pdf,AI-HDL_2026/teams/01_NeCRL/DP1/ai_logs/Member C Milestone1 AI Logs.md
+NeCRL,DP1,raw,unparsed,0,NECRL---AI-HDL-main\DP1_submission\AI_Chat_Logs\Member B_DP1.pdf,AI-HDL_2026/teams/01_NeCRL/DP1/ai_logs/Member B_DP1.md
+NeCRL,-,-,skipped:pdf-copy,0,NECRL---AI-HDL-main\DP3_submission\AI_chatlogs\Rank1\chatlog.pdf,AI-HDL_2026/teams/01_NeCRL/DP3/ai_logs/Rank1__chatlog.md
+NeCRL,-,-,skipped:pdf-copy,0,NECRL---AI-HDL-main\DP3_submission\AI_chatlogs\Rank2\chatlog.pdf,AI-HDL_2026/teams/01_NeCRL/DP3/ai_logs/Rank2__chatlog.md
+NeCRL,-,-,skipped:pdf-copy,0,NECRL---AI-HDL-main\DP3_submission\AI_chatlogs\Rank5\rank5.pdf,AI-HDL_2026/teams/01_NeCRL/DP3/ai_logs/rank5.md
+NeCRL,-,-,skipped:pdf-copy,0,NECRL---AI-HDL-main\DP3_submission\AI_chatlogs\Rank7\rank7.pdf,AI-HDL_2026/teams/01_NeCRL/DP3/ai_logs/rank7.md
+ITIMS Boys,DP1,curated,prompt_label,2,ITIMS_ Boy-challenge-1\ai_logs\debugging.md,AI-HDL_2026/teams/02_ITIMS-Boys/DP1/ai_logs/debugging.md
+ITIMS Boys,DP1,curated,prompt_label,4,ITIMS_ Boy-challenge-1\ai_logs\design_generation.md,AI-HDL_2026/teams/02_ITIMS-Boys/DP1/ai_logs/design_generation.md
+ITIMS Boys,DP1,curated,unparsed,0,ITIMS_ Boy-challenge-1\ai_logs\optimization.md,"(empty file, not released)"
+ITIMS Boys,DP1,raw,prompt_label,5,ITIMS_ Boy-challenge-1\ai_logs\raw_logs\rawlogs.md,AI-HDL_2026/teams/02_ITIMS-Boys/DP1/ai_logs/rawlogs.md
+ITIMS Boys,DP2,curated,prompt_label,4,ITIMS_ Boy-challenge-2\ai_logs\debugging.md,AI-HDL_2026/teams/02_ITIMS-Boys/DP2/ai_logs/debugging.md
+ITIMS Boys,DP2,curated,prompt_label,1,ITIMS_ Boy-challenge-2\ai_logs\optimization.md,AI-HDL_2026/teams/02_ITIMS-Boys/DP2/ai_logs/optimization.md
+ITIMS Boys,DP3,curated,prompt_label,5,ITIMS_ Boy-challenge-3\ai_logs\debugging.md,AI-HDL_2026/teams/02_ITIMS-Boys/DP3/ai_logs/debugging.md
+ITIMS Boys,DP3,curated,prompt_label,14,ITIMS_ Boy-challenge-3\ai_logs\design_generation.md,AI-HDL_2026/teams/02_ITIMS-Boys/DP3/ai_logs/design_generation.md
+ITIMS Boys,DP4,curated,prompt_label,6,ITIMS_ Boy-challenge-4\ai_logs\debugging.md,AI-HDL_2026/teams/02_ITIMS-Boys/DP4/ai_logs/debugging.md
+ITIMS Boys,DP4,curated,prompt_label,2,ITIMS_ Boy-challenge-4\ai_logs\optimization.md,AI-HDL_2026/teams/02_ITIMS-Boys/DP4/ai_logs/optimization.md
+ITIMS Boys,DP4,raw,prompt_label,10,ITIMS_ Boy-challenge-4\ai_logs\raw_logs\rawlogs.md,AI-HDL_2026/teams/02_ITIMS-Boys/DP4/ai_logs/rawlogs.md
+ElectroNova,DP1,curated,prompt_label,5,ElectroNova-challenge-DP#1\ai_logs\design_generation.md,AI-HDL_2026/teams/03_ElectroNova/DP1/ai_logs/design_generation.md
+ElectroNova,DP1,raw,user_label,30,ElectroNova-challenge-DP#1\ai_logs\optimization.md,AI-HDL_2026/teams/03_ElectroNova/DP1/ai_logs/optimization.md
+ElectroNova,DP2,curated,prompt_label,40,ElectroNova-challenge-DP#2\ai_logs\prompt_summary.md,AI-HDL_2026/teams/03_ElectroNova/DP2/ai_logs/prompt_summary.md
+ElectroNova,DP3,curated,prompt_numbered,19,ElectroNova-challenge-DP#3\ai_logs\prompt_summary.md,AI-HDL_2026/teams/03_ElectroNova/DP3/ai_logs/prompt_summary.md
+ElectroNova,DP4,curated,prompt_label,30,ElectroNova-challenge-DP#4\ai_logs\prompts.md,AI-HDL_2026/teams/03_ElectroNova/DP4/ai_logs/prompts.md
+ElectroNova,-,-,skipped:pdf-copy,0,ElectroNova-challenge-DP#1\ai_logs\prompt log.pdf,AI-HDL_2026/teams/03_ElectroNova/DP1/ai_logs/prompt log.md
+Devrem,DP1,curated,prompt_label,7,aihdl_2026_devrem-main\docs\LLM_PROMPT_LOG.md,AI-HDL_2026/teams/04_Devrem/common/ai_logs/LLM_PROMPT_LOG.md
+Devrem,DP3,curated,unparsed,0,aihdl_2026_devrem-main\docs\LLM_PROMPT_LOG.md,AI-HDL_2026/teams/04_Devrem/common/ai_logs/LLM_PROMPT_LOG.md
+Devrem,DP3,curated,prompt_label,1,aihdl_2026_devrem-main\docs\LLM_PROMPT_LOG.md,AI-HDL_2026/teams/04_Devrem/common/ai_logs/LLM_PROMPT_LOG.md
+Devrem,DP3,curated,prompt_label,1,aihdl_2026_devrem-main\docs\LLM_PROMPT_LOG.md,AI-HDL_2026/teams/04_Devrem/common/ai_logs/LLM_PROMPT_LOG.md
+Devrem,DP3,curated,prompt_label,1,aihdl_2026_devrem-main\docs\LLM_PROMPT_LOG.md,AI-HDL_2026/teams/04_Devrem/common/ai_logs/LLM_PROMPT_LOG.md
+Devrem,DP3,curated,prompt_label,1,aihdl_2026_devrem-main\docs\LLM_PROMPT_LOG.md,AI-HDL_2026/teams/04_Devrem/common/ai_logs/LLM_PROMPT_LOG.md
+Devrem,DP3,curated,prompt_label,1,aihdl_2026_devrem-main\docs\LLM_PROMPT_LOG.md,AI-HDL_2026/teams/04_Devrem/common/ai_logs/LLM_PROMPT_LOG.md
+Devrem,DP3,curated,prompt_label,1,aihdl_2026_devrem-main\docs\LLM_PROMPT_LOG.md,AI-HDL_2026/teams/04_Devrem/common/ai_logs/LLM_PROMPT_LOG.md
+Devrem,DP3,curated,prompt_label,1,aihdl_2026_devrem-main\docs\LLM_PROMPT_LOG.md,AI-HDL_2026/teams/04_Devrem/common/ai_logs/LLM_PROMPT_LOG.md
+Devrem,DP3,curated,prompt_label,1,aihdl_2026_devrem-main\docs\LLM_PROMPT_LOG.md,AI-HDL_2026/teams/04_Devrem/common/ai_logs/LLM_PROMPT_LOG.md
+Devrem,DP3,curated,prompt_label,1,aihdl_2026_devrem-main\docs\LLM_PROMPT_LOG.md,AI-HDL_2026/teams/04_Devrem/common/ai_logs/LLM_PROMPT_LOG.md
+Devrem,DP3,curated,prompt_label,1,aihdl_2026_devrem-main\docs\LLM_PROMPT_LOG.md,AI-HDL_2026/teams/04_Devrem/common/ai_logs/LLM_PROMPT_LOG.md
+Devrem,DP3,curated,prompt_label,1,aihdl_2026_devrem-main\docs\LLM_PROMPT_LOG.md,AI-HDL_2026/teams/04_Devrem/common/ai_logs/LLM_PROMPT_LOG.md
+Devrem,DP3,curated,prompt_label,1,aihdl_2026_devrem-main\docs\LLM_PROMPT_LOG.md,AI-HDL_2026/teams/04_Devrem/common/ai_logs/LLM_PROMPT_LOG.md
+Devrem,DP3,curated,prompt_label,1,aihdl_2026_devrem-main\docs\LLM_PROMPT_LOG.md,AI-HDL_2026/teams/04_Devrem/common/ai_logs/LLM_PROMPT_LOG.md
+Devrem,DP3,curated,prompt_label,1,aihdl_2026_devrem-main\docs\LLM_PROMPT_LOG.md,AI-HDL_2026/teams/04_Devrem/common/ai_logs/LLM_PROMPT_LOG.md
+Devrem,DP3,curated,unparsed,0,aihdl_2026_devrem-main\docs\LLM_PROMPT_LOG.md,AI-HDL_2026/teams/04_Devrem/common/ai_logs/LLM_PROMPT_LOG.md
+Devrem,DP4,curated,unparsed,0,aihdl_2026_devrem-main\docs\LLM_PROMPT_LOG.md,AI-HDL_2026/teams/04_Devrem/common/ai_logs/LLM_PROMPT_LOG.md
+Devrem,DP4,curated,prompt_label,1,aihdl_2026_devrem-main\docs\LLM_PROMPT_LOG.md,AI-HDL_2026/teams/04_Devrem/common/ai_logs/LLM_PROMPT_LOG.md
+Devrem,DP4,curated,prompt_label,1,aihdl_2026_devrem-main\docs\LLM_PROMPT_LOG.md,AI-HDL_2026/teams/04_Devrem/common/ai_logs/LLM_PROMPT_LOG.md
+Devrem,DP4,curated,prompt_label,1,aihdl_2026_devrem-main\docs\LLM_PROMPT_LOG.md,AI-HDL_2026/teams/04_Devrem/common/ai_logs/LLM_PROMPT_LOG.md
+Devrem,DP4,curated,prompt_label,1,aihdl_2026_devrem-main\docs\LLM_PROMPT_LOG.md,AI-HDL_2026/teams/04_Devrem/common/ai_logs/LLM_PROMPT_LOG.md
+Devrem,DP4,curated,prompt_label,1,aihdl_2026_devrem-main\docs\LLM_PROMPT_LOG.md,AI-HDL_2026/teams/04_Devrem/common/ai_logs/LLM_PROMPT_LOG.md
+Devrem,DP4,curated,unparsed,0,aihdl_2026_devrem-main\docs\LLM_PROMPT_LOG.md,AI-HDL_2026/teams/04_Devrem/common/ai_logs/LLM_PROMPT_LOG.md
+Devrem,DP4,curated,unparsed,0,aihdl_2026_devrem-main\docs\LLM_PROMPT_LOG.md,AI-HDL_2026/teams/04_Devrem/common/ai_logs/LLM_PROMPT_LOG.md
+Devrem,DP4,curated,prompt_label,1,aihdl_2026_devrem-main\docs\LLM_PROMPT_LOG.md,AI-HDL_2026/teams/04_Devrem/common/ai_logs/LLM_PROMPT_LOG.md
+Devrem,DP4,curated,unparsed,0,aihdl_2026_devrem-main\docs\LLM_PROMPT_LOG.md,AI-HDL_2026/teams/04_Devrem/common/ai_logs/LLM_PROMPT_LOG.md
+Devrem,DP3,curated,prompt_numbered,27,aihdl_2026_devrem-main\dp3_claude_code_prompts.md,AI-HDL_2026/teams/04_Devrem/DP3/ai_logs/dp3_claude_code_prompts.md
+Maestro,DP1,curated,unparsed,0,submissions\maestros-challenge-1\ai_logs\debugging.md,"(empty file, not released)"
+Maestro,DP1,curated,prompt_label,2,submissions\maestros-challenge-1\ai_logs\design_generation.md,AI-HDL_2026/teams/05_Maestro/DP1/ai_logs/design_generation.md
+Maestro,DP1,curated,prompt_label,1,submissions\maestros-challenge-1\ai_logs\optimization.md,AI-HDL_2026/teams/05_Maestro/DP1/ai_logs/optimization.md
+Maestro,DP1,raw,prompt_label,2,submissions\maestros-challenge-1\ai_logs\raw_logs\raw_logs.md,AI-HDL_2026/teams/05_Maestro/DP1/ai_logs/raw_logs.md
+Maestro,DP2,curated,prompt_label,1,submissions\maestros-challenge-2\ai-logs\debugging.md,AI-HDL_2026/teams/05_Maestro/DP2/ai_logs/debugging.md
+Maestro,DP2,curated,prompt_label,3,submissions\maestros-challenge-2\ai-logs\design_generation2.md,AI-HDL_2026/teams/05_Maestro/DP2/ai_logs/design_generation2.md
+Maestro,DP2,curated,prompt_label,2,submissions\maestros-challenge-2\ai-logs\optimization2.md,AI-HDL_2026/teams/05_Maestro/DP2/ai_logs/optimization2.md
+Maestro,DP2,raw,prompt_label,9,submissions\maestros-challenge-2\ai-logs\raw_logs\raw_logs2.md,AI-HDL_2026/teams/05_Maestro/DP2/ai_logs/raw_logs2.md
+Maestro,DP3,curated,prompt_label,5,submissions\maestros-challenge-3\ai_logs\debugging3.md,AI-HDL_2026/teams/05_Maestro/DP3/ai_logs/debugging3.md
+Maestro,DP3,curated,prompt_label,7,submissions\maestros-challenge-3\ai_logs\design_generation3.md,AI-HDL_2026/teams/05_Maestro/DP3/ai_logs/design_generation3.md
+Maestro,DP3,curated,prompt_label,5,submissions\maestros-challenge-3\ai_logs\optimization3.md,AI-HDL_2026/teams/05_Maestro/DP3/ai_logs/optimization3.md
+Maestro,DP3,raw,prompt_label,21,submissions\maestros-challenge-3\ai_logs\raw_logs\raw_logs3.md,AI-HDL_2026/teams/05_Maestro/DP3/ai_logs/raw_logs3.md
+Maestro,DP4,curated,prompt_label,17,submissions\maestros-challenge-4\ai_logs\debugging4.md,AI-HDL_2026/teams/05_Maestro/DP4/ai_logs/debugging4.md
+Maestro,DP4,curated,prompt_label,1,submissions\maestros-challenge-4\ai_logs\design_generation4.md,AI-HDL_2026/teams/05_Maestro/DP4/ai_logs/design_generation4.md
+Maestro,DP4,raw,prompt_label,19,submissions\maestros-challenge-4\ai_logs\raw_logs\raw_logs4.md,AI-HDL_2026/teams/05_Maestro/DP4/ai_logs/raw_logs4.md
+Acona Tech,DP4,curated,prompt_label,7,Acona-Tech-AI-HDL-2026-DP4\prompt_logs.md,AI-HDL_2026/teams/07_Acona-Tech/DP4/ai_logs/prompt_logs.md
+ICLab_HUST2,DP1,curated,prompt_label,5,team-ICLab_HUST2-challenge-1\ai_logs\debugging.md,AI-HDL_2026/teams/08_ICLab-HUST2/DP1/ai_logs/debugging_v2.md
+ICLab_HUST2,DP1,curated,prompt_label,5,team-ICLab_HUST2-challenge-1\ai_logs\design_generation.md,AI-HDL_2026/teams/08_ICLab-HUST2/DP1/ai_logs/design_generation_v2.md
+ICLab_HUST2,DP1,curated,prompt_label,4,team-ICLab_HUST2-challenge-1\ai_logs\optimization.md,AI-HDL_2026/teams/08_ICLab-HUST2/DP1/ai_logs/optimization_v2.md
+ICLab_HUST2,DP2,curated,prompt_label,4,team-ICLab_HUST2-challenge-2\ai_logs\optimization.md,AI-HDL_2026/teams/08_ICLab-HUST2/DP2/ai_logs/optimization.md
+ICLab_HUST2,DP3,curated,prompt_label,8,team-ICLab_HUST2-challenge-3\ai_logs\security_hardening.md,AI-HDL_2026/teams/08_ICLab-HUST2/DP3/ai_logs/security_hardening.md
+ICLab_HUST2,DP4,curated,prompt_label,9,team-ICLab_HUST2-challenge-4\ai_logs\physical_design.md,AI-HDL_2026/teams/08_ICLab-HUST2/DP4/ai_logs/physical_design.md
+HUST1,DP3,raw,user_label,8,DP3\docs\LLM_Log.md,AI-HDL_2026/teams/09_HUST1/DP3/ai_logs/LLM_Log.md
+Farmceries,DP1,curated,plain_user,10,team-farmceries-AI-HDL-2026-DP1-Submission\dp-1\submission\ai_logs\debugging.md,AI-HDL_2026/teams/11_Farmceries/DP1/ai_logs/debugging.md
+Farmceries,DP1,curated,plain_user,4,team-farmceries-AI-HDL-2026-DP1-Submission\dp-1\submission\ai_logs\design_generation.md,AI-HDL_2026/teams/11_Farmceries/DP1/ai_logs/design_generation.md
+Farmceries,DP1,curated,plain_user,7,team-farmceries-AI-HDL-2026-DP1-Submission\dp-1\submission\ai_logs\optimization.md,AI-HDL_2026/teams/11_Farmceries/DP1/ai_logs/optimization.md
+Farmceries,DP1,raw,plain_user,220,team-farmceries-AI-HDL-2026-DP1-Submission\dp-1\submission\ai_logs\raw_logs\00_complete_conversation.md,AI-HDL_2026/teams/11_Farmceries/DP1/ai_logs/00_complete_conversation.md
+Farmceries,DP2,raw,plain_user,3,team-farmceries-AI-HDL-2026-DP2-Submission\dp-2\ai_logs\raw_logs\00_complete_conversation.md,AI-HDL_2026/teams/11_Farmceries/DP2/ai_logs/00_complete_conversation.md
+Farmceries,DP3,raw,jsonl_antigravity,9,team-farmceries-AI-HDL-2026-DP3-Submission\dp-3\ai_logs\raw_logs\00_dp3_session.md,AI-HDL_2026/teams/11_Farmceries/DP3/ai_logs/00_dp3_session.md
+Farmceries,DP4,raw,plain_user,6,team-farmceries-AI-HDL-2026-DP4-Submission\dp-4\ai_logs\raw_logs\00_complete_conversation.md,AI-HDL_2026/teams/11_Farmceries/DP4/ai_logs/00_complete_conversation.md
+ICLab_HUST,DP1,raw,plain_user,19,DP1\prompt\prompt.docx,AI-HDL_2026/teams/20_ICLab-HUST/DP1/ai_logs/prompt.md
+ICLab_HUST,DP2,raw,plain_user,2,DP2\prompt\prompt.docx,AI-HDL_2026/teams/20_ICLab-HUST/DP2/ai_logs/prompt.md
+ICLab_HUST,DP3,raw,plain_user,13,DP3\prompt\promt_dp3.docx,AI-HDL_2026/teams/20_ICLab-HUST/DP3/ai_logs/promt_dp3.md
+BIG-4,DP1,curated,unparsed,0,BIG-4-AI Accelerator (Matrix Math)-Complex\ai_logs\Debugging\debugging.md,AI-HDL_2026/teams/21_BIG-4/DP1/ai_logs/debugging.md
+BIG-4,DP1,curated,unparsed,0,BIG-4-AI Accelerator (Matrix Math)-Complex\ai_logs\Design generation\design_generation.md,AI-HDL_2026/teams/21_BIG-4/DP1/ai_logs/design_generation.md
+BIG-4,DP1,curated,question_label,13,BIG-4-AI Accelerator (Matrix Math)-Complex\ai_logs\Optimization\optimization.md,AI-HDL_2026/teams/21_BIG-4/DP1/ai_logs/optimization.md
+BIG-4,DP1,raw,prompt_numbered,29,BIG-4-AI Accelerator (Matrix Math)-Complex\ai_logs\raw_logs\raw_logs.md,AI-HDL_2026/teams/21_BIG-4/DP1/ai_logs/raw_logs.md
+HUSD,DP2,curated,prompt_label,1,ai logs\DP2.md,AI-HDL_2026/teams/18_HUSD/DP2/ai_logs/DP2.md
+HUSD,DP1,curated,prompt_label,3,ai logs\debugging.md,AI-HDL_2026/teams/18_HUSD/DP1/ai_logs/debugging.md
+HUSD,DP1,curated,prompt_label,1,ai logs\design_generation.md,AI-HDL_2026/teams/18_HUSD/DP1/ai_logs/design_generation.md
+HUSD,DP1,raw,user_label,4,ai logs\raw_logs.md,AI-HDL_2026/teams/18_HUSD/DP1/ai_logs/raw_logs.md
+Mercer,DP1,raw,jsonl_prompt,3,MercerTeamAIHDL-main\DP_1\AI helper\ai_log.txt,AI-HDL_2026/teams/nf_Mercer/DP1/ai_logs/ai_log.txt
+BellLabs,DP1,curated,prompt_label,6,BellLabs_AIHDL-DP4-Submission\logs\dp1\dp1_prompts.txt,AI-HDL_2026/teams/19_BellLabs/DP1/ai_logs/dp1_prompts.txt
+BellLabs,DP2,curated,prompt_label,14,BellLabs_AIHDL-DP4-Submission\logs\dp2\dp2_prompts.txt,AI-HDL_2026/teams/19_BellLabs/DP2/ai_logs/dp2_prompts.txt
+BellLabs,DP3,raw,plain_user,39,BellLabs_AIHDL-DP4-Submission\logs\dp3\dp3_prompts.txt,AI-HDL_2026/teams/19_BellLabs/DP3/ai_logs/dp3_prompts.txt
+BellLabs,DP4,raw,said,4,BellLabs_AIHDL-DP4-Submission\logs\dp4\dp4_prompts.txt,AI-HDL_2026/teams/19_BellLabs/DP4/ai_logs/dp4_prompts.txt
+Obsidian Order,DP1,curated,prompt_label,4,Obsidian-Order---AI-HDL-2026-Design-Phase-1-main\docs\prompts_log.md,AI-HDL_2026/teams/12_Obsidian-Order/DP1/ai_logs/prompts_log.md
+Techgenius,DP?,curated,unparsed,0,Techgenius-AI-HDL26-main\tinyqv-full-peripheral-template\src\prompt.txt,AI-HDL_2026/teams/15_Techgenius/common/ai_logs/prompt.txt
+Astral Coders,DP?,curated,unparsed,0,prompt_log.md,"(empty file, not released)"
+Team Circuitrix,DP?,curated,unparsed,0,prompt logs.txt,AI-HDL_2026/teams/13_Team-Circuitrix/common/ai_logs/prompt logs.txt
+Team Ingenius,DP1,raw,named_speaker,309,DP1\docs\prompts\design.md,AI-HDL_2026/teams/22_Team-Ingenius/DP1/ai_logs/design.md
+Team Ingenius,DP1,raw,named_speaker,48,DP1\docs\prompts\planning.md,AI-HDL_2026/teams/22_Team-Ingenius/DP1/ai_logs/planning.md
+Team Ingenius,DP1,curated,prompt_label,4,DP1\docs\prompts\synthesis.md,AI-HDL_2026/teams/22_Team-Ingenius/DP1/ai_logs/synthesis.md
+UCC Eng. Physics,DP1,curated,prompt_numbered,13,dp1\docs\DP1_LLM_Prompt.md,AI-HDL_2026/teams/14_UCC-Eng-Physics/DP1/ai_logs/DP1_LLM_Prompt.md

@@ -19,7 +19,9 @@ TAPED = {"NeCRL": "AES-128 accelerator (graduate division winner)", "ITIMS Boys"
 P = ["DP1", "DP2", "DP3", "DP4"]
 pc = {r["team"]: r for r in csv.DictReader(open(os.path.join(A, "prompt_counts_by_team.csv"), encoding="utf8"))}
 ar = {r["team"]: r for r in csv.DictReader(open(os.path.join(A, "artifact_stats_by_team.csv"), encoding="utf8"))}
-teams_dir = os.path.join(R, "teams")
+# a built release keeps teams/ at its root; the published release has it under AI-HDL_2026/
+C = os.path.join(R, "AI-HDL_2026") if os.path.isdir(os.path.join(R, "AI-HDL_2026", "teams")) else R
+teams_dir = os.path.join(C, "teams")
 folders = {d.split("_", 1)[1]: d for d in os.listdir(teams_dir)}
 
 
@@ -30,7 +32,7 @@ def folder(team):
     return folders.get(key, "")
 
 
-with open(os.path.join(R, "index.csv"), "w", newline="", encoding="utf8") as fh:
+with open(os.path.join(C, "index.csv"), "w", newline="", encoding="utf8") as fh:
     w = csv.writer(fh)
     w.writerow(["folder", "team", "final_rank", "institution", "country", "phases_with_files", "phases_with_prompt_logs",
                 "all_four_phases_logged", "distinct_prompts_DP1", "distinct_prompts_DP2", "distinct_prompts_DP3", "distinct_prompts_DP4",
