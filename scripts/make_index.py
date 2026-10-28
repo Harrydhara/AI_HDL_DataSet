@@ -33,15 +33,15 @@ def folder(team):
 with open(os.path.join(R, "index.csv"), "w", newline="", encoding="utf8") as fh:
     w = csv.writer(fh)
     w.writerow(["folder", "team", "final_rank", "institution", "country", "phases_with_files", "phases_with_prompt_logs",
-                "all_four_phases_logged", "curated_prompts_DP1", "curated_prompts_DP2", "curated_prompts_DP3", "curated_prompts_DP4",
+                "all_four_phases_logged", "distinct_prompts_DP1", "distinct_prompts_DP2", "distinct_prompts_DP3", "distinct_prompts_DP4",
                 "rtl_files", "rtl_loc", "testbench_files", "reports", "gds_files", "taped_out"])
     for team in sorted(pc, key=lambda t: int(pc[t]["final_rank"] or 99)):
         f = folder(team)
         present = sorted(d for d in os.listdir(os.path.join(teams_dir, f)) if d in P) if f else []
-        logged = [p for p in P if int(pc[team][f"curated_{p}"])]
+        logged = [p for p in P if int(pc[team][f"distinct_{p}"])]
         a = ar.get(team, {})
         w.writerow([f, team, pc[team]["final_rank"], *INST.get(team, ("", "")), ";".join(present), ";".join(logged),
-                    "yes" if len(logged) == 4 else "no", *[pc[team][f"curated_{p}"] for p in P],
+                    "yes" if len(logged) == 4 else "no", *[pc[team][f"distinct_{p}"] for p in P],
                     a.get("rtl_files", ""), a.get("rtl_loc", ""), a.get("tb_files", ""), a.get("reports", ""), a.get("gds", ""),
                     TAPED.get(team, "")])
 print("index.csv written")

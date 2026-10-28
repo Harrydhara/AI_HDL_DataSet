@@ -66,10 +66,16 @@ LICENSE                      CC BY-NC 4.0
 | Testbench files (Verilog, C++, cocotb) | 371 |
 | Gate-level netlists | 32 |
 | Tool reports and logs | 500 |
-| GDSII layouts / DEF files | 18 / 13 |
-| Teams with prompt logs | 16 |
-| Curated prompt entries | 568 |
+| GDSII files (teams) / DEF files | 17 (9) / 13 |
+| Teams with countable prompt logs | 16 |
+| Distinct prompts (each counted once, in its first phase) | 529 |
+| Entries in curated logs | 568 |
 | User turns in raw chat exports | 1,169 |
+| Teams with prompt logs in all four phases and a DP4 layout | 5 |
+
+The participation figures reported for the competition (776 registered participants, 148 teams) describe the competition, not this release. See `index.csv` for each team's coverage by phase. Only five teams have complete trajectories: ITIMS' Boys, ElectroNova, Maestro, Farmceries and Bell Labs.
+
+**Prompt counts.** Each team's curated log is counted (raw chat exports only where a phase has no curated log). A prompt repeated in a later, cumulative copy of a log is counted only in the earliest phase it appears. Counts describe what teams chose to record; they are not a measure of effort.
 
 ## 2025 pilot cycle
 
@@ -107,12 +113,13 @@ Notes on the pilot data:
 ## Known gaps
 
 - **Missing finalists:** the submissions of two finalist teams (Wilcads, VisionForge) are not included.
+- **Missing layouts:** all 22 finalists passed the DP4 gate, but DP4 layout files are present for only 9 of the 20 released finalists.
 - **Missing or partial logs:**
   - Team team's folder contains DP1 code only.
   - TechGenius, Astral Coders and Circuitrix submitted empty prompt-log files.
   - HUST1 and Acona Tech prompt logs cover one phase only. Acona Tech's DP1–DP2 logs, and several pilot logs, were submitted only as links to shared Claude, Gemini or ChatGPT chats; those links were removed for privacy.
 - **Mixed log formats:** the competition template, prompt summaries, and raw Cursor, Copilot, Gemini, Claude Code and Antigravity exports. Prompt counts therefore depend on how each team condensed its sessions. See `prompt_counts_per_file.csv` for the rule applied to each file.
-- **Taped-out designs:** the two reference designs (NeCRL AES-128 and ITIMS' Boys SPI + CRC-16) were submitted for fabrication on SKY130. Silicon measurements will be added when the parts return.
+- **Taped-out designs:** the two reference designs (NeCRL AES-128 and ITIMS' Boys SPI + CRC-16) were submitted for fabrication on SKY130. Silicon measurements will be added when the parts return. All power figures in the teams' reports are vectorless OpenSTA estimates, not measurements. The ITIMS' Boys write-up lists its power with a µW unit, but the underlying reports are in mW.
 
 ## License
 

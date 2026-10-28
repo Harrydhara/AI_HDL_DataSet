@@ -58,6 +58,44 @@ def count(t):
     return "unparsed", 0
 
 
+# Patterns locating each prompt, used to key prompts by their text so that a prompt repeated in a
+# later, cumulative copy of a log is counted only once (in the earliest phase it appears).
+KEY_RX = {
+    "user_label": re.compile(r"^\s*>?\s*(?:\*\*User\*\*:?|\*\*User:\*\*|#{1,4}\s*USER\b)", re.M),
+    "named_speaker": re.compile(r"^\*\*([^*\[\n]{1,30}?)\s*\[[^\]\n]{1,6}\]:\*\*", re.M),
+    "plain_user": re.compile(r"^\s*(?:User|USER|Human|HUMAN)\s*:", re.M),
+    "prompt_label": re.compile(r"\*\*Prompt(?:\s*\(user\))?:?\*\*|^\s*(?:PROMPT|Prompt)\s*:", re.M),
+    "prompt_numbered": re.compile(r"^\s*(?:#+\s*)?\**\s*Prompt\s*(?:ID:\s*)?#?\s*\d+", re.M | re.I),
+    "said": re.compile(r"\bYou\s+said:"),
+    "interaction_hdr": re.compile(r"^#{2,5}\s*Interaction\b", re.M),
+    "question_label": re.compile(r"^\*\*Question:\*\*", re.M),
+}
+
+
+def _norm(s):
+    return re.sub(r"[^a-z0-9]+", "", s.lower())[:80]
+
+
+def prompt_keys(rule, t):
+    """One key per counted prompt: the normalized opening text of the prompt."""
+    if rule == "jsonl_antigravity":
+        return [_norm(m.group(1)) for m in re.finditer(r'"type"\s*:\s*"USER_INPUT".*?"content"\s*:\s*"(.{0,300})', t)]
+    if rule == "jsonl_prompt":
+        return [_norm(m.group(1)) for m in re.finditer(r'"prompt"\s*:\s*"(.{0,300})', t)]
+    rx = KEY_RX.get(rule)
+    if not rx:
+        return []
+    keys = []
+    for m in rx.finditer(t):
+        if rule == "named_speaker" and m.group(1).strip().lower() in ("copilot", "chatgpt", "claude", "gemini", "assistant"):
+            continue
+        keys.append(_norm(t[m.end(): m.end() + 300]))
+    if rule == "said" and not keys:
+        keys = [_norm(t[m.start() - 300: m.start()])
+                for m in re.finditer(r"\b(?:Copilot|ChatGPT|Gemini|Claude)\s+said:", t)]
+    return keys
+
+
 def segments(rel, root_ph, text):
     """Yield (phase, text) pieces; split a file with no path phase on Design-Phase headings."""
     m = PH.findall(rel)
@@ -124,7 +162,8 @@ if __name__ == "__main__":
                 if rule in ("named_speaker", "jsonl_antigravity", "jsonl_prompt", "said") or \
                    (rule in ("plain_user", "user_label") and not SUMMARY.search(rel)):
                     k = "raw"
-                rows.append(dict(team=team, phase=seg_ph, rel=rel, rule=rule, n=n, kind=k))
+                rows.append(dict(team=team, phase=seg_ph, rel=rel, rule=rule, n=n, kind=k,
+                                 keys=prompt_keys(rule, seg) if n else []))
             if any_n and not rel.lower().endswith(".pdf"):
                 parsed_dirs.add(d)
 
@@ -147,12 +186,33 @@ if __name__ == "__main__":
             fc[p] = cur[team][p] or raw[team][p]
         final_raw[team], final_cur[team] = fr, fc
 
+    # distinct prompts: curated logs (raw if a phase has none); a prompt whose opening text already
+    # appeared in an earlier phase of the same team (cumulative logs) is not counted again
+    final_distinct = {}
+    for team in TEAMS:
+        seen_keys, fd = set(), collections.Counter()
+        for p in PHASES + ("DP?",):
+            sel = [r for r in rows if r["team"] == team and r["phase"] == p and r["n"]]
+            pick = [r for r in sel if r["kind"] != "raw"] or [r for r in sel if r["kind"] == "raw"]
+            phase_keys = set()
+            for r in pick:
+                ks = r["keys"] if len(r["keys"]) == r["n"] else r["keys"] + [None] * (r["n"] - len(r["keys"]))
+                for i, k in enumerate(ks):
+                    phase_keys.add(k if k else f"__{r['rel']}#{i}")
+            new = {k for k in phase_keys if k not in seen_keys}
+            fd[p] = len(new)
+            seen_keys |= phase_keys
+        final_distinct[team] = fd
+
     for r in rows:
         print(f"{r['team']:16s} {r['phase']:4s} {r['kind']:7s} {r['rule']:18s} {r['n']:4d}  {r['rel'][-75:]}")
     for label, tab in (("RAW (raw transcript if present, else curated)", final_raw),
-                       ("CURATED (curated log if present, else raw)", final_cur)):
+                       ("CURATED (curated log if present, else raw)", final_cur),
+                       ("DISTINCT (curated, each prompt counted once in its first phase)", final_distinct)):
         print("\n" + label)
         print(f"{'team':16s} " + " ".join(f"{p:>5s}" for p in PHASES + ('DP?',)))
         for team in TEAMS:
             print(f"{team:16s} " + " ".join(f"{tab[team][p]:5d}" for p in PHASES + ('DP?',)))
-    json.dump({"raw": final_raw, "curated": final_cur}, open(os.path.join(here, "phase_totals.json"), "w"), indent=1)
+    json.dump({"raw": final_raw, "curated": final_cur, "distinct": final_distinct},
+              open(os.path.join(here, "phase_totals.json"), "w"), indent=1)
+    json.dump(rows, open(os.path.join(here, "prompt_counts.json"), "w", encoding="utf8"), indent=1)

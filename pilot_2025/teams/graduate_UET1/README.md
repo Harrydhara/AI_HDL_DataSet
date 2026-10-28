@@ -4,13 +4,13 @@
 - **Division:** graduate
 - **Notes:** RTL byte-identical to UET3
 
-## Logged prompts
+## Distinct logged prompts
 
 | Prompts counted | Countable logs |
 |---|---|
 | 2 | 1 |
 
-Counted from this team's logs; see `prompt_counts_per_file.csv` at the repository root for the rule applied to each log.
+Counted from this team's logs; a prompt repeated in a later, cumulative log is counted once, in its first phase. See `prompt_counts_per_file.csv` at the repository root for the rule applied to each log. Counts describe what was logged, not effort.
 
 ## Files
 

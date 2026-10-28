@@ -5,15 +5,15 @@
 - **Institution:** Hanoi University of Science and Technology
 - **Country:** Vietnam
 - **Phases with files:** DP1, DP2, DP3, DP4
-- **Phases with prompt logs:** DP1, DP2, DP3, DP4
+- **Phases with prompt logs:** DP1, DP3, DP4
 
-## Logged prompts
+## Distinct logged prompts
 
 | DP1 | DP2 | DP3 | DP4 |
 |---|---|---|---|
-| 14 | 4 | 8 | 9 |
+| 14 | 0 | 8 | 9 |
 
-Counted from this team's logs; see `prompt_counts_per_file.csv` at the repository root for the rule applied to each log.
+Counted from this team's logs; a prompt repeated in a later, cumulative log is counted once, in its first phase. See `prompt_counts_per_file.csv` at the repository root for the rule applied to each log. Counts describe what was logged, not effort.
 
 ## Files
 

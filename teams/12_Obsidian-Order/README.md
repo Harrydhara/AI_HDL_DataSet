@@ -7,13 +7,13 @@
 - **Phases with files:** DP1, DP2
 - **Phases with prompt logs:** DP1
 
-## Logged prompts
+## Distinct logged prompts
 
 | DP1 | DP2 | DP3 | DP4 |
 |---|---|---|---|
 | 4 | 0 | 0 | 0 |
 
-Counted from this team's logs; see `prompt_counts_per_file.csv` at the repository root for the rule applied to each log.
+Counted from this team's logs; a prompt repeated in a later, cumulative log is counted once, in its first phase. See `prompt_counts_per_file.csv` at the repository root for the rule applied to each log. Counts describe what was logged, not effort.
 
 ## Files
 

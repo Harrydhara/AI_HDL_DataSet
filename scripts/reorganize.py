@@ -203,9 +203,9 @@ def team_card(dst_team, title, meta, counts, phased, prompts):
             L.append(f"- **{k}:** {v}")
     L.append("")
     if prompts:
-        L += ["## Logged prompts", "", "| " + " | ".join(prompts[0]) + " |", "|" + "---|" * len(prompts[0]),
+        L += ["## Distinct logged prompts", "", "| " + " | ".join(prompts[0]) + " |", "|" + "---|" * len(prompts[0]),
               "| " + " | ".join(str(x) for x in prompts[1]) + " |", "",
-              "Counted from this team's logs; see `prompt_counts_per_file.csv` at the repository root for the rule applied to each log.", ""]
+              "Counted from this team's logs; a prompt repeated in a later, cumulative log is counted once, in its first phase. See `prompt_counts_per_file.csv` at the repository root for the rule applied to each log. Counts describe what was logged, not effort.", ""]
     L += ["## Files", ""]
     if phased:
         L.append("| Folder | " + " | ".join(phases) + " |")
@@ -246,7 +246,7 @@ for team in sorted(os.listdir(os.path.join(IN, "teams"))):
             ("Phases with files", (r.get("phases_with_files") or "").replace(";", ", ")),
             ("Phases with prompt logs", (r.get("phases_with_prompt_logs") or "none found").replace(";", ", ")),
             ("Taped out", r.get("taped_out"))]
-    pr = (["DP1", "DP2", "DP3", "DP4"], [r.get(f"curated_prompts_DP{i}", "") for i in range(1, 5)]) if r else None
+    pr = (["DP1", "DP2", "DP3", "DP4"], [r.get(f"distinct_prompts_DP{i}", "") for i in range(1, 5)]) if r else None
     team_card(os.path.join(OUT, "teams", team), r.get("team", team), meta, counts, True, pr)
 
 pidx = {r["folder"]: r for r in read_csv(os.path.join(IN, "pilot_2025", "index.csv"))}
