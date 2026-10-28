@@ -2,7 +2,7 @@
 
 **Human–LLM hardware design trajectories from natural-language prompts to signed-off SKY130 layout.**
 
-This dataset accompanies the paper *"AI-HDL: AI Hardware Design League — A Two-Cycle Release of Cross-Stage Human–LLM Hardware Design Trajectories, from RTL Prompting to Signed-Off Layout"* (submitted to ACM TODAES, Special Issue on Open, Reliable, and Generalizable Datasets for AI in EDA).
+This dataset accompanies the paper *"AI-HDL: A Human–LLM Hardware Design Dataset"* (submitted to ACM TODAES, Special Issue on Open, Reliable, and Generalizable Datasets for AI in EDA).
 
 This is an initial release covering the first two competition cycles. It does not define a benchmark or report model baselines, since only five teams have complete trajectories. The competition is continuing, and later cycles will be added under the same layout.
 
@@ -131,8 +131,7 @@ Released under the Creative Commons Attribution-NonCommercial 4.0 International 
 
 ```
 @article{aihdl2026dataset,
-  title   = {{AI-HDL}: {AI} Hardware Design League -- A Two-Cycle Release of Cross-Stage
-             Human--{LLM} Hardware Design Trajectories, from {RTL} Prompting to Signed-Off Layout},
+  title   = {{AI-HDL}: A Human--{LLM} Hardware Design Dataset},
   journal = {ACM Transactions on Design Automation of Electronic Systems (submitted)},
   year    = {2026}
 }
