@@ -1,4 +1,7 @@
-"""Redraw Figure 8 (prompt heatmap + phase shares) from data-analysis/prompt_counts_by_team.csv."""
+"""Redraw the prompt-count figure (heatmap + phase shares) from the prompt-count table.
+
+usage: make_fig8.py [OUT.png]  -> OUT.png (both panels) and OUT_shares.png (the phase-share donut alone)
+Reads prompt_counts.csv at the release root (prompt_counts_by_team.csv in the analysis folder)."""
 import csv, os, sys
 import matplotlib
 matplotlib.use("Agg")
@@ -6,7 +9,8 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
 
 here = os.path.dirname(os.path.abspath(__file__))
-src = os.path.join(here, "..", "prompt_counts_by_team.csv")
+src = next(p for p in (os.path.join(here, "..", "prompt_counts.csv"), os.path.join(here, "..", "prompt_counts_by_team.csv"))
+           if os.path.exists(p))
 out = sys.argv[1] if len(sys.argv) > 1 else os.path.join(here, "fig_8_recount.png")
 
 P = ["DP1", "DP2", "DP3", "DP4"]
@@ -38,12 +42,23 @@ for s in ax.spines.values():
 ax.set_title("(a) Distinct logged prompts per team and phase", pad=10)
 
 colors = ["#c8653a", "#8fa9c4", "#1f4e79", "#2e6b57"]
-wedges, _, autot = bx.pie(pooled, labels=[f"Design Phase {k}\n({pooled[k-1]} prompts)" for k in range(1, 5)],
-                          autopct="%1.1f%%", startangle=90, counterclock=False, colors=colors,
-                          wedgeprops=dict(width=0.45, edgecolor="white"), pctdistance=0.78, textprops=dict(fontsize=10))
-for t in autot:
-    t.set_color("white"); t.set_fontweight("bold")
+
+
+def donut(axis):
+    _, _, autot = axis.pie(pooled, labels=[f"Design Phase {k}\n({pooled[k-1]} prompts)" for k in range(1, 5)],
+                           autopct="%1.1f%%", startangle=90, counterclock=False, colors=colors,
+                           wedgeprops=dict(width=0.45, edgecolor="white"), pctdistance=0.78, textprops=dict(fontsize=10))
+    for t in autot:
+        t.set_color("white"); t.set_fontweight("bold")
+
+
+donut(bx)
 bx.set_title(f"(b) Share of distinct logged prompts, {len(complete)} teams\nwith logs for all four phases (n = {sum(pooled)})", pad=10)
 fig.tight_layout()
 fig.savefig(out, dpi=200)
-print("wrote", out, "complete teams:", [rows[i]["team"] for i in complete], "pooled:", pooled)
+fig2, cx = plt.subplots(figsize=(6.4, 4.2))
+donut(cx)
+fig2.tight_layout()
+fig2.savefig(os.path.splitext(out)[0] + "_shares.png", dpi=200)
+print("wrote", out, "complete teams:", [rows[i]["team"] for i in complete], "pooled:", pooled,
+      "shares:", [round(100 * x / sum(pooled), 1) for x in pooled])

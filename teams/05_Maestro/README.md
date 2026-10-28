@@ -11,7 +11,7 @@
 
 | DP1 | DP2 | DP3 | DP4 |
 |---|---|---|---|
-| 3 | 6 | 16 | 18 |
+| 3 | 6 | 16 | 17 |
 
 Counted from this team's logs; a prompt repeated in a later, cumulative log is counted once, in its first phase. See `prompt_counts_per_file.csv` at the repository root for the rule applied to each log. Counts describe what was logged, not effort.
 

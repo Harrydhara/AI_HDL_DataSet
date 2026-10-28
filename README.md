@@ -70,14 +70,18 @@ LICENSE                      CC BY-NC 4.0
 | Tool reports and logs | 500 |
 | GDSII files (teams) / DEF files | 17 (9) / 13 |
 | Teams with countable prompt logs | 16 |
-| Distinct prompts (each counted once, in its first phase) | 529 |
-| Entries in curated logs | 568 |
-| User turns in raw chat exports | 1,169 |
+| Distinct prompts (each counted once, in its first phase) | 495 |
+| Entries in curated logs | 534 |
+| User turns in raw chat exports | 1,136 |
 | Teams with prompt logs in all four phases and a DP4 layout | 5 |
 
 The participation figures reported for the competition (776 registered participants, 148 teams) describe the competition, not this release. See `index.csv` for each team's coverage by phase. Only five teams have complete trajectories: ITIMS' Boys, ElectroNova, Maestro, Farmceries and Bell Labs.
 
 **Prompt counts.** Each team's curated log is counted (raw chat exports only where a phase has no curated log). A prompt repeated in a later, cumulative copy of a log is counted only in the earliest phase it appears. Counts describe what teams chose to record; they are not a measure of effort.
+
+**Corrections (October 2026).** Checking every counted prompt against the released text found entries that are not prompts: Devrem's DP3 prompt-plan file, which repeats the prompts recorded in the team's log and includes a flow diagram; four DP4 entries in Devrem's log that record generated files rather than prompts; an empty template entry (Maestro, DP4); a template placeholder (Obsidian Order, DP1); and a note (ICLab_HUST2, DP3). `scripts/recount.py` lists each one, removes it and recomputes `prompt_counts.csv` from the released logs. The earlier totals were 529 distinct prompts, 568 curated entries and 1,169 raw user turns.
+
+**Prompt text and markers.** `scripts/extract_prompts.py` extracts the text of every counted prompt from the released logs, using the same prompt boundaries as the counts. `scripts/prompt_markers.py` holds the keyword markers (repeated error, frustration, urgency, confusion, conceptual question, redirecting the model, thanks, pasted tool output) used in the paper's descriptive analysis of where designers got stuck, and `scripts/make_fig_struggle.py` draws its figure. The markers are matched against the participant's own words, not pasted logs; they describe the text, not emotion or effort.
 
 ## 2025 pilot cycle
 
@@ -121,6 +125,8 @@ Notes on the pilot data:
   - TechGenius, Astral Coders and Circuitrix submitted empty prompt-log files.
   - HUST1 and Acona Tech prompt logs cover one phase only. Acona Tech's DP1–DP2 logs, and several pilot logs, were submitted only as links to shared Claude, Gemini or ChatGPT chats; those links were removed for privacy.
 - **Mixed log formats:** the competition template, prompt summaries, and raw Cursor, Copilot, Gemini, Claude Code and Antigravity exports. Prompt counts therefore depend on how each team condensed its sessions. See `prompt_counts_per_file.csv` for the rule applied to each file.
+- **Logs written by the model:** some logs were written or maintained by the LLM at the team's request. ElectroNova's DP3 summary is in the model's first person ("My Response"); Bell Labs asked the model to keep `dp3_prompts.txt` and `dp4_prompts.txt` up to date; NeCRL's Rank 6 log was copied out by the model; Devrem's log was appended by the agent. Wording in such logs may not be the participants' own.
+- **Languages:** most logs are in English; seven DP4 prompts of ICLab_HUST2 are in Vietnamese.
 - **Taped-out designs:** the two reference designs (NeCRL AES-128 and ITIMS' Boys SPI + CRC-16) were submitted for fabrication on SKY130. Silicon measurements will be added when the parts return. All power figures in the teams' reports are vectorless OpenSTA estimates, not measurements. The ITIMS' Boys write-up lists its power with a µW unit, but the underlying reports are in mW.
 
 ## License
