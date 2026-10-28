@@ -2,7 +2,9 @@
 
 **Human–LLM hardware design trajectories from natural-language prompts to signed-off SKY130 layout.**
 
-This dataset accompanies the paper *"AI-HDL: AI Hardware Design League — An Open, Cross-Stage, Human-in-the-Loop Dataset and Benchmark from RTL Prompting to Silicon Tape-Out"* (submitted to ACM TODAES, Special Issue on Open, Reliable, and Generalizable Datasets for AI in EDA).
+This dataset accompanies the paper *"AI-HDL: AI Hardware Design League — A Two-Cycle Release of Cross-Stage Human–LLM Hardware Design Trajectories, from RTL Prompting to Signed-Off Layout"* (submitted to ACM TODAES, Special Issue on Open, Reliable, and Generalizable Datasets for AI in EDA).
+
+This is an initial release covering the first two competition cycles. It does not define a benchmark or report model baselines, since only five teams have complete trajectories. The competition is continuing, and later cycles will be added under the same layout.
 
 In the AI Hardware Design League 2026, every team had to generate its hardware by prompting a large language model (LLM). Each team extended a common RISC-V core (TinyQV) with its own peripheral and carried it through four gated design phases:
 
@@ -40,7 +42,7 @@ pilot_2025/
   index.csv                  one row per pilot team: division, prompt and code counts, notes
   prompt_counts_per_file.csv every pilot prompt log, the counting rule used, its count and released path
 index.csv                    one row per team: rank, institution, country, phases, prompt and artifact counts
-prompt_counts.csv            logged prompts per team and phase (curated and raw)
+prompt_counts.csv            logged prompts per team and phase (distinct, curated and raw)
 prompt_counts_per_file.csv   every prompt log: phase, counting rule, count, and released path
 artifact_stats.csv           RTL files and lines, testbenches, netlists, reports, GDS/DEF per team
 scripts/                     counting, statistics, anonymization, build and layout scripts
@@ -129,13 +131,13 @@ Released under the Creative Commons Attribution-NonCommercial 4.0 International 
 
 ```
 @article{aihdl2026dataset,
-  title   = {{AI-HDL}: {AI} Hardware Design League -- An Open, Cross-Stage, Human-in-the-Loop
-             Dataset and Benchmark from {RTL} Prompting to Silicon Tape-Out},
-  journal = {ACM Transactions on Design Automation of Electronic Systems (under review)},
+  title   = {{AI-HDL}: {AI} Hardware Design League -- A Two-Cycle Release of Cross-Stage
+             Human--{LLM} Hardware Design Trajectories, from {RTL} Prompting to Signed-Off Layout},
+  journal = {ACM Transactions on Design Automation of Electronic Systems (submitted)},
   year    = {2026}
 }
 ```
 
 ## Contact
 
-[maintainer name and email]
+To report an error or residual personal data, open an issue at https://github.com/Harrydhara/AI_HDL_DataSet/issues.
