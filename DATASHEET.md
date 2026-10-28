@@ -79,8 +79,8 @@ Across both cycles, 776 participants registered in 148 teams; the 2026 cycle had
 
 ## Distribution
 
-GitHub: https://github.com/Harrydhara/AI_HDL_DataSet. License: CC BY-NC 4.0. Competition templates, phase specifications and rubrics are published separately at https://github.com/prismlabarizona/AIHDL-2026.
+GitHub: https://github.com/prismlabarizona/AI-HDL_Dataset_2025-2026. License: CC BY-NC 4.0. Competition templates, phase specifications and rubrics are published separately at https://github.com/prismlabarizona/AIHDL-2026.
 
 ## Maintenance
 
-The dataset is versioned. Later competition cycles will be added under the same layout. To report errors or residual personal data, open an issue at https://github.com/Harrydhara/AI_HDL_DataSet/issues.
+The dataset is versioned. Later competition cycles will be added under the same layout. To report errors or residual personal data, open an issue at https://github.com/prismlabarizona/AI-HDL_Dataset_2025-2026/issues.

@@ -145,4 +145,4 @@ Released under the Creative Commons Attribution-NonCommercial 4.0 International 
 
 ## Contact
 
-To report an error or residual personal data, open an issue at https://github.com/Harrydhara/AI_HDL_DataSet/issues.
+To report an error or residual personal data, open an issue at https://github.com/prismlabarizona/AI-HDL_Dataset_2025-2026/issues.
